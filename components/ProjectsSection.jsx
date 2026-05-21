@@ -126,7 +126,7 @@ export default function ProjectsSection() {
   const openProject = useCallback((project) => setSelectedProject(project), [])
 
   return (
-    <section id="projects" className="apollo-section">
+    <section id="projects" className="apollo-section apollo-projects-section">
       <div className="apollo-container">
         <div className="mb-10 md:mb-12 flex flex-col sm:flex-row sm:flex-wrap sm:items-end sm:justify-between gap-4">
           <div>

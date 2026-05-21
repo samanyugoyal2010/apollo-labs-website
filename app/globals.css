@@ -383,8 +383,8 @@
 
 @media (min-width: 768px) {
   .apollo-more-soon {
-    margin-top: 64px;
-    padding: 24px 0 12px;
+    margin-top: 48px;
+    padding: 16px 0 0;
   }
 }
 
@@ -394,7 +394,11 @@
   border: 1px solid var(--apollo-border);
   background: var(--apollo-surface-card);
   text-align: center;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .apollo-cards-row .apollo-team-card {
@@ -405,6 +409,12 @@
 .apollo-team-card:hover {
   background: var(--apollo-surface);
   border-color: rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.apollo-team-card-hint {
+  display: block;
 }
 
 .apollo-section-dark.apollo-card-vertical {
@@ -462,8 +472,50 @@
   letter-spacing: 0.01em;
 }
 
+.apollo-team-section {
+  padding-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .apollo-team-section {
+    padding-bottom: 32px;
+  }
+}
+
+.apollo-team-section + .apollo-projects-section {
+  margin-top: 12px;
+  padding-top: 32px;
+}
+
+@media (min-width: 768px) {
+  .apollo-team-section + .apollo-projects-section {
+    padding-top: 40px;
+  }
+}
+
+.apollo-projects-section {
+  padding-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .apollo-projects-section {
+    padding-bottom: 32px;
+  }
+}
+
 .apollo-join-section {
+  padding-top: 32px;
   padding-bottom: 60px;
+}
+
+@media (min-width: 768px) {
+  .apollo-join-section {
+    padding-top: 40px;
+  }
+}
+
+.apollo-projects-section + .apollo-join-section {
+  margin-top: 12px;
 }
 
 .apollo-join-card {
@@ -887,6 +939,24 @@
 
 .apollo-modal-project {
   max-width: 560px;
+}
+
+.apollo-modal-team {
+  max-width: 560px;
+}
+
+.apollo-team-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.apollo-team-avatar-modal {
+  margin: 0;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  font-size: 20px;
 }
 
 .apollo-modal-close {
