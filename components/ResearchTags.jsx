@@ -4,8 +4,8 @@ export default function ResearchTags() {
   const tags = [...RESEARCH_TAGS, ...RESEARCH_TAGS]
 
   return (
-    <div className="mt-12">
-      <p className="text-center text-xs tracking-widest text-[var(--apollo-text-faint)] uppercase mb-4">
+    <div className="mt-16 border-t border-[var(--apollo-border)] pt-12">
+      <p className="apollo-caption text-center mb-6">
         Research areas we explore
       </p>
       <div className="apollo-tags-viewport">

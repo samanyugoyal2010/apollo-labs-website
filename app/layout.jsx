@@ -1,5 +1,6 @@
 import {
   EB_Garamond,
+  Great_Vibes,
   Inter,
   Instrument_Serif,
   JetBrains_Mono,
@@ -33,6 +34,13 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 })
 
+const greatVibes = Great_Vibes({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-script',
+  display: 'swap',
+})
+
 export const metadata = {
   icons: { icon: '/favicon.svg' },
   title: 'Apollo Labs — Student-led collaborative research',
@@ -51,7 +59,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${ebGaramond.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${ebGaramond.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${greatVibes.variable}`}
     >
       <body className="antialiased">
         <AppShell>{children}</AppShell>

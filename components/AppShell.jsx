@@ -22,7 +22,7 @@ export default function AppShell({ children }) {
   }
 
   if (!mounted) {
-    return <div className="min-h-screen bg-white" />
+    return <div className="min-h-screen bg-[#fafaf9]" />
   }
 
   return (
