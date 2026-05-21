@@ -1,0 +1,352 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-eb-garamond), ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-display: var(--font-instrument), ui-serif, Georgia, serif;
+}
+
+/* ara.so-style black & white theme */
+.apollo-site {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--apollo-bg);
+  color: var(--apollo-text);
+  isolation: isolate;
+  position: relative;
+  min-height: 100vh;
+
+  --apollo-bg: #ffffff;
+  --apollo-bg-nav: rgba(255, 255, 255, 0.72);
+  --apollo-nav-border: rgba(0, 0, 0, 0.1);
+  --apollo-nav-shadow: 0 2px 20px rgba(0, 0, 0, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --apollo-text: #000000;
+  --apollo-text-body: rgba(0, 0, 0, 0.7);
+  --apollo-text-faint: rgba(0, 0, 0, 0.5);
+  --apollo-border: rgba(0, 0, 0, 0.08);
+  --apollo-surface: rgba(0, 0, 0, 0.05);
+  --apollo-surface-card: rgba(0, 0, 0, 0.02);
+  --apollo-cta-bg: #000000;
+  --apollo-cta-text: #ffffff;
+}
+
+.apollo-home :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-serif);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.apollo-container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (min-width: 768px) {
+  .apollo-container {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+
+.apollo-hero-h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  max-width: 720px;
+  text-align: left;
+  color: var(--apollo-text);
+}
+
+.apollo-body {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--apollo-text-body);
+}
+
+.apollo-body-sm {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--apollo-text-body);
+}
+
+.apollo-caption {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--apollo-text-faint);
+}
+
+.apollo-hero-cta {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 9999px;
+  background: var(--apollo-cta-bg);
+  color: var(--apollo-cta-text);
+  transition: opacity 0.15s ease;
+}
+
+.apollo-hero-cta:hover {
+  opacity: 0.88;
+}
+
+.apollo-hero-cta-secondary {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 14px 28px;
+  border-radius: 9999px;
+  background: var(--apollo-surface);
+  color: var(--apollo-text);
+  border: 1px solid var(--apollo-border);
+  transition: background 0.15s ease;
+}
+
+.apollo-hero-cta-secondary:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.apollo-nav {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 52px;
+  padding-left: 48px;
+  padding-right: 48px;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    backdrop-filter 0.35s ease;
+}
+
+.apollo-nav.apollo-nav-scrolled {
+  width: min(700px, calc(100vw - 40px));
+  height: 44px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background: var(--apollo-bg-nav);
+  border-color: var(--apollo-nav-border);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: var(--apollo-nav-shadow);
+  border-radius: 9999px;
+}
+
+.apollo-nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--apollo-text-body);
+  transition: color 0.15s ease;
+}
+
+.apollo-nav-link:hover {
+  color: var(--apollo-text);
+}
+
+.apollo-section {
+  border-radius: 24px;
+  margin: 32px 16px 0;
+  overflow: hidden;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.apollo-section-dark {
+  background: #1a1a1a;
+  --apollo-text: #ffffff;
+  --apollo-text-body: rgba(255, 255, 255, 0.7);
+  --apollo-text-faint: rgba(255, 255, 255, 0.5);
+  --apollo-border: rgba(255, 255, 255, 0.12);
+  --apollo-surface: rgba(255, 255, 255, 0.06);
+  --apollo-surface-card: rgba(255, 255, 255, 0.04);
+  --apollo-cta-bg: #ffffff;
+  --apollo-cta-text: rgb(26, 26, 26);
+  color: var(--apollo-text);
+}
+
+.apollo-tags-viewport {
+  overflow: hidden;
+  width: 100%;
+  padding: 2px 0 6px;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 2.5%,
+    #000 97.5%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 2.5%,
+    #000 97.5%,
+    transparent
+  );
+}
+
+.apollo-tags-track {
+  display: flex;
+  width: max-content;
+  gap: 16px;
+  will-change: transform;
+  animation: apollo-tags-scroll 30s linear infinite;
+}
+
+@keyframes apollo-tags-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.apollo-tag {
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface-card);
+  font-size: 14px;
+  color: var(--apollo-text-body);
+  white-space: nowrap;
+}
+
+.apollo-link {
+  color: var(--apollo-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(0, 0, 0, 0.25);
+  transition: text-decoration-color 0.15s ease;
+}
+
+.apollo-section-dark .apollo-link {
+  text-decoration-color: rgba(255, 255, 255, 0.35);
+}
+
+.apollo-link:hover {
+  text-decoration-color: currentColor;
+}
+
+.apollo-project-card {
+  display: block;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface-card);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.apollo-project-card:hover {
+  background: var(--apollo-surface);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.apollo-team-card {
+  padding: 32px;
+  border-radius: 16px;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface-card);
+  text-align: center;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.apollo-team-card:hover {
+  background: var(--apollo-surface);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.apollo-team-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #000000;
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-family: var(--font-sans);
+}
+
+.apollo-footer {
+  border-top: 1px solid var(--apollo-border);
+  padding: 48px 0 64px;
+}
+
+.apollo-footer-link {
+  font-size: 14px;
+  color: var(--apollo-text-body);
+  transition: color 0.15s ease;
+}
+
+.apollo-footer-link:hover {
+  color: var(--apollo-text);
+}
+
+.apollo-orbit-visual {
+  animation: apollo-orbit-spin 24s linear infinite;
+}
+
+@keyframes apollo-orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.apollo-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  animation: apollo-shimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes apollo-shimmer {
+  0% {
+    transform: translateX(-100%) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-12deg);
+  }
+}
+
+.apollo-cta-panel {
+  background: #1a1a1a;
+  border-radius: 24px;
+  margin-left: 16px;
+  margin-right: 16px;
+  overflow: hidden;
+  --apollo-text: #ffffff;
+  --apollo-text-body: rgba(255, 255, 255, 0.7);
+  --apollo-cta-bg: #ffffff;
+  --apollo-cta-text: rgb(26, 26, 26);
+}
+
+.apollo-nav-logo {
+  filter: brightness(0);
+}
