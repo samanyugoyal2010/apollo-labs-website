@@ -2,7 +2,14 @@
 
 import { useState } from 'react'
 import CalendlyEmbed from '@/components/CalendlyEmbed'
-import { CONTACT_EMAIL, JOIN_OPTIONS } from '@/lib/data'
+import DiscordIcon from '@/components/DiscordIcon'
+import {
+  CONTACT_EMAIL,
+  DISCORD_HANDLE,
+  DISCORD_PERKS,
+  DISCORD_URL,
+  JOIN_OPTIONS,
+} from '@/lib/data'
 
 function buildMailto({ name, email, interest, message }) {
   const subject = encodeURIComponent(
@@ -12,6 +19,35 @@ function buildMailto({ name, email, interest, message }) {
     `Name: ${name || '—'}\nEmail: ${email || '—'}\nInterested in: ${interest || '—'}\n\n${message || ''}`
   )
   return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
+}
+
+function JoinOptionLink({ option }) {
+  if (option.action === 'discord') {
+    return (
+      <a
+        href={DISCORD_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="apollo-link text-sm font-medium mt-auto"
+      >
+        {option.cta} →
+      </a>
+    )
+  }
+
+  return (
+    <a
+      href={buildMailto({
+        name: '',
+        email: '',
+        interest: option.title,
+        message: `Hi Apollo Labs,\n\nI'm interested in: ${option.title}\n\n`,
+      })}
+      className="apollo-link text-sm font-medium mt-auto"
+    >
+      {option.cta} →
+    </a>
+  )
 }
 
 export default function JoinUsSection() {
@@ -36,10 +72,48 @@ export default function JoinUsSection() {
         <h2 className="text-[clamp(32px,4vw,48px)] font-normal leading-[1.08] tracking-tight mb-4 max-w-xl">
           Find your place at Apollo Labs
         </h2>
-        <p className="apollo-body max-w-lg mb-12">
-          Whether you want to join a project, pitch an idea, or partner with our team —
-          here&apos;s how you can get involved.
+        <p className="apollo-body max-w-lg mb-10">
+          Our Discord is the front door. It&apos;s where projects get staffed, drafts get
+          read, and the whole team actually talks to each other.
         </p>
+
+        <div className="apollo-discord-panel mb-12">
+          <div className="apollo-discord-panel-glow" aria-hidden />
+          <div className="apollo-discord-panel-body">
+            <div className="apollo-discord-panel-main">
+              <span className="apollo-discord-badge">
+                <DiscordIcon className="h-4 w-4" />
+                Community
+              </span>
+              <h3 className="apollo-discord-title">
+                Everything happens on Discord.
+              </h3>
+              <p className="apollo-discord-lede">
+                Join the server to meet the team, follow live project channels, and jump
+                into whichever research you care about. No application, no waiting list —
+                introduce yourself and start contributing.
+              </p>
+              <a
+                href={DISCORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="apollo-discord-cta apollo-discord-cta-lg"
+              >
+                <DiscordIcon className="h-5 w-5" />
+                Join the Apollo Labs Discord
+              </a>
+              <p className="apollo-discord-meta">
+                {DISCORD_HANDLE} · Free · Open to all high school students
+              </p>
+            </div>
+
+            <ul className="apollo-discord-perks">
+              {DISCORD_PERKS.map((perk) => (
+                <li key={perk}>{perk}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
 
         <div className="apollo-cards-row mb-16">
           {JOIN_OPTIONS.map((option) => (
@@ -50,17 +124,7 @@ export default function JoinUsSection() {
               <p className="apollo-body-sm leading-relaxed flex-1 mb-6">
                 {option.description}
               </p>
-              <a
-                href={buildMailto({
-                  name: '',
-                  email: '',
-                  interest: option.title,
-                  message: `Hi Apollo Labs,\n\nI'm interested in: ${option.title}\n\n`,
-                })}
-                className="apollo-link text-sm font-medium mt-auto"
-              >
-                {option.cta} →
-              </a>
+              <JoinOptionLink option={option} />
             </div>
           ))}
         </div>
@@ -73,8 +137,8 @@ export default function JoinUsSection() {
                 Book a meeting
               </h3>
               <p className="apollo-body-sm max-w-lg">
-                Pick a time that works for you — we&apos;ll walk through how you can join
-                Apollo Labs or answer any questions.
+                Prefer to talk one-on-one first? Pick a time that works for you — we&apos;ll
+                walk through how you can join Apollo Labs or answer any questions.
               </p>
             </div>
             <CalendlyEmbed />
@@ -92,10 +156,7 @@ export default function JoinUsSection() {
                 Send us a message — it opens your email app ready to send. Or email us
                 directly anytime.
               </p>
-              <a
-                href={`mailto:${CONTACT_EMAIL}`}
-                className="apollo-contact-email group"
-              >
+              <a href={`mailto:${CONTACT_EMAIL}`} className="apollo-contact-email">
                 <span className="apollo-contact-email-label">Email us</span>
                 <span className="apollo-contact-email-address">{CONTACT_EMAIL}</span>
               </a>
@@ -103,9 +164,10 @@ export default function JoinUsSection() {
 
             <form className="apollo-contact-form" onSubmit={handleSubmit}>
               <div className="apollo-contact-form-row">
-                <label className="apollo-contact-field">
+                <label className="apollo-contact-field" htmlFor="apollo-field-name">
                   <span>Name</span>
                   <input
+                    id="apollo-field-name"
                     type="text"
                     name="name"
                     placeholder="Your name"
@@ -114,9 +176,10 @@ export default function JoinUsSection() {
                     autoComplete="name"
                   />
                 </label>
-                <label className="apollo-contact-field">
+                <label className="apollo-contact-field" htmlFor="apollo-field-email">
                   <span>Email</span>
                   <input
+                    id="apollo-field-email"
                     type="email"
                     name="email"
                     placeholder="you@school.edu"
@@ -126,9 +189,10 @@ export default function JoinUsSection() {
                   />
                 </label>
               </div>
-              <label className="apollo-contact-field">
+              <label className="apollo-contact-field" htmlFor="apollo-field-interest">
                 <span>I&apos;m interested in</span>
                 <select
+                  id="apollo-field-interest"
                   name="interest"
                   value={form.interest}
                   onChange={set('interest')}
@@ -140,9 +204,10 @@ export default function JoinUsSection() {
                   ))}
                 </select>
               </label>
-              <label className="apollo-contact-field">
+              <label className="apollo-contact-field" htmlFor="apollo-field-message">
                 <span>Message</span>
                 <textarea
+                  id="apollo-field-message"
                   name="message"
                   rows={4}
                   placeholder="Tell us a bit about yourself and what you'd like to do..."

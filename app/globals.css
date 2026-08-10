@@ -34,6 +34,7 @@
   --apollo-accent-glow: rgba(37, 99, 235, 0.25);
   --apollo-cta-bg: #0a0a0a;
   --apollo-cta-text: #ffffff;
+  --apollo-mark-bead: var(--apollo-accent);
 }
 
 .apollo-home :is(h1, h2, h3, h4, h5, h6) {
@@ -129,6 +130,10 @@
 }
 
 .apollo-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   font-size: 15px;
   font-weight: 500;
   padding: 13px 26px;
@@ -151,6 +156,10 @@
 }
 
 .apollo-hero-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   font-size: 15px;
   font-weight: 500;
   padding: 13px 26px;
@@ -217,6 +226,84 @@
 
 .apollo-nav-link:hover {
   color: var(--apollo-text);
+}
+
+/* ---------------------------------------------------------------------------
+   Identity — mark and lockup
+   The mark inherits `currentColor`, so a container only has to set `color`.
+   Callers set the mark's height; width follows the viewBox.
+--------------------------------------------------------------------------- */
+.apollo-mark {
+  display: block;
+  width: auto;
+  overflow: visible;
+}
+
+.apollo-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  line-height: 1;
+  color: var(--apollo-text);
+}
+
+.apollo-logo-mark {
+  flex: none;
+  height: 22px;
+}
+
+.apollo-logo-type {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.apollo-logo-name {
+  font-family: var(--font-display);
+  font-size: 19px;
+  letter-spacing: -0.015em;
+}
+
+.apollo-logo-suffix {
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--apollo-text-faint);
+}
+
+.apollo-logo-lg {
+  gap: 18px;
+}
+
+.apollo-logo-lg .apollo-logo-mark {
+  height: 52px;
+}
+
+.apollo-logo-lg .apollo-logo-type {
+  gap: 12px;
+}
+
+.apollo-logo-lg .apollo-logo-name {
+  font-size: clamp(38px, 8vw, 54px);
+}
+
+.apollo-logo-lg .apollo-logo-suffix {
+  font-size: clamp(11px, 2vw, 14px);
+  letter-spacing: 0.3em;
+}
+
+/* The logo is the only place the mark reacts to input: the bead drifts a step
+   further along its orbit, which is the whole idea of the mark in miniature. */
+.apollo-logo-link .apollo-mark-bead {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.apollo-logo-link:hover .apollo-mark-bead {
+  transform: translate(-1.4px, -1.9px) scale(1.12);
 }
 
 .apollo-section {
@@ -459,11 +546,17 @@
   }
 }
 
+.apollo-footer-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
 .apollo-footer-brand {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  color: var(--apollo-text);
-  letter-spacing: -0.01em;
+  color: var(--apollo-text-faint);
+  letter-spacing: 0.01em;
 }
 
 .apollo-footer-credit {
@@ -768,13 +861,15 @@
     0 0 60px var(--apollo-accent-soft);
 }
 
-.apollo-hero-core-letter {
-  font-family: var(--font-display);
-  font-style: italic;
-  background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 50%, #60a5fa 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.apollo-hero-core-mark {
+  height: 52px;
+  color: var(--apollo-text);
+}
+
+.apollo-notfound-mark {
+  height: 44px;
+  margin-inline: auto;
+  color: var(--apollo-text);
 }
 
 .apollo-shimmer::after {
@@ -811,8 +906,58 @@
   --apollo-cta-text: rgb(26, 26, 26);
 }
 
-.apollo-nav-logo {
-  filter: brightness(0);
+/* ---------------------------------------------------------------------------
+   Intro sequence — the mark assembles itself: orbit draws, letter rises,
+   bead lands at apogee. Reduced-motion visitors skip the intro entirely
+   (AppShell never mounts it), so there is no separate no-motion variant.
+--------------------------------------------------------------------------- */
+.apollo-mark-intro :is(.apollo-mark-ring, .apollo-mark-weave) {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: apollo-mark-draw 1.15s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards;
+}
+
+.apollo-mark-intro .apollo-mark-chevron {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  opacity: 0;
+  animation: apollo-mark-rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.45s forwards;
+}
+
+.apollo-mark-intro .apollo-mark-bead {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: apollo-mark-land 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.05s
+    forwards;
+}
+
+@keyframes apollo-mark-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes apollo-mark-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14%) scaleY(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes apollo-mark-land {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* Mobile nav */
@@ -851,6 +996,14 @@
   transform: translateY(-7px) rotate(-45deg);
 }
 
+/* Tailwind utilities live in @layer utilities, so the unlayered display:flex
+   above beats `md:hidden`. Hide the trigger explicitly at the md breakpoint. */
+@media (min-width: 768px) {
+  .apollo-nav-menu-btn {
+    display: none;
+  }
+}
+
 .apollo-mobile-menu {
   position: fixed;
   inset: 0;
@@ -876,6 +1029,12 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.apollo-mobile-menu-brand {
+  padding: 6px 16px 14px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--apollo-border);
 }
 
 .apollo-mobile-menu-link {
@@ -963,6 +1122,9 @@
   position: absolute;
   top: 16px;
   right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 36px;
   height: 36px;
   border: none;
@@ -1142,5 +1304,429 @@
 
   .apollo-card-vertical {
     min-height: unset;
+  }
+}
+
+/* ============================================================
+   Production layer: intro cover, a11y, Discord, motion prefs
+   ============================================================ */
+
+/* Painted before hydration by the inline script in the root layout, so the
+   intro overlay never flashes the page behind it. Cleared by AppShell. */
+html.apollo-preload,
+html.apollo-preload body {
+  overflow: hidden;
+}
+
+html.apollo-preload::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: #000000;
+}
+
+.apollo-loading {
+  will-change: transform;
+  color: #ffffff;
+  --apollo-mark-bead: #7ea8ff;
+}
+
+.apollo-loading .apollo-logo {
+  color: #ffffff;
+}
+
+.apollo-loading .apollo-logo-suffix {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.apollo-loading-track {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.apollo-loading-status {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* --- Focus & keyboard access --- */
+
+.apollo-skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  background: #0a0a0a;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  transform: translateY(-160%);
+  transition: transform 0.18s ease;
+}
+
+.apollo-skip-link:focus {
+  transform: translateY(0);
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--apollo-accent, #2563eb);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.apollo-section-dark :focus-visible,
+.apollo-contact-panel :focus-visible,
+.apollo-discord-panel :focus-visible {
+  outline-color: #ffffff;
+}
+
+.apollo-modal:focus {
+  outline: none;
+}
+
+/* Fixed nav would otherwise sit on top of anchored section headings. */
+:target,
+#mission,
+#research,
+#team,
+#projects,
+#join-us,
+#get-involved {
+  scroll-margin-top: 88px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Team cards use the shared 3-up `.apollo-cards-row` grid — same rhythm as the
+   mission, project, and join rows. If the team ever grows past three, add a
+   `.apollo-cards-row-team` override here rather than letting a row orphan. */
+
+.apollo-member-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+}
+
+.apollo-member-tag {
+  padding: 5px 12px;
+  border-radius: 9999px;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface-card);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--apollo-text-body);
+  white-space: nowrap;
+}
+
+/* --- Discord --- */
+
+.apollo-discord-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 26px;
+  border-radius: 9999px;
+  background: #5865f2;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  box-shadow: 0 1px 2px rgba(31, 38, 135, 0.2),
+    0 6px 20px rgba(88, 101, 242, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.apollo-discord-cta:hover {
+  background: #4752c4;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(31, 38, 135, 0.22),
+    0 10px 28px rgba(88, 101, 242, 0.42);
+}
+
+.apollo-discord-cta:active {
+  transform: translateY(0);
+}
+
+.apollo-discord-cta-lg {
+  padding: 15px 30px;
+  font-size: 16px;
+}
+
+.apollo-hero-meta {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--apollo-text-faint);
+  letter-spacing: 0.01em;
+}
+
+.apollo-nav-discord {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  background: #5865f2;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.apollo-nav-discord:hover {
+  background: #4752c4;
+  transform: translateY(-1px);
+}
+
+.apollo-mobile-menu-discord {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #5865f2;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.apollo-discord-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 28px 22px;
+  background: linear-gradient(150deg, #2b2f4a 0%, #16171f 62%);
+  border: 1px solid rgba(88, 101, 242, 0.35);
+  color: #ffffff;
+  --apollo-text: #ffffff;
+  --apollo-text-body: rgba(255, 255, 255, 0.74);
+  --apollo-text-faint: rgba(255, 255, 255, 0.55);
+  --apollo-border: rgba(255, 255, 255, 0.14);
+}
+
+@media (min-width: 768px) {
+  .apollo-discord-panel {
+    padding: 44px 48px;
+  }
+}
+
+.apollo-discord-panel-glow {
+  position: absolute;
+  top: -45%;
+  right: -15%;
+  width: 60%;
+  height: 150%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(88, 101, 242, 0.5) 0%,
+    transparent 68%
+  );
+  filter: blur(50px);
+}
+
+.apollo-discord-panel-body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 32px;
+}
+
+@media (min-width: 900px) {
+  .apollo-discord-panel-body {
+    grid-template-columns: 1.25fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+}
+
+.apollo-discord-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  margin-bottom: 18px;
+  border-radius: 9999px;
+  border: 1px solid rgba(88, 101, 242, 0.5);
+  background: rgba(88, 101, 242, 0.18);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.apollo-discord-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.6vw, 42px);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  color: #ffffff;
+}
+
+.apollo-discord-lede {
+  max-width: 46ch;
+  margin-bottom: 26px;
+  font-size: 15px;
+  line-height: 1.62;
+  color: var(--apollo-text-body);
+}
+
+.apollo-discord-meta {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--apollo-text-faint);
+  letter-spacing: 0.01em;
+}
+
+.apollo-discord-perks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.apollo-discord-perks li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--apollo-text-body);
+}
+
+.apollo-discord-perks li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(88, 101, 242, 0.9);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* --- Footer --- */
+
+.apollo-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  order: 3;
+}
+
+@media (min-width: 640px) {
+  .apollo-footer-links {
+    order: 0;
+  }
+}
+
+.apollo-footer-discord {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-radius: 9999px;
+  border: 1px solid var(--apollo-border);
+  background: rgba(88, 101, 242, 0.08);
+  font-size: 13px;
+  font-weight: 500;
+  color: #4752c4;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.apollo-footer-discord:hover {
+  background: rgba(88, 101, 242, 0.16);
+  border-color: rgba(88, 101, 242, 0.4);
+}
+
+.apollo-footer-link {
+  padding: 7px 12px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--apollo-text-body);
+  transition: color 0.15s ease;
+}
+
+.apollo-footer-link:hover {
+  color: var(--apollo-text);
+}
+
+/* --- Reduced motion: kill ambient animation, keep the layout identical --- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .apollo-tags-track,
+  .apollo-orbit-visual,
+  .apollo-hero-visual-wrap,
+  .apollo-shimmer::after {
+    animation: none !important;
+  }
+
+  .apollo-shimmer::after {
+    display: none;
+  }
+
+  .apollo-modal,
+  .apollo-modal-backdrop {
+    animation: none !important;
+  }
+
+  .apollo-hero-cta:hover,
+  .apollo-hero-cta-secondary:hover,
+  .apollo-discord-cta:hover,
+  .apollo-nav-discord:hover,
+  .apollo-project-card:hover,
+  .apollo-team-card:hover {
+    transform: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Small-screen polish --- */
+
+@media (max-width: 480px) {
+  .apollo-nav-discord {
+    padding: 8px 12px;
+  }
+
+  /* Stacked hero/panel CTAs read as one column, not a ragged pair. */
+  .apollo-discord-cta,
+  .apollo-discord-cta-lg,
+  .apollo-hero-cta-secondary {
+    width: 100%;
   }
 }

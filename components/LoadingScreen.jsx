@@ -1,11 +1,16 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import RocketIcon from '@/components/RocketIcon'
+import { useEffect, useRef, useState } from 'react'
+import ApolloMark from '@/components/ApolloMark'
+
+const TICK_MS = 12
+const HOLD_MS = 260
 
 export default function LoadingScreen({ onComplete }) {
   const [count, setCount] = useState(0)
+  const onCompleteRef = useRef(onComplete)
+  onCompleteRef.current = onComplete
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -16,61 +21,60 @@ export default function LoadingScreen({ onComplete }) {
         }
         return prev + 1
       })
-    }, 25)
+    }, TICK_MS)
 
     return () => clearInterval(timer)
   }, [])
 
   useEffect(() => {
-    if (count >= 100) {
-      const timeout = setTimeout(() => onComplete?.(), 400)
-      return () => clearTimeout(timeout)
-    }
-  }, [count, onComplete])
-
-  const flameIntensity = count / 100
+    if (count < 100) return
+    const timeout = setTimeout(() => onCompleteRef.current?.(), HOLD_MS)
+    return () => clearTimeout(timeout)
+  }, [count])
 
   return (
     <motion.div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black"
-      exit={{ y: '-100%', transition: { duration: 1, ease: 'easeInOut' } }}
+      className="apollo-loading fixed inset-0 z-[100] flex items-center justify-center bg-black"
+      exit={{ y: '-100%', transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] } }}
+      role="status"
+      aria-live="polite"
+      aria-label="Loading Apollo Labs"
     >
-      <div className="text-center">
-        <motion.div
-          className="mb-8 flex flex-col items-center justify-center gap-6"
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
-        >
-          <RocketIcon className="h-24 w-16" flameIntensity={flameIntensity} />
-          <div className="text-5xl font-light tracking-tight text-white md:text-7xl">
-            apollo labs
-          </div>
-        </motion.div>
+      <div className="w-full max-w-[420px] px-6">
+        {/* The mark builds itself: orbit draws, letter rises into it, bead
+            lands at apogee — the identity explained in one and a half seconds. */}
+        <div className="mb-10 flex justify-center">
+          <ApolloMark className="apollo-mark-intro h-28 sm:h-32" />
+        </div>
 
-        <motion.div
-          className="mx-auto mb-4 h-1 w-64 overflow-hidden rounded-full bg-white/20"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+        <div className="mb-10 flex justify-center">
+          <motion.span
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.75, ease: [0.2, 0.8, 0.2, 1] }}
+          >
+            <span className="apollo-logo apollo-logo-lg">
+              <span className="apollo-logo-type">
+                <span className="apollo-logo-name">Apollo</span>
+                <span className="apollo-logo-suffix">Labs</span>
+              </span>
+            </span>
+          </motion.span>
+        </div>
+
+        <div className="apollo-loading-track mb-3 overflow-hidden">
           <motion.div
             className="h-full bg-white"
             initial={{ width: 0 }}
             animate={{ width: `${count}%` }}
-            transition={{ duration: 0.1 }}
+            transition={{ duration: 0.1, ease: 'linear' }}
           />
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="text-lg text-white/60"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-        >
-          {count < 100 ? 'Launching…' : 'Ready for liftoff'}
-          <span className="mt-1 block text-2xl text-white/90">{count}%</span>
-        </motion.div>
+        <p className="apollo-loading-status">
+          <span>{count < 100 ? 'Entering orbit' : 'In orbit'}</span>
+          <span className="tabular-nums text-white/70">{count}</span>
+        </p>
       </div>
     </motion.div>
   )

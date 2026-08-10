@@ -1,58 +1,44 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
+import Modal from '@/components/Modal'
 import { TEAM_MEMBERS } from '@/lib/data'
 
-function Modal({ open, onClose, children, className = '' }) {
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e) => e.key === 'Escape' && onClose()
-    document.body.style.overflow = 'hidden'
-    window.addEventListener('keydown', onKey)
-    return () => {
-      document.body.style.overflow = ''
-      window.removeEventListener('keydown', onKey)
-    }
-  }, [open, onClose])
-
-  if (!open) return null
-
-  return (
-    <div className="apollo-modal-backdrop" onClick={onClose} role="presentation">
-      <div
-        className={`apollo-modal ${className}`}
-        onClick={(e) => e.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="team-modal-title"
-      >
-        <button type="button" className="apollo-modal-close" onClick={onClose} aria-label="Close">
-          ×
-        </button>
-        {children}
-      </div>
-    </div>
-  )
-}
+const TITLE_ID = 'apollo-team-modal-title'
 
 function TeamMemberModal({ member, onClose }) {
-  if (!member) return null
-
   return (
-    <Modal open={!!member} onClose={onClose} className="apollo-modal-team">
-      <div className="apollo-team-modal-header">
-        <div className="apollo-team-avatar apollo-team-avatar-modal">{member.initials}</div>
-        <div>
-          <span className="apollo-caption mb-1 block">{member.role}</span>
-          <h3
-            id="team-modal-title"
-            className="text-[clamp(24px,3.5vw,32px)] font-normal leading-tight tracking-tight"
-          >
-            {member.name}
-          </h3>
-        </div>
-      </div>
-      <p className="apollo-body-sm leading-relaxed mt-6">{member.bio}</p>
+    <Modal open={!!member} onClose={onClose} labelledBy={TITLE_ID} className="apollo-modal-team">
+      {member && (
+        <>
+          <div className="apollo-team-modal-header">
+            <div className="apollo-team-avatar apollo-team-avatar-modal">
+              {member.initials}
+            </div>
+            <div>
+              <span className="apollo-caption mb-1 block">{member.role}</span>
+              <h3
+                id={TITLE_ID}
+                className="text-[clamp(24px,3.5vw,32px)] font-normal leading-tight tracking-tight"
+              >
+                {member.name}
+              </h3>
+            </div>
+          </div>
+
+          {member.tags?.length > 0 && (
+            <ul className="apollo-member-tags">
+              {member.tags.map((tag) => (
+                <li key={tag} className="apollo-member-tag">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <p className="apollo-body-sm leading-relaxed mt-6">{member.bio}</p>
+        </>
+      )}
     </Modal>
   )
 }
@@ -81,6 +67,7 @@ export default function TeamSection() {
               type="button"
               className="apollo-team-card text-left w-full"
               onClick={() => setSelectedMember(member)}
+              aria-haspopup="dialog"
             >
               <div className="apollo-team-avatar">{member.initials}</div>
               <h3 className="text-xl font-normal tracking-tight text-[var(--apollo-text)] mb-1 text-center">

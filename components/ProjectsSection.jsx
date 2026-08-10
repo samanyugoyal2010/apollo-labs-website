@@ -1,61 +1,46 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
+import Modal from '@/components/Modal'
 import { PROJECT_CATEGORIES, PROJECTS } from '@/lib/data'
 
-function Modal({ open, onClose, children, className = '' }) {
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e) => e.key === 'Escape' && onClose()
-    document.body.style.overflow = 'hidden'
-    window.addEventListener('keydown', onKey)
-    return () => {
-      document.body.style.overflow = ''
-      window.removeEventListener('keydown', onKey)
-    }
-  }, [open, onClose])
-
-  if (!open) return null
-
-  return (
-    <div className="apollo-modal-backdrop" onClick={onClose} role="presentation">
-      <div
-        className={`apollo-modal ${className}`}
-        onClick={(e) => e.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-      >
-        <button type="button" className="apollo-modal-close" onClick={onClose} aria-label="Close">
-          ×
-        </button>
-        {children}
-      </div>
-    </div>
-  )
-}
+const DETAIL_TITLE_ID = 'apollo-project-modal-title'
+const LIST_TITLE_ID = 'apollo-project-list-title'
 
 function ProjectDetailModal({ project, onClose }) {
-  if (!project) return null
-
   return (
-    <Modal open={!!project} onClose={onClose} className="apollo-modal-project">
-      <span className="apollo-caption mb-2 block">
-        {project.category} · {project.tag}
-      </span>
-      <h3 className="text-[clamp(26px,4vw,36px)] font-normal leading-tight tracking-tight mb-1">
-        {project.title}
-      </h3>
-      <p className="text-base font-medium text-[var(--apollo-text-body)] mb-1">{project.topic}</p>
-      <p className="apollo-caption mb-6">Lead: {project.lead}</p>
+    <Modal
+      open={!!project}
+      onClose={onClose}
+      labelledBy={DETAIL_TITLE_ID}
+      className="apollo-modal-project"
+    >
+      {project && (
+        <>
+          <span className="apollo-caption mb-2 block">
+            {project.category} · {project.tag}
+          </span>
+          <h3
+            id={DETAIL_TITLE_ID}
+            className="text-[clamp(26px,4vw,36px)] font-normal leading-tight tracking-tight mb-1"
+          >
+            {project.title}
+          </h3>
+          <p className="text-base font-medium text-[var(--apollo-text-body)] mb-1">
+            {project.topic}
+          </p>
+          <p className="apollo-caption mb-6">Lead: {project.lead}</p>
 
-      <p className="apollo-body-sm leading-relaxed mb-6">{project.overview}</p>
+          <p className="apollo-body-sm leading-relaxed mb-6">{project.overview}</p>
 
-      <p className="apollo-caption mb-3">Standout aspects</p>
-      <ul className="apollo-modal-highlights">
-        {project.highlights.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
+          <p className="apollo-caption mb-3">Standout aspects</p>
+          <ul className="apollo-modal-highlights">
+            {project.highlights.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </>
+      )}
     </Modal>
   )
 }
@@ -69,19 +54,26 @@ function AllProjectsModal({ open, onClose, onSelectProject }) {
   }, [category])
 
   return (
-    <Modal open={open} onClose={onClose} className="apollo-modal-list">
+    <Modal
+      open={open}
+      onClose={onClose}
+      labelledBy={LIST_TITLE_ID}
+      className="apollo-modal-list"
+    >
       <span className="apollo-caption mb-2 block">All projects</span>
-      <h3 className="text-[clamp(24px,3.5vw,32px)] font-normal leading-tight tracking-tight mb-6">
+      <h3
+        id={LIST_TITLE_ID}
+        className="text-[clamp(24px,3.5vw,32px)] font-normal leading-tight tracking-tight mb-6"
+      >
         Apollo Labs research
       </h3>
 
-      <div className="apollo-project-filters" role="tablist" aria-label="Filter by category">
+      <div className="apollo-project-filters" role="group" aria-label="Filter by category">
         {PROJECT_CATEGORIES.map((cat) => (
           <button
             key={cat}
             type="button"
-            role="tab"
-            aria-selected={category === cat}
+            aria-pressed={category === cat}
             className={`apollo-project-filter ${category === cat ? 'apollo-project-filter-active' : ''}`}
             onClick={() => setCategory(cat)}
           >
@@ -101,10 +93,10 @@ function AllProjectsModal({ open, onClose, onSelectProject }) {
                 onSelectProject(project)
               }}
             >
-              <div className="apollo-project-list-meta">
+              <span className="apollo-project-list-meta">
                 <span className="apollo-caption">{project.category}</span>
                 <span className="apollo-caption">{project.tag}</span>
-              </div>
+              </span>
               <span className="apollo-project-list-title">{project.title}</span>
               <span className="apollo-project-list-topic">{project.topic}</span>
               <span className="apollo-project-list-lead">Lead: {project.lead}</span>
@@ -123,6 +115,7 @@ export default function ProjectsSection() {
   const [showAll, setShowAll] = useState(false)
 
   const closeDetail = useCallback(() => setSelectedProject(null), [])
+  const closeAll = useCallback(() => setShowAll(false), [])
   const openProject = useCallback((project) => setSelectedProject(project), [])
 
   return (
@@ -139,6 +132,7 @@ export default function ProjectsSection() {
             type="button"
             className="apollo-link text-sm font-medium text-left sm:text-right"
             onClick={() => setShowAll(true)}
+            aria-haspopup="dialog"
           >
             All projects →
           </button>
@@ -151,6 +145,7 @@ export default function ProjectsSection() {
               type="button"
               className="apollo-card-vertical apollo-project-card text-left w-full"
               onClick={() => openProject(project)}
+              aria-haspopup="dialog"
             >
               <p className="apollo-caption mb-3 text-[var(--apollo-text-faint)]">
                 {project.tag} · Lead: {project.lead}
@@ -175,7 +170,7 @@ export default function ProjectsSection() {
       <ProjectDetailModal project={selectedProject} onClose={closeDetail} />
       <AllProjectsModal
         open={showAll}
-        onClose={() => setShowAll(false)}
+        onClose={closeAll}
         onSelectProject={openProject}
       />
     </section>

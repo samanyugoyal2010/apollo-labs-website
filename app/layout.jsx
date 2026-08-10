@@ -6,6 +6,7 @@ import {
   JetBrains_Mono,
 } from 'next/font/google'
 import AppShell from '@/components/AppShell'
+import { SITE_NAME, SITE_URL } from '@/lib/site'
 import './globals.css'
 
 const inter = Inter({
@@ -41,19 +42,63 @@ const greatVibes = Great_Vibes({
   display: 'swap',
 })
 
+const TITLE = 'Apollo Labs — Student-led collaborative research'
+const DESCRIPTION =
+  'Apollo Labs is a student-led organization where high school students collaborate on shared research projects — from hypothesis to write-up. Join the community on Discord.'
+
 export const metadata = {
-  icons: { icon: '/favicon.svg' },
-  title: 'Apollo Labs — Student-led collaborative research',
-  description:
-    'Apollo Labs is a student-led organization where high school students collaborate on shared research projects — from hypothesis to write-up.',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: TITLE,
+    template: '%s — Apollo Labs',
+  },
+  description: DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    'Apollo Labs',
+    'student research',
+    'high school research',
+    'collaborative research',
+    'machine learning research',
+    'student-led lab',
+  ],
+  authors: [{ name: SITE_NAME }],
+  // Icons and the social card come from the file conventions in `app/`:
+  // icon.svg, apple-icon.jsx, opengraph-image.jsx. Declaring `icons` here would
+  // override those and drop the apple-touch-icon link.
+  alternates: { canonical: '/' },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+  },
   openGraph: {
-    title: 'Apollo Labs — Student-led collaborative research',
+    title: TITLE,
     description:
       'High school students building research, together. Founded by Samanyu Goyal, Ram Rithvik Pagadala, and Ashmit Pai.',
-    siteName: 'Apollo Labs',
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 }
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#fafaf9',
+  colorScheme: 'light',
+}
+
+// Runs before the page paints so the intro overlay never flashes the content
+// behind it. The timeout is a failsafe: if hydration never happens, the cover
+// clears itself rather than leaving a black screen.
+const PRELOAD_SCRIPT = `(function(){try{var r=document.documentElement;var s=null;try{s=window.sessionStorage.getItem('apollo-labs-seen')}catch(e){}var m=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(!s&&!m){r.classList.add('apollo-preload');setTimeout(function(){r.classList.remove('apollo-preload')},6000)}}catch(e){}})()`
 
 export default function RootLayout({ children }) {
   return (
@@ -62,6 +107,10 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} ${ebGaramond.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${greatVibes.variable}`}
     >
       <body className="antialiased">
+        <script dangerouslySetInnerHTML={{ __html: PRELOAD_SCRIPT }} />
+        <a href="#main" className="apollo-skip-link">
+          Skip to content
+        </a>
         <AppShell>{children}</AppShell>
       </body>
     </html>

@@ -5,11 +5,37 @@ import TeamSection from '@/components/TeamSection'
 import ProjectsSection from '@/components/ProjectsSection'
 import JoinUsSection from '@/components/JoinUsSection'
 import Footer from '@/components/Footer'
+import { CONTACT_EMAIL, DISCORD_URL, TEAM_MEMBERS } from '@/lib/data'
+import { SITE_NAME, SITE_URL } from '@/lib/site'
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE_NAME,
+  url: SITE_URL,
+  description:
+    'A student-led organization where high school students collaborate on shared research projects — from hypothesis to write-up.',
+  email: CONTACT_EMAIL,
+  sameAs: [DISCORD_URL],
+  member: TEAM_MEMBERS.map((member) => ({
+    '@type': 'Person',
+    name: member.name,
+    jobTitle: member.role,
+  })),
+}
 
 export default function Home() {
   return (
     <div className="apollo-site min-h-screen overflow-x-hidden">
-      <div className="fixed inset-0 -z-10 w-screen h-screen overflow-hidden pointer-events-none">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
+      <div
+        className="fixed inset-0 -z-10 w-screen h-screen overflow-hidden pointer-events-none"
+        aria-hidden
+      >
         <div
           className="absolute top-[-15%] right-[-10%] h-[55vh] w-[55vw] max-w-[700px] rounded-full opacity-50"
           style={{
@@ -35,7 +61,7 @@ export default function Home() {
       </div>
 
       <Nav />
-      <main className="apollo-home">
+      <main id="main" className="apollo-home">
         <Hero />
         <MissionSections />
         <TeamSection />

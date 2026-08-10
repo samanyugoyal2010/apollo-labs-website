@@ -1,3 +1,5 @@
+import ApolloMark from '@/components/ApolloMark'
+
 export default function HeroVisual() {
   return (
     <div className="apollo-hero-visual-wrap relative mx-auto flex aspect-square w-full max-w-[420px] items-center justify-center lg:max-w-none">
@@ -17,8 +19,10 @@ export default function HeroVisual() {
         style={{ animationDuration: '16s' }}
       />
 
-      <div className="apollo-hero-core relative z-10 flex h-[88px] w-[88px] items-center justify-center rounded-full">
-        <span className="apollo-hero-core-letter text-[2.75rem] leading-none">A</span>
+      {/* The concentric rings are this mark's orbit blown up to page scale —
+          the visual is the logo exploded, with the mark itself at the center. */}
+      <div className="apollo-hero-core relative z-10 flex h-[104px] w-[104px] items-center justify-center rounded-full">
+        <ApolloMark className="apollo-hero-core-mark" />
       </div>
 
       <div className="absolute top-[10%] right-[16%] h-3.5 w-3.5 rounded-full bg-[var(--apollo-text)] shadow-[0_0_12px_rgba(0,0,0,0.2)]" />

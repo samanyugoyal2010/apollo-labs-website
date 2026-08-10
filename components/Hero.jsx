@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import HeroVisual from '@/components/HeroVisual'
 import ResearchTags from '@/components/ResearchTags'
+import DiscordIcon from '@/components/DiscordIcon'
+import { DISCORD_HANDLE, DISCORD_URL } from '@/lib/data'
 
 export default function Hero() {
   return (
@@ -14,18 +16,28 @@ export default function Hero() {
             <h1 className="apollo-hero-h1 mb-6">
               High school students building <em>research</em>, together.
             </h1>
-            <p className="apollo-body mb-10 max-w-lg text-[17px] leading-relaxed">
+            <p className="apollo-body mb-8 max-w-lg text-[17px] leading-relaxed">
               Apollo Labs is a student-led organization where collaborators work on
-              shared research projects — from hypothesis to write-up.
+              shared research projects — from hypothesis to write-up. Everything
+              happens in our Discord.
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              <Link href="#team" className="apollo-hero-cta relative overflow-hidden apollo-shimmer">
+              <a
+                href={DISCORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="apollo-discord-cta relative overflow-hidden apollo-shimmer"
+              >
+                <DiscordIcon className="h-[18px] w-[18px]" />
+                Join our Discord
+              </a>
+              <Link href="#team" className="apollo-hero-cta-secondary">
                 Meet the team
               </Link>
-              <Link href="#research" className="apollo-hero-cta-secondary">
-                Our research
-              </Link>
             </div>
+            <p className="apollo-hero-meta">
+              {DISCORD_HANDLE} · Free to join · Open to all high school students
+            </p>
           </div>
           <HeroVisual />
         </div>
