@@ -428,6 +428,14 @@
   text-decoration-color: currentColor;
 }
 
+button.apollo-link {
+  cursor: pointer;
+  font: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
 .apollo-project-card {
   display: flex;
   flex-direction: column;
@@ -453,6 +461,31 @@
 
 .apollo-project-card-hint {
   display: block;
+}
+
+.apollo-pillar-card {
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  width: 100%;
+  transition: border-color 0.15s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.apollo-pillar-card:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+.apollo-pillar-card-hint {
+  display: block;
+  color: var(--apollo-text-faint);
+  transition: color 0.15s ease;
+}
+
+.apollo-pillar-card:hover .apollo-pillar-card-hint {
+  color: var(--apollo-text);
 }
 
 .apollo-more-soon {
@@ -1104,6 +1137,10 @@
   max-width: 560px;
 }
 
+.apollo-modal-pillar {
+  max-width: 560px;
+}
+
 .apollo-team-modal-header {
   display: flex;
   align-items: center;
@@ -1705,6 +1742,7 @@ html {
   .apollo-discord-cta:hover,
   .apollo-nav-discord:hover,
   .apollo-project-card:hover,
+  .apollo-pillar-card:hover,
   .apollo-team-card:hover {
     transform: none;
   }
@@ -1728,5 +1766,63 @@ html {
   .apollo-discord-cta-lg,
   .apollo-hero-cta-secondary {
     width: 100%;
+  }
+}
+
+/* ============================================================
+   Mobile refinements
+   Touch targets, iOS field behaviour, and the Calendly embed.
+   ============================================================ */
+
+/* Touch ergonomics key off the pointer, not the width — a phone in landscape is
+   844px wide and would miss a width-only rule. */
+@media (max-width: 767px), (pointer: coarse) {
+  /* iOS Safari auto-zooms the page when a focused field is under 16px, and
+     never zooms back out. 16px keeps the layout still on tap. */
+  .apollo-contact-field input,
+  .apollo-contact-field select,
+  .apollo-contact-field textarea {
+    font-size: 16px;
+  }
+
+  /* Card CTAs ("See how we work →", "Pitch it on Discord →") rendered as bare
+     20px-tall text — too small to hit reliably. */
+  .apollo-link,
+  .apollo-logo-link,
+  .apollo-footer-discord,
+  .apollo-footer-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .apollo-nav-discord {
+    min-height: 40px;
+  }
+
+  .apollo-modal-close {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* The filter pills in the all-projects dialog. */
+  .apollo-project-filter {
+    min-height: 40px;
+  }
+}
+
+/* Narrow-viewport layout, as opposed to touch ergonomics above. */
+@media (max-width: 767px) {
+  /* 9.5px is below comfortable reading size on a phone. */
+  .apollo-logo-suffix {
+    font-size: 10.5px;
+  }
+
+  /* Calendly needs ~320px to lay out its month grid; the panel's own padding
+     was squeezing it to 275. Cancel that padding for the embed only. */
+  .apollo-contact-panel .apollo-calendly-wrap {
+    margin-left: -20px;
+    margin-right: -20px;
+    border-radius: 12px;
   }
 }

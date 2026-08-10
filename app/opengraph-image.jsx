@@ -1,38 +1,20 @@
 import { ImageResponse } from 'next/og'
 import { markDataUri } from '@/lib/mark'
-import { DISCORD_HANDLE } from '@/lib/data'
+import { googleFont } from '@/lib/google-font'
 
 export const alt =
   'Apollo Labs — high school students building research, together'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
-/**
- * Fetch a font from Google at build time. Returns null on any failure so an
- * offline or blocked build still produces a card, just in the default face.
- */
-async function googleFont(query, text) {
-  try {
-    const api = `https://fonts.googleapis.com/css2?family=${query}&text=${encodeURIComponent(text)}`
-    const css = await fetch(api, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
-    }).then((r) => r.text())
-
-    const url = css.match(/src: url\((.+?)\) format\('(?:opentype|truetype)'\)/)?.[1]
-    if (!url) return null
-    return await fetch(url).then((r) => r.arrayBuffer())
-  } catch {
-    return null
-  }
-}
-
 const HEADLINE = 'High school students building research, together.'
 const WORDMARK = 'Apollo'
+const FOOTNOTE = 'Join our Discord'
 
 export default async function OpengraphImage() {
   const [serif, sans] = await Promise.all([
     googleFont('Instrument+Serif', `${WORDMARK}${HEADLINE}`),
-    googleFont('Inter:wght@500', `LABS${DISCORD_HANDLE}Student-ledCollaborativeResearch·`),
+    googleFont('Inter:wght@500', `LABS${FOOTNOTE}Student-ledCollaborativeResearch·`),
   ])
 
   const fonts = []
@@ -114,7 +96,7 @@ export default async function OpengraphImage() {
           }}
         >
           <span>Student-led · Collaborative · Research</span>
-          <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{DISCORD_HANDLE}</span>
+          <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{FOOTNOTE}</span>
         </div>
       </div>
     ),

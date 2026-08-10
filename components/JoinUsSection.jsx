@@ -5,7 +5,6 @@ import CalendlyEmbed from '@/components/CalendlyEmbed'
 import DiscordIcon from '@/components/DiscordIcon'
 import {
   CONTACT_EMAIL,
-  DISCORD_HANDLE,
   DISCORD_PERKS,
   DISCORD_URL,
   JOIN_OPTIONS,
@@ -103,7 +102,7 @@ export default function JoinUsSection() {
                 Join the Apollo Labs Discord
               </a>
               <p className="apollo-discord-meta">
-                {DISCORD_HANDLE} · Free · Open to all high school students
+                Free · Open to all high school students
               </p>
             </div>
 

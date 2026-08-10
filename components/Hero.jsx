@@ -2,7 +2,7 @@ import Link from 'next/link'
 import HeroVisual from '@/components/HeroVisual'
 import ResearchTags from '@/components/ResearchTags'
 import DiscordIcon from '@/components/DiscordIcon'
-import { DISCORD_HANDLE, DISCORD_URL } from '@/lib/data'
+import { DISCORD_URL } from '@/lib/data'
 
 export default function Hero() {
   return (
@@ -36,7 +36,7 @@ export default function Hero() {
               </Link>
             </div>
             <p className="apollo-hero-meta">
-              {DISCORD_HANDLE} · Free to join · Open to all high school students
+              Free to join · Open to all high school students
             </p>
           </div>
           <HeroVisual />

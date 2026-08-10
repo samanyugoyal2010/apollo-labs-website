@@ -38,19 +38,50 @@ light on the intro. Callers set a height; width follows the viewBox.
 | [`app/apple-icon.jsx`](app/apple-icon.jsx) | 180×180 home-screen icon, generated from `markSvg()`. |
 | [`app/opengraph-image.jsx`](app/opengraph-image.jsx) | 1200×630 social card. |
 | [`public/logo.svg`](public/logo.svg) | Standalone lockup for READMEs and decks. |
+| `public/*.png` | The raster set — see below. |
+
+### Raster assets
+
+Anywhere that can't take an SVG — Discord, Google Workspace, slide decks, print —
+uses the PNGs in `public/`. They are generated, not hand-exported:
+
+```bash
+npm run logos
+```
+
+| File | Size | Use |
+| --- | --- | --- |
+| `logo.png` | 680×190 | Lockup, dark ink, transparent |
+| `logo-light.png` | 680×190 | Lockup, white ink, for dark backgrounds |
+| `mark.png` | 512×512 | Mark alone, dark ink, transparent |
+| `mark-light.png` | 512×512 | Mark alone, white ink, transparent |
+| `icon.png` | 512×512 | Mark on the dark tile — server icons, org avatars |
+
+[`scripts/render-logo-pngs.mjs`](scripts/render-logo-pngs.mjs) renders them from
+the same geometry, so changing the shape in [`lib/mark.js`](lib/mark.js) and
+re-running is all it takes. It goes through `next/og` (satori + resvg), which
+ships with Next, so there is no extra dependency — and it is the only rasterizer
+here that can embed Instrument Serif, which a generic SVG converter would
+substitute with whatever serif the machine happens to have.
+
+The lockup's proportions are not arbitrary: the mark's **ink** height is matched
+to the wordmark's cap height, which is why the mark box is scaled up past the
+type size (its ink fills only ~71% of the tight viewBox).
 
 Icons and the social card use Next's `app/` file conventions, so the `<link>`
 and `og:image` tags are generated with content hashes. Do not add `icons` to
 `metadata` in [`app/layout.jsx`](app/layout.jsx) — it overrides the conventions
 and silently drops the apple-touch-icon.
 
-`app/icon.svg` and `public/logo.svg` are static files that duplicate the path
-data, because they are consumed outside React. If the geometry in
-[`lib/mark.js`](lib/mark.js) changes, they need the same edit.
+`app/icon.svg` and `public/logo.svg` are the only files that duplicate the path
+data — they are static SVGs read outside React. If the geometry in
+[`lib/mark.js`](lib/mark.js) changes, those two need the same edit by hand;
+everything else regenerates.
 
-The social card fetches Instrument Serif and Inter from Google at build time and
-falls back to system faces if that fetch fails, so an offline build still ships
-a card.
+The social card and the logo PNGs fetch Instrument Serif and Inter from Google
+via [`lib/google-font.js`](lib/google-font.js) and fall back to system faces if
+that fetch fails, so an offline build still ships a card. `npm run logos` warns
+when it falls back, since a wordmark in the wrong serif should not be committed.
 
 ## Editing content
 
