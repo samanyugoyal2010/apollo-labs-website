@@ -35,6 +35,7 @@
   --apollo-cta-bg: #0a0a0a;
   --apollo-cta-text: #ffffff;
   --apollo-mark-bead: var(--apollo-accent);
+  --apollo-option-bg: #ffffff;
 }
 
 .apollo-home :is(h1, h2, h3, h4, h5, h6) {
@@ -355,6 +356,7 @@
   --apollo-surface-card: rgba(255, 255, 255, 0.04);
   --apollo-cta-bg: #ffffff;
   --apollo-cta-text: rgb(26, 26, 26);
+  --apollo-option-bg: #1a1a1a;
   color: var(--apollo-text);
 }
 
@@ -434,33 +436,6 @@ button.apollo-link {
   background: none;
   border: none;
   padding: 0;
-}
-
-.apollo-project-card {
-  display: flex;
-  flex-direction: column;
-  padding: 24px;
-  border-radius: 16px;
-  border: 1px solid var(--apollo-border);
-  background: var(--apollo-surface-card);
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  font: inherit;
-  text-align: left;
-  width: 100%;
-  transition: background 0.15s ease, border-color 0.15s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.apollo-project-card:hover {
-  background: var(--apollo-surface);
-  border-color: rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-}
-
-.apollo-project-card-hint {
-  display: block;
 }
 
 .apollo-pillar-card {
@@ -671,6 +646,9 @@ button.apollo-link {
   --apollo-text-body: rgba(255, 255, 255, 0.72);
   --apollo-text-faint: rgba(255, 255, 255, 0.5);
   --apollo-border: rgba(255, 255, 255, 0.12);
+  --apollo-surface: rgba(255, 255, 255, 0.06);
+  --apollo-surface-card: rgba(255, 255, 255, 0.09);
+  --apollo-option-bg: #1a1a1a;
 }
 
 @media (min-width: 768px) {
@@ -777,9 +755,9 @@ button.apollo-link {
   width: 100%;
   padding: 12px 14px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface);
+  color: var(--apollo-text);
   font-size: 15px;
   font-family: var(--font-sans);
   outline: none;
@@ -788,28 +766,30 @@ button.apollo-link {
 
 .apollo-contact-field input::placeholder,
 .apollo-contact-field textarea::placeholder {
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--apollo-text-faint);
 }
 
 .apollo-contact-field input:focus,
 .apollo-contact-field select:focus,
 .apollo-contact-field textarea:focus {
-  border-color: rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.09);
+  border-color: var(--apollo-text-faint);
+  background: var(--apollo-surface-card);
 }
 
 .apollo-contact-field select {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  /* Mid-grey chevron: a data-URI stroke cannot read a custom property, and
+     this one reads on both the dark contact panel and the light one. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   padding-right: 36px;
 }
 
 .apollo-contact-field select option {
-  background: #1a1a1a;
-  color: #ffffff;
+  background: var(--apollo-option-bg);
+  color: var(--apollo-text);
 }
 
 .apollo-contact-panel .apollo-hero-cta {
@@ -1124,9 +1104,6 @@ button.apollo-link {
     animation: apollo-modal-scale 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .apollo-modal-list {
-    max-width: 560px;
-  }
 }
 
 .apollo-modal-project {
@@ -1206,6 +1183,27 @@ button.apollo-link {
   background: var(--apollo-accent);
 }
 
+/* --- "View more": the full write-up inside the project modal --- */
+
+.apollo-project-methods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.apollo-project-methods li {
+  padding: 6px 13px;
+  border: 1px solid var(--apollo-border);
+  border-radius: 9999px;
+  background: var(--apollo-surface-card);
+  font-size: 12.5px;
+  line-height: 1.3;
+  color: var(--apollo-text-body);
+}
+
 .apollo-project-filters {
   display: flex;
   flex-wrap: wrap;
@@ -1229,70 +1227,6 @@ button.apollo-link {
   background: var(--apollo-text);
   border-color: var(--apollo-text);
   color: #ffffff;
-}
-
-.apollo-project-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.apollo-project-list-item {
-  width: 100%;
-  padding: 16px;
-  border-radius: 12px;
-  border: 1px solid var(--apollo-border);
-  background: var(--apollo-surface-card);
-  text-align: left;
-  cursor: pointer;
-  font: inherit;
-  color: inherit;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-.apollo-project-list-item:hover {
-  background: var(--apollo-surface);
-  border-color: rgba(0, 0, 0, 0.12);
-}
-
-.apollo-project-list-meta {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 6px;
-}
-
-.apollo-project-list-title {
-  display: block;
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--apollo-text);
-  margin-bottom: 2px;
-}
-
-.apollo-project-list-topic {
-  display: block;
-  font-size: 14px;
-  color: var(--apollo-text-body);
-  margin-bottom: 4px;
-}
-
-.apollo-project-list-lead {
-  display: block;
-  font-size: 12px;
-  color: var(--apollo-text-faint);
-}
-
-.apollo-project-coming-soon {
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--apollo-border);
-  text-align: center;
-  font-size: 13px;
-  color: var(--apollo-text-faint);
-  letter-spacing: 0.02em;
 }
 
 @keyframes apollo-fade-in {
@@ -1716,7 +1650,627 @@ html {
 
 /* --- Reduced motion: kill ambient animation, keep the layout identical --- */
 
+/* ============================================================
+   Research gallery — cover cards, project pages, submissions
+   ============================================================ */
+
+.apollo-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .apollo-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .apollo-gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.apollo-gallery-item {
+  display: flex;
+}
+
+.apollo-gallery-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface-card);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.15s ease, transform 0.2s ease, box-shadow 0.2s ease,
+    background 0.15s ease;
+}
+
+.apollo-gallery-card:hover {
+  background: var(--apollo-surface);
+  border-color: rgba(0, 0, 0, 0.14);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.09);
+}
+
+.apollo-gallery-card:focus-visible {
+  outline: 2px solid var(--apollo-accent);
+  outline-offset: 3px;
+}
+
+.apollo-gallery-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px 22px 22px;
+}
+
+.apollo-gallery-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.apollo-gallery-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 21px;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--apollo-text);
+  margin-bottom: 5px;
+}
+
+.apollo-gallery-topic {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--apollo-text-body);
+  margin-bottom: 10px;
+}
+
+.apollo-gallery-authors {
+  display: block;
+  font-size: 13px;
+  color: var(--apollo-text-faint);
+  margin-bottom: 12px;
+}
+
+.apollo-gallery-abstract {
+  display: block;
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--apollo-text-body);
+}
+
+.apollo-gallery-hint {
+  display: block;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--apollo-text-faint);
+  transition: color 0.15s ease;
+}
+
+.apollo-gallery-card:hover .apollo-gallery-hint {
+  color: var(--apollo-text);
+}
+
+.apollo-gallery-empty {
+  padding: 48px 24px;
+  border-radius: 18px;
+  border: 1px dashed var(--apollo-border);
+  text-align: center;
+  font-size: 15px;
+  color: var(--apollo-text-body);
+}
+
+/* --- Status pill: in progress vs published --- */
+
+.apollo-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--apollo-text-faint);
+  white-space: nowrap;
+}
+
+.apollo-status-pill::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.apollo-status-pill-published {
+  border-color: var(--apollo-accent-soft);
+  background: var(--apollo-accent-soft);
+  color: var(--apollo-accent);
+}
+
+/* --- Cover art: supplied image, or a generated gradient behind the mark --- */
+
+.apollo-cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  overflow: hidden;
+  background: hsl(var(--apollo-cover-hue, 220) 32% 14%);
+  border-bottom: 1px solid var(--apollo-border);
+}
+
+.apollo-cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.apollo-cover-wash {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 76% 22%,
+      hsl(var(--apollo-cover-hue, 220) 78% 58% / 0.42) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      circle at 18% 84%,
+      hsl(calc(var(--apollo-cover-hue, 220) + 48) 70% 52% / 0.28) 0%,
+      transparent 60%
+    );
+}
+
+.apollo-cover-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+  background-size: 34px 34px;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000, transparent 72%);
+  mask-image: radial-gradient(circle at 50% 50%, #000, transparent 72%);
+}
+
+.apollo-cover .apollo-cover-mark {
+  position: relative;
+  height: 34%;
+  width: auto;
+  color: rgba(255, 255, 255, 0.9);
+  --apollo-mark-bead: hsl(var(--apollo-cover-hue, 220) 90% 72%);
+}
+
+/* --- Preview modal actions --- */
+
+.apollo-preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--apollo-border);
+}
+
+/* ============================================================
+   Project page — /projects/[slug]
+   ============================================================ */
+
+.apollo-paper {
+  padding-top: 120px;
+  padding-bottom: 96px;
+}
+
+@media (min-width: 768px) {
+  .apollo-paper {
+    padding-top: 160px;
+  }
+}
+
+.apollo-paper-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .apollo-paper-container {
+    padding: 0 32px;
+  }
+}
+
+.apollo-paper-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--apollo-text-faint);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.apollo-paper-back:hover {
+  color: var(--apollo-text);
+}
+
+.apollo-paper-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.apollo-paper-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5.4vw, 56px);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--apollo-text);
+  margin-bottom: 14px;
+}
+
+.apollo-paper-topic {
+  font-size: clamp(17px, 2.2vw, 21px);
+  line-height: 1.4;
+  color: var(--apollo-text-body);
+  margin-bottom: 24px;
+}
+
+.apollo-paper-authors {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--apollo-text);
+  margin-bottom: 4px;
+}
+
+.apollo-paper-affiliation {
+  font-size: 14px;
+  color: var(--apollo-text-faint);
+}
+
+.apollo-paper-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.apollo-paper-cover {
+  margin: 40px 0 8px;
+  border-radius: 16px;
+  border: 1px solid var(--apollo-border);
+  aspect-ratio: 21 / 9;
+}
+
+.apollo-paper-abstract {
+  margin-top: 48px;
+  padding: 28px;
+  border-radius: 16px;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface-card);
+}
+
+.apollo-paper-heading {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--apollo-text-faint);
+  margin-bottom: 14px;
+}
+
+.apollo-paper-lede {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--apollo-text-body);
+}
+
+.apollo-paper-section {
+  margin-top: 44px;
+}
+
+.apollo-paper-body {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--apollo-text-body);
+}
+
+.apollo-paper-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.apollo-paper-list li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--apollo-text-body);
+}
+
+.apollo-paper-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--apollo-accent);
+}
+
+.apollo-paper-pdf {
+  width: 100%;
+  height: min(80vh, 900px);
+  border-radius: 14px;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface);
+}
+
+.apollo-paper-cta {
+  margin-top: 64px;
+  padding: 32px;
+  border-radius: 18px;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface-card);
+}
+
+.apollo-paper-cta-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--apollo-text);
+  margin-bottom: 12px;
+}
+
+.apollo-paper-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+
+/* ============================================================
+   Submit a paper
+   ============================================================ */
+
+.apollo-submit-section {
+  scroll-margin-top: 96px;
+}
+
+.apollo-submit-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: none;
+}
+
+@media (min-width: 640px) {
+  .apollo-submit-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .apollo-submit-steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.apollo-submit-step {
+  padding: 22px;
+  border-radius: 14px;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface-card);
+}
+
+.apollo-submit-step-n {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--apollo-accent);
+  margin-bottom: 12px;
+}
+
+.apollo-submit-step-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--apollo-text);
+  margin-bottom: 6px;
+}
+
+.apollo-submit-step-body {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--apollo-text-body);
+}
+
+.apollo-submit-panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface-card);
+}
+
+@media (min-width: 1024px) {
+  .apollo-submit-panel {
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+    gap: 48px;
+    padding: 40px;
+  }
+}
+
+.apollo-submit-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.apollo-submit-checklist li {
+  position: relative;
+  padding-left: 26px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--apollo-text-body);
+}
+
+.apollo-submit-checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--apollo-accent);
+}
+
+.apollo-submit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.apollo-field-hint,
+.apollo-field-error,
+.apollo-field-counter {
+  font-size: 12px;
+  line-height: 1.45;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.apollo-field-hint {
+  color: var(--apollo-text-faint);
+}
+
+.apollo-field-counter {
+  color: var(--apollo-text-faint);
+}
+
+.apollo-field-error {
+  color: #b91c1c;
+}
+
+.apollo-contact-field input[aria-invalid="true"],
+.apollo-contact-field textarea[aria-invalid="true"] {
+  border-color: rgba(185, 28, 28, 0.55);
+}
+
+.apollo-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.apollo-submit-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin-top: 6px;
+}
+
+.apollo-submit-actions .apollo-hero-cta[disabled] {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.apollo-submit-fineprint {
+  font-size: 13px;
+  color: var(--apollo-text-faint);
+}
+
+.apollo-form-status {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--apollo-text-body);
+  min-height: 1px;
+}
+
+.apollo-form-status-error {
+  color: #b91c1c;
+}
+
+.apollo-submit-success {
+  padding: 44px 28px;
+  border-radius: 20px;
+  border: 1px solid var(--apollo-border);
+  background: var(--apollo-surface-card);
+}
+
+@media (min-width: 768px) {
+  .apollo-submit-success {
+    padding: 64px 48px;
+  }
+}
+
+.apollo-submit-success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .apollo-gallery-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
   html {
     scroll-behavior: auto;
   }
@@ -1741,7 +2295,6 @@ html {
   .apollo-hero-cta-secondary:hover,
   .apollo-discord-cta:hover,
   .apollo-nav-discord:hover,
-  .apollo-project-card:hover,
   .apollo-pillar-card:hover,
   .apollo-team-card:hover {
     transform: none;

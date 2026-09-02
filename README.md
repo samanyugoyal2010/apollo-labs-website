@@ -86,8 +86,62 @@ when it falls back, since a wordmark in the wrong serif should not be committed.
 ## Editing content
 
 All copy lives in [`lib/data.js`](lib/data.js): team members, projects, mission
-pillars, research tags, join options, contact email, Calendly URL, and the
-Discord invite. No component holds hard-coded copy.
+pillars, research tags, join options, contact email, Calendly URL, the
+submission checklist, and the Discord invite. No component holds hard-coded
+copy.
+
+## The research gallery
+
+The Projects section is a gallery of cover cards. Clicking one opens a preview
+with the abstract; "Read the full paper" goes to `/projects/<slug>`, a
+statically generated page with the full write-up, its own social card, and
+JSON-LD for search engines.
+
+A project is a gallery entry from the day it starts. `paper` is what gets
+filled in once a write-up clears review:
+
+```js
+{
+  slug: 'optimus',
+  authors: ['Samanyu Goyal'],
+  status: 'in-progress',
+  paper: null,          // { pdf, published, doi } once approved
+  cover: null,          // '/covers/optimus.png', or null for a generated one
+  // ... title, topic, category, overview (the abstract), highlights, detail
+}
+```
+
+Setting `paper.pdf` flips the card to Published, adds the download button and
+an inline PDF viewer, and upgrades the structured data to `ScholarlyArticle`.
+Leaving `cover` as `null` draws a generated gradient cover keyed to the slug,
+so the gallery never shows a missing image.
+
+### Publishing an approved paper
+
+1. Put the PDF in `public/papers/` (and a cover image in `public/covers/`).
+2. Add or update the entry in `PROJECTS` with `paper.pdf` and
+   `paper.published` set.
+
+That is the whole job — the project page, its social card, and its
+`sitemap.xml` entry all follow from the data.
+
+## Paper submissions
+
+`SubmitPaperSection` posts to `/api/submit-paper`, the site's only server
+route. It sends the reviewer the submission along with **Approve** and
+**Request changes** buttons — `mailto:` links carrying a pre-written reply — and
+sends the student a receipt. There is no database and no admin page: approving
+a paper happens in the reviewer's own mail client.
+
+Set `RESEND_API_KEY` to turn it on; see [`.env.example`](.env.example). Without
+it the route returns 503 and the form points students at the contact email
+instead, so a missing key degrades rather than dead-ends.
+
+One caveat worth knowing: until a sending domain is verified in Resend, the
+default sender only delivers to the Resend account owner. The reviewer copy
+arrives and the student's receipt does not — the route logs that and still
+reports success, because the submission did go through. Verify a domain and set
+`RESEND_FROM` to send receipts.
 
 ## Team
 
@@ -126,6 +180,10 @@ Graph tags, `robots.txt`, and `sitemap.xml`. On Vercel it falls back to the
 project production URL automatically; without either it defaults to
 `http://localhost:3000`.
 
+Set `RESEND_API_KEY` (and ideally `RESEND_FROM`) to enable paper submissions.
+Copy [`.env.example`](.env.example) to `.env.local` for local development, and
+add the same variables in the Vercel project settings.
+
 ## Stack
 
 - Next.js 15 (App Router) + React 19
@@ -140,6 +198,8 @@ project production URL automatically; without either it defaults to
   [`app/layout.jsx`](app/layout.jsx) that sets `.apollo-preload` on `<html>`.
   The script self-clears after 6s so a hydration failure can never leave a
   blank screen.
+- **The intro only plays on the home page.** A shared link to a paper should
+  land on the paper, not on an intro.
 - **The intro respects `prefers-reduced-motion`** and is skipped entirely when
   set, along with all ambient animation (marquee, orbits, float, shimmer).
   Because it never mounts in that case, the mark's assemble animation

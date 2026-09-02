@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import ApolloLogo from '@/components/ApolloLogo'
 import DiscordIcon from '@/components/DiscordIcon'
 import { DISCORD_URL, NAV_LINKS } from '@/lib/data'
@@ -9,6 +10,12 @@ import { DISCORD_URL, NAV_LINKS } from '@/lib/data'
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+
+  // NAV_LINKS are in-page anchors. On a project page there is nothing to
+  // scroll to, so they have to route home first.
+  const onHome = pathname === '/'
+  const hrefFor = (href) => (onHome || !href.startsWith('#') ? href : `/${href}`)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -48,7 +55,7 @@ export default function Nav() {
 
         <div className="hidden md:flex items-center gap-7">
           {NAV_LINKS.map((link) => (
-            <Link key={link.label} href={link.href} className="apollo-nav-link">
+            <Link key={link.label} href={hrefFor(link.href)} className="apollo-nav-link">
               {link.label}
             </Link>
           ))}
@@ -96,7 +103,7 @@ export default function Nav() {
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
-                href={link.href}
+                href={hrefFor(link.href)}
                 className="apollo-mobile-menu-link"
                 onClick={closeMenu}
               >

@@ -3,6 +3,7 @@ import Hero from '@/components/Hero'
 import MissionSections from '@/components/MissionSections'
 import TeamSection from '@/components/TeamSection'
 import ProjectsSection from '@/components/ProjectsSection'
+import SubmitPaperSection from '@/components/SubmitPaperSection'
 import JoinUsSection from '@/components/JoinUsSection'
 import Footer from '@/components/Footer'
 import { CONTACT_EMAIL, DISCORD_URL, TEAM_MEMBERS } from '@/lib/data'
@@ -66,6 +67,7 @@ export default function Home() {
         <MissionSections />
         <TeamSection />
         <ProjectsSection />
+        <SubmitPaperSection />
         <JoinUsSection />
       </main>
       <Footer />

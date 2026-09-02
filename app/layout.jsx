@@ -98,7 +98,7 @@ export const viewport = {
 // Runs before the page paints so the intro overlay never flashes the content
 // behind it. The timeout is a failsafe: if hydration never happens, the cover
 // clears itself rather than leaving a black screen.
-const PRELOAD_SCRIPT = `(function(){try{var r=document.documentElement;var s=null;try{s=window.sessionStorage.getItem('apollo-labs-seen')}catch(e){}var m=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(!s&&!m){r.classList.add('apollo-preload');setTimeout(function(){r.classList.remove('apollo-preload')},6000)}}catch(e){}})()`
+const PRELOAD_SCRIPT = `(function(){try{var r=document.documentElement;var h=location.pathname==='/'||location.pathname==='';var s=null;try{s=window.sessionStorage.getItem('apollo-labs-seen')}catch(e){}var m=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(h&&!s&&!m){r.classList.add('apollo-preload');setTimeout(function(){r.classList.remove('apollo-preload')},6000)}}catch(e){}})()`
 
 export default function RootLayout({ children }) {
   return (
