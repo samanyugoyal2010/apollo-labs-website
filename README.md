@@ -5,6 +5,8 @@
 Marketing site for **Apollo Labs** — a student-led organization where high school
 students collaborate on research projects.
 
+Made by Samanyu, Ashmit, and Nihar
+
 ## Community
 
 The Discord server is the primary way to join and the main call to action across
