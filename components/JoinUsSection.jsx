@@ -12,7 +12,7 @@ import {
 
 function buildMailto({ name, email, interest, message }) {
   const subject = encodeURIComponent(
-    `[Apollo Labs] ${interest || 'Join request'} — ${name || 'New message'}`
+    `[Collaborative Research Club] ${interest || 'Join request'} — ${name || 'New message'}`
   )
   const body = encodeURIComponent(
     `Name: ${name || '—'}\nEmail: ${email || '—'}\nInterested in: ${interest || '—'}\n\n${message || ''}`
@@ -27,7 +27,7 @@ function JoinOptionLink({ option }) {
         href={DISCORD_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="apollo-link text-sm font-medium mt-auto"
+        className="crc-link text-sm font-medium mt-auto"
       >
         {option.cta} →
       </a>
@@ -40,9 +40,9 @@ function JoinOptionLink({ option }) {
         name: '',
         email: '',
         interest: option.title,
-        message: `Hi Apollo Labs,\n\nI'm interested in: ${option.title}\n\n`,
+        message: `Hi Collaborative Research Club,\n\nI'm interested in: ${option.title}\n\n`,
       })}
-      className="apollo-link text-sm font-medium mt-auto"
+      className="crc-link text-sm font-medium mt-auto"
     >
       {option.cta} →
     </a>
@@ -65,29 +65,29 @@ export default function JoinUsSection() {
   const set = (key) => (e) => setForm((prev) => ({ ...prev, [key]: e.target.value }))
 
   return (
-    <section id="join-us" className="apollo-section apollo-join-section">
-      <div className="apollo-container">
-        <span className="apollo-caption mb-4 block">Join us</span>
+    <section id="join-us" className="crc-section crc-join-section">
+      <div className="crc-container">
+        <span className="crc-caption mb-4 block">Join us</span>
         <h2 className="text-[clamp(32px,4vw,48px)] font-normal leading-[1.08] tracking-tight mb-4 max-w-xl">
-          Find your place at Apollo Labs
+          Find your place at CRC
         </h2>
-        <p className="apollo-body max-w-lg mb-10">
+        <p className="crc-body max-w-lg mb-10">
           Our Discord is the front door. It&apos;s where projects get staffed, drafts get
           read, and the whole team actually talks to each other.
         </p>
 
-        <div className="apollo-discord-panel mb-12">
-          <div className="apollo-discord-panel-glow" aria-hidden />
-          <div className="apollo-discord-panel-body">
-            <div className="apollo-discord-panel-main">
-              <span className="apollo-discord-badge">
+        <div className="crc-discord-panel mb-12">
+          <div className="crc-discord-panel-glow" aria-hidden />
+          <div className="crc-discord-panel-body">
+            <div className="crc-discord-panel-main">
+              <span className="crc-discord-badge">
                 <DiscordIcon className="h-4 w-4" />
                 Community
               </span>
-              <h3 className="apollo-discord-title">
+              <h3 className="crc-discord-title">
                 Everything happens on Discord.
               </h3>
-              <p className="apollo-discord-lede">
+              <p className="crc-discord-lede">
                 Join the server to meet the team, follow live project channels, and jump
                 into whichever research you care about. No application, no waiting list —
                 introduce yourself and start contributing.
@@ -96,17 +96,17 @@ export default function JoinUsSection() {
                 href={DISCORD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="apollo-discord-cta apollo-discord-cta-lg"
+                className="crc-discord-cta crc-discord-cta-lg"
               >
                 <DiscordIcon className="h-5 w-5" />
-                Join the Apollo Labs Discord
+                Join the CRC Discord
               </a>
-              <p className="apollo-discord-meta">
-                Free · Open to all high school students
+              <p className="crc-discord-meta">
+                Free · Based at Cal High
               </p>
             </div>
 
-            <ul className="apollo-discord-perks">
+            <ul className="crc-discord-perks">
               {DISCORD_PERKS.map((perk) => (
                 <li key={perk}>{perk}</li>
               ))}
@@ -114,13 +114,13 @@ export default function JoinUsSection() {
           </div>
         </div>
 
-        <div className="apollo-cards-row mb-16">
+        <div className="crc-cards-row mb-16">
           {JOIN_OPTIONS.map((option) => (
-            <div key={option.id} className="apollo-card-vertical apollo-join-card">
-              <h3 className="text-xl font-normal tracking-tight text-[var(--apollo-text)] mb-3">
+            <div key={option.id} className="crc-card-vertical crc-join-card">
+              <h3 className="text-xl font-normal tracking-tight text-[var(--crc-text)] mb-3">
                 {option.title}
               </h3>
-              <p className="apollo-body-sm leading-relaxed flex-1 mb-6">
+              <p className="crc-body-sm leading-relaxed flex-1 mb-6">
                 {option.description}
               </p>
               <JoinOptionLink option={option} />
@@ -128,45 +128,45 @@ export default function JoinUsSection() {
           ))}
         </div>
 
-        <div id="get-involved" className="apollo-contact-panel">
-          <div className="apollo-contact-schedule">
-            <div className="apollo-contact-schedule-header">
-              <span className="apollo-caption mb-3 block">Schedule</span>
+        <div id="get-involved" className="crc-contact-panel">
+          <div className="crc-contact-schedule">
+            <div className="crc-contact-schedule-header">
+              <span className="crc-caption mb-3 block">Schedule</span>
               <h3 className="text-[clamp(24px,3vw,32px)] font-normal leading-tight tracking-tight mb-3">
                 Book a meeting
               </h3>
-              <p className="apollo-body-sm max-w-lg">
+              <p className="crc-body-sm max-w-lg">
                 Prefer to talk one-on-one first? Pick a time that works for you — we&apos;ll
-                walk through how you can join Apollo Labs or answer any questions.
+                walk through how you can join CRC or answer any questions.
               </p>
             </div>
             <CalendlyEmbed />
           </div>
 
-          <hr className="apollo-contact-divider" />
+          <hr className="crc-contact-divider" />
 
-          <div className="apollo-contact-top">
-            <div className="apollo-contact-intro">
-              <span className="apollo-caption mb-3 block">Contact</span>
+          <div className="crc-contact-top">
+            <div className="crc-contact-intro">
+              <span className="crc-caption mb-3 block">Contact</span>
               <h3 className="text-[clamp(24px,3vw,32px)] font-normal leading-tight tracking-tight mb-3">
                 Let&apos;s talk
               </h3>
-              <p className="apollo-body-sm max-w-sm mb-6">
+              <p className="crc-body-sm max-w-sm mb-6">
                 Send us a message — it opens your email app ready to send. Or email us
                 directly anytime.
               </p>
-              <a href={`mailto:${CONTACT_EMAIL}`} className="apollo-contact-email">
-                <span className="apollo-contact-email-label">Email us</span>
-                <span className="apollo-contact-email-address">{CONTACT_EMAIL}</span>
+              <a href={`mailto:${CONTACT_EMAIL}`} className="crc-contact-email">
+                <span className="crc-contact-email-label">Email us</span>
+                <span className="crc-contact-email-address">{CONTACT_EMAIL}</span>
               </a>
             </div>
 
-            <form className="apollo-contact-form" onSubmit={handleSubmit}>
-              <div className="apollo-contact-form-row">
-                <label className="apollo-contact-field" htmlFor="apollo-field-name">
+            <form className="crc-contact-form" onSubmit={handleSubmit}>
+              <div className="crc-contact-form-row">
+                <label className="crc-contact-field" htmlFor="crc-field-name">
                   <span>Name</span>
                   <input
-                    id="apollo-field-name"
+                    id="crc-field-name"
                     type="text"
                     name="name"
                     placeholder="Your name"
@@ -175,10 +175,10 @@ export default function JoinUsSection() {
                     autoComplete="name"
                   />
                 </label>
-                <label className="apollo-contact-field" htmlFor="apollo-field-email">
+                <label className="crc-contact-field" htmlFor="crc-field-email">
                   <span>Email</span>
                   <input
-                    id="apollo-field-email"
+                    id="crc-field-email"
                     type="email"
                     name="email"
                     placeholder="you@school.edu"
@@ -188,10 +188,10 @@ export default function JoinUsSection() {
                   />
                 </label>
               </div>
-              <label className="apollo-contact-field" htmlFor="apollo-field-interest">
+              <label className="crc-contact-field" htmlFor="crc-field-interest">
                 <span>I&apos;m interested in</span>
                 <select
-                  id="apollo-field-interest"
+                  id="crc-field-interest"
                   name="interest"
                   value={form.interest}
                   onChange={set('interest')}
@@ -203,10 +203,10 @@ export default function JoinUsSection() {
                   ))}
                 </select>
               </label>
-              <label className="apollo-contact-field" htmlFor="apollo-field-message">
+              <label className="crc-contact-field" htmlFor="crc-field-message">
                 <span>Message</span>
                 <textarea
-                  id="apollo-field-message"
+                  id="crc-field-message"
                   name="message"
                   rows={4}
                   placeholder="Tell us a bit about yourself and what you'd like to do..."
@@ -214,7 +214,7 @@ export default function JoinUsSection() {
                   onChange={set('message')}
                 />
               </label>
-              <button type="submit" className="apollo-hero-cta w-full sm:w-auto">
+              <button type="submit" className="crc-hero-cta w-full sm:w-auto">
                 Send message
               </button>
             </form>

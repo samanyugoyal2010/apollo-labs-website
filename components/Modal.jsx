@@ -74,11 +74,11 @@ export default function Modal({
   if (!open) return null
 
   return (
-    <div className="apollo-modal-backdrop" onClick={onClose} role="presentation">
+    <div className="crc-modal-backdrop" onClick={onClose} role="presentation">
       <div
         ref={panelRef}
         tabIndex={-1}
-        className={`apollo-modal ${className}`}
+        className={`crc-modal ${className}`}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -87,7 +87,7 @@ export default function Modal({
       >
         <button
           type="button"
-          className="apollo-modal-close"
+          className="crc-modal-close"
           onClick={onClose}
           aria-label="Close dialog"
         >

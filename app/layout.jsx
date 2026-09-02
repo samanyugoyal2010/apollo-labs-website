@@ -42,20 +42,23 @@ const greatVibes = Great_Vibes({
   display: 'swap',
 })
 
-const TITLE = 'Apollo Labs — Student-led collaborative research'
+const TITLE = 'Collaborative Research Club | Cal High student research'
 const DESCRIPTION =
-  'Apollo Labs is a student-led organization where high school students collaborate on shared research projects — from hypothesis to write-up. Join the community on Discord.'
+  'Collaborative Research Club is a student-led club at California High School where students work together on research projects, from hypothesis to write-up.'
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: TITLE,
-    template: '%s — Apollo Labs',
+    template: '%s | Collaborative Research Club',
   },
   description: DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [
-    'Apollo Labs',
+    'Collaborative Research Club',
+    'CRC',
+    'California High School',
+    'Cal High',
     'student research',
     'high school research',
     'collaborative research',
@@ -98,7 +101,7 @@ export const viewport = {
 // Runs before the page paints so the intro overlay never flashes the content
 // behind it. The timeout is a failsafe: if hydration never happens, the cover
 // clears itself rather than leaving a black screen.
-const PRELOAD_SCRIPT = `(function(){try{var r=document.documentElement;var h=location.pathname==='/'||location.pathname==='';var s=null;try{s=window.sessionStorage.getItem('apollo-labs-seen')}catch(e){}var m=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(h&&!s&&!m){r.classList.add('apollo-preload');setTimeout(function(){r.classList.remove('apollo-preload')},6000)}}catch(e){}})()`
+const PRELOAD_SCRIPT = `(function(){try{var r=document.documentElement;var h=location.pathname==='/'||location.pathname==='';var s=null;try{s=window.sessionStorage.getItem('crc-seen')}catch(e){}var m=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(h&&!s&&!m){r.classList.add('crc-preload');setTimeout(function(){r.classList.remove('crc-preload')},6000)}}catch(e){}})()`
 
 export default function RootLayout({ children }) {
   return (
@@ -108,7 +111,7 @@ export default function RootLayout({ children }) {
     >
       <body className="antialiased">
         <script dangerouslySetInnerHTML={{ __html: PRELOAD_SCRIPT }} />
-        <a href="#main" className="apollo-skip-link">
+        <a href="#main" className="crc-skip-link">
           Skip to content
         </a>
         <AppShell>{children}</AppShell>

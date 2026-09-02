@@ -67,7 +67,7 @@ export default async function ProjectPage({ params }) {
   }
 
   return (
-    <div className="apollo-site min-h-screen overflow-x-hidden">
+    <div className="crc-site min-h-screen overflow-x-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -75,41 +75,41 @@ export default async function ProjectPage({ params }) {
 
       <Nav />
 
-      <main id="main" className="apollo-home apollo-paper">
-        <article className="apollo-paper-container">
-          <Link href="/#projects" className="apollo-paper-back">
+      <main id="main" className="crc-home crc-paper">
+        <article className="crc-paper-container">
+          <Link href="/#projects" className="crc-paper-back">
             <span aria-hidden>←</span> Back to the gallery
           </Link>
 
-          <header className="apollo-paper-header">
-            <div className="apollo-paper-meta">
-              <span className="apollo-caption">{project.category}</span>
+          <header className="crc-paper-header">
+            <div className="crc-paper-meta">
+              <span className="crc-caption">{project.category}</span>
               <span
-                className={`apollo-status-pill ${
-                  published ? 'apollo-status-pill-published' : ''
+                className={`crc-status-pill ${
+                  published ? 'crc-status-pill-published' : ''
                 }`}
               >
                 {statusLabel(project)}
               </span>
             </div>
 
-            <h1 className="apollo-paper-title">{project.title}</h1>
-            <p className="apollo-paper-topic">{project.topic}</p>
+            <h1 className="crc-paper-title">{project.title}</h1>
+            <p className="crc-paper-topic">{project.topic}</p>
 
-            <p className="apollo-paper-authors">{authorLine(project)}</p>
-            <p className="apollo-paper-affiliation">
+            <p className="crc-paper-authors">{authorLine(project)}</p>
+            <p className="crc-paper-affiliation">
               {SITE_NAME}
               {project.paper?.published &&
                 ` · ${formatDate(project.paper.published)}`}
             </p>
 
             {published && (
-              <div className="apollo-paper-actions">
+              <div className="crc-paper-actions">
                 <a
                   href={project.paper.pdf}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="apollo-hero-cta"
+                  className="crc-hero-cta"
                 >
                   Download the PDF <span aria-hidden>↓</span>
                 </a>
@@ -118,7 +118,7 @@ export default async function ProjectPage({ params }) {
                     href={`https://doi.org/${project.paper.doi}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="apollo-link text-sm font-medium"
+                    className="crc-link text-sm font-medium"
                   >
                     doi:{project.paper.doi}
                   </a>
@@ -127,21 +127,21 @@ export default async function ProjectPage({ params }) {
             )}
           </header>
 
-          <ProjectCover project={project} className="apollo-paper-cover" priority />
+          <ProjectCover project={project} className="crc-paper-cover" priority />
 
-          <section className="apollo-paper-abstract" aria-labelledby="abstract">
-            <h2 id="abstract" className="apollo-paper-heading">
+          <section className="crc-paper-abstract" aria-labelledby="abstract">
+            <h2 id="abstract" className="crc-paper-heading">
               Abstract
             </h2>
-            <p className="apollo-paper-lede">{project.overview}</p>
+            <p className="crc-paper-lede">{project.overview}</p>
           </section>
 
           {project.highlights?.length > 0 && (
-            <section className="apollo-paper-section" aria-labelledby="contributions">
-              <h2 id="contributions" className="apollo-paper-heading">
+            <section className="crc-paper-section" aria-labelledby="contributions">
+              <h2 id="contributions" className="crc-paper-heading">
                 Contributions
               </h2>
-              <ul className="apollo-paper-list">
+              <ul className="crc-paper-list">
                 {project.highlights.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -150,11 +150,11 @@ export default async function ProjectPage({ params }) {
           )}
 
           {detail?.methods?.length > 0 && (
-            <section className="apollo-paper-section" aria-labelledby="methods">
-              <h2 id="methods" className="apollo-paper-heading">
+            <section className="crc-paper-section" aria-labelledby="methods">
+              <h2 id="methods" className="crc-paper-heading">
                 Methods
               </h2>
-              <ul className="apollo-project-methods">
+              <ul className="crc-project-methods">
                 {detail.methods.map((method) => (
                   <li key={method}>{method}</li>
                 ))}
@@ -163,34 +163,34 @@ export default async function ProjectPage({ params }) {
           )}
 
           {detail?.sections?.map((section) => (
-            <section key={section.heading} className="apollo-paper-section">
-              <h2 className="apollo-paper-heading">{section.heading}</h2>
-              <p className="apollo-paper-body">{section.body}</p>
+            <section key={section.heading} className="crc-paper-section">
+              <h2 className="crc-paper-heading">{section.heading}</h2>
+              <p className="crc-paper-body">{section.body}</p>
             </section>
           ))}
 
           {published && (
-            <section className="apollo-paper-section" aria-labelledby="full-text">
-              <h2 id="full-text" className="apollo-paper-heading">
+            <section className="crc-paper-section" aria-labelledby="full-text">
+              <h2 id="full-text" className="crc-paper-heading">
                 Full text
               </h2>
-              <p className="apollo-paper-body mb-6">
+              <p className="crc-paper-body mb-6">
                 The complete paper — figures, tables, and references included — is
                 available as a PDF.
               </p>
               <object
                 data={project.paper.pdf}
                 type="application/pdf"
-                className="apollo-paper-pdf"
+                className="crc-paper-pdf"
                 aria-label={`${project.title} full paper`}
               >
-                <p className="apollo-paper-body">
+                <p className="crc-paper-body">
                   Your browser can&apos;t display the PDF inline.{' '}
                   <a
                     href={project.paper.pdf}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="apollo-link"
+                    className="crc-link"
                   >
                     Open it in a new tab →
                   </a>
@@ -199,23 +199,23 @@ export default async function ProjectPage({ params }) {
             </section>
           )}
 
-          <aside className="apollo-paper-cta">
-            <h2 className="apollo-paper-cta-title">
+          <aside className="crc-paper-cta">
+            <h2 className="crc-paper-cta-title">
               {detail?.contribute ? 'Working on this' : 'Want to work on this?'}
             </h2>
             {detail?.contribute && (
-              <p className="apollo-paper-body mb-5">{detail.contribute}</p>
+              <p className="crc-paper-body mb-5">{detail.contribute}</p>
             )}
-            <div className="apollo-paper-cta-actions">
+            <div className="crc-paper-cta-actions">
               <a
                 href={DISCORD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="apollo-hero-cta"
+                className="crc-hero-cta"
               >
                 Join the Discord <span aria-hidden>→</span>
               </a>
-              <Link href="/#submit" className="apollo-link text-sm font-medium">
+              <Link href="/#submit" className="crc-link text-sm font-medium">
                 Publish your own research →
               </Link>
             </div>

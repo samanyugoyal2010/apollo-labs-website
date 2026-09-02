@@ -27,7 +27,7 @@ const structuredData = {
 
 export default function Home() {
   return (
-    <div className="apollo-site min-h-screen overflow-x-hidden">
+    <div className="crc-site min-h-screen overflow-x-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -62,7 +62,7 @@ export default function Home() {
       </div>
 
       <Nav />
-      <main id="main" className="apollo-home">
+      <main id="main" className="crc-home">
         <Hero />
         <MissionSections />
         <TeamSection />

@@ -11,7 +11,7 @@ import { SUBMISSION_FIELDS } from '@/lib/data'
  *   RESEND_API_KEY  required — without it the route returns 503 and the form
  *                   tells the student to email instead, so a missing key
  *                   degrades to the old mailto behaviour rather than a dead end.
- *   RESEND_FROM     optional — "Apollo Labs <papers@yourdomain.com>". Until a
+ *   RESEND_FROM     optional — "Collaborative Research Club <papers@yourdomain.com>". Until a
  *                   domain is verified in Resend, the default sender can only
  *                   deliver to the account owner, so the reviewer copy arrives
  *                   and the student confirmation does not. That is why a failed
@@ -21,7 +21,7 @@ import { SUBMISSION_FIELDS } from '@/lib/data'
 export const runtime = 'nodejs'
 
 const RESEND_ENDPOINT = 'https://api.resend.com/emails'
-const DEFAULT_FROM = 'Apollo Labs <onboarding@resend.dev>'
+const DEFAULT_FROM = 'Collaborative Research Club <onboarding@resend.dev>'
 
 const LIMITS = {
   name: 120,

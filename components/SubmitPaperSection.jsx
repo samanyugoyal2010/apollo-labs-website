@@ -106,26 +106,26 @@ export default function SubmitPaperSection() {
 
   if (status === 'sent') {
     return (
-      <section id="submit" className="apollo-section apollo-submit-section">
-        <div className="apollo-container">
-          <div className="apollo-submit-success" role="status">
-            <span className="apollo-caption mb-4 block">Submission received</span>
+      <section id="submit" className="crc-section crc-submit-section">
+        <div className="crc-container">
+          <div className="crc-submit-success" role="status">
+            <span className="crc-caption mb-4 block">Submission received</span>
             <h2 className="text-[clamp(28px,4vw,44px)] font-normal leading-[1.1] tracking-tight mb-4">
               Your paper is in the queue.
             </h2>
-            <p className="apollo-body max-w-lg mb-8">{message}</p>
-            <div className="apollo-submit-success-actions">
+            <p className="crc-body max-w-lg mb-8">{message}</p>
+            <div className="crc-submit-success-actions">
               <a
                 href={DISCORD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="apollo-hero-cta"
+                className="crc-hero-cta"
               >
                 Join the Discord <span aria-hidden>→</span>
               </a>
               <button
                 type="button"
-                className="apollo-link text-sm font-medium"
+                className="crc-link text-sm font-medium"
                 onClick={() => {
                   setStatus('idle')
                   setMessage('')
@@ -141,45 +141,45 @@ export default function SubmitPaperSection() {
   }
 
   return (
-    <section id="submit" className="apollo-section apollo-submit-section">
-      <div className="apollo-container">
-        <span className="apollo-caption mb-4 block">Publish with us</span>
+    <section id="submit" className="crc-section crc-submit-section">
+      <div className="crc-container">
+        <span className="crc-caption mb-4 block">Publish with us</span>
         <h2 className="text-[clamp(28px,4vw,48px)] font-normal leading-[1.08] tracking-tight mb-4 max-w-2xl">
           Put your research in the gallery
         </h2>
-        <p className="apollo-body max-w-xl mb-12">
+        <p className="crc-body max-w-xl mb-12">
           Finished a paper or a project write-up? Send it over. If it clears review, it
           gets its own page here — a real, citable link you can put on an application,
           send to a teacher, or share with anyone who asks what you have been working on.
         </p>
 
-        <ol className="apollo-submit-steps mb-14">
+        <ol className="crc-submit-steps mb-14">
           {STEPS.map((step) => (
-            <li key={step.n} className="apollo-submit-step">
-              <span className="apollo-submit-step-n">{step.n}</span>
-              <h3 className="apollo-submit-step-title">{step.title}</h3>
-              <p className="apollo-submit-step-body">{step.body}</p>
+            <li key={step.n} className="crc-submit-step">
+              <span className="crc-submit-step-n">{step.n}</span>
+              <h3 className="crc-submit-step-title">{step.title}</h3>
+              <p className="crc-submit-step-body">{step.body}</p>
             </li>
           ))}
         </ol>
 
-        <div className="apollo-submit-panel">
-          <aside className="apollo-submit-aside">
+        <div className="crc-submit-panel">
+          <aside className="crc-submit-aside">
             <h3 className="text-xl font-normal tracking-tight mb-4">
               Before you send
             </h3>
-            <ul className="apollo-submit-checklist">
+            <ul className="crc-submit-checklist">
               {SUBMISSION_CHECKLIST.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <p className="apollo-body-sm mt-6">
+            <p className="crc-body-sm mt-6">
               Not there yet? Bring the draft to{' '}
               <a
                 href={DISCORD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="apollo-link"
+                className="crc-link"
               >
                 the Discord
               </a>{' '}
@@ -187,8 +187,8 @@ export default function SubmitPaperSection() {
             </p>
           </aside>
 
-          <form className="apollo-submit-form" onSubmit={handleSubmit} noValidate>
-            <div className="apollo-contact-form-row">
+          <form className="crc-submit-form" onSubmit={handleSubmit} noValidate>
+            <div className="crc-contact-form-row">
               <Field
                 id="sub-name"
                 label="Your name"
@@ -212,7 +212,7 @@ export default function SubmitPaperSection() {
               />
             </div>
 
-            <div className="apollo-contact-form-row">
+            <div className="crc-contact-form-row">
               <Field
                 id="sub-authors"
                 label="All authors"
@@ -233,7 +233,7 @@ export default function SubmitPaperSection() {
               />
             </div>
 
-            <label className="apollo-contact-field" htmlFor="sub-field">
+            <label className="crc-contact-field" htmlFor="sub-field">
               <span>Field of research</span>
               <select id="sub-field" value={form.field} onChange={set('field')}>
                 {SUBMISSION_FIELDS.map((f) => (
@@ -276,10 +276,10 @@ export default function SubmitPaperSection() {
               placeholder="https://github.com/... (optional)"
             />
 
-            <label className="apollo-contact-field" htmlFor="sub-abstract">
+            <label className="crc-contact-field" htmlFor="sub-abstract">
               <span>
                 Abstract{' '}
-                <span className="apollo-field-counter">
+                <span className="crc-field-counter">
                   {abstractWords} {abstractWords === 1 ? 'word' : 'words'} · aim for 150–250
                 </span>
               </span>
@@ -293,11 +293,11 @@ export default function SubmitPaperSection() {
                 required
               />
               {errors.abstract && (
-                <span className="apollo-field-error">{errors.abstract}</span>
+                <span className="crc-field-error">{errors.abstract}</span>
               )}
             </label>
 
-            <label className="apollo-contact-field" htmlFor="sub-notes">
+            <label className="crc-contact-field" htmlFor="sub-notes">
               <span>Anything else we should know</span>
               <textarea
                 id="sub-notes"
@@ -309,7 +309,7 @@ export default function SubmitPaperSection() {
             </label>
 
             {/* Honeypot — hidden from people, irresistible to bots. */}
-            <div className="apollo-honeypot" aria-hidden>
+            <div className="crc-honeypot" aria-hidden>
               <label htmlFor="sub-website">Website</label>
               <input
                 id="sub-website"
@@ -321,25 +321,25 @@ export default function SubmitPaperSection() {
               />
             </div>
 
-            <div className="apollo-submit-actions">
+            <div className="crc-submit-actions">
               <button
                 type="submit"
-                className="apollo-hero-cta"
+                className="crc-hero-cta"
                 disabled={status === 'sending'}
               >
                 {status === 'sending' ? 'Sending…' : 'Submit for review'}
               </button>
-              <p className="apollo-submit-fineprint">
+              <p className="crc-submit-fineprint">
                 Or email it to{' '}
-                <a href={`mailto:${CONTACT_EMAIL}`} className="apollo-link">
+                <a href={`mailto:${CONTACT_EMAIL}`} className="crc-link">
                   {CONTACT_EMAIL}
                 </a>
               </p>
             </div>
 
             <p
-              className={`apollo-form-status ${
-                status === 'error' ? 'apollo-form-status-error' : ''
+              className={`crc-form-status ${
+                status === 'error' ? 'crc-form-status-error' : ''
               }`}
               role="status"
               aria-live="polite"
@@ -355,11 +355,11 @@ export default function SubmitPaperSection() {
 
 function Field({ id, label, error, hint, type = 'text', ...props }) {
   return (
-    <label className="apollo-contact-field" htmlFor={id}>
+    <label className="crc-contact-field" htmlFor={id}>
       <span>{label}</span>
       <input id={id} type={type} aria-invalid={!!error} {...props} />
-      {hint && !error && <span className="apollo-field-hint">{hint}</span>}
-      {error && <span className="apollo-field-error">{error}</span>}
+      {hint && !error && <span className="crc-field-hint">{hint}</span>}
+      {error && <span className="crc-field-error">{error}</span>}
     </label>
   )
 }

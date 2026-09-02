@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react'
 import Modal from '@/components/Modal'
 import { MISSION_PILLARS } from '@/lib/data'
 
-const TITLE_ID = 'apollo-pillar-modal-title'
+const TITLE_ID = 'crc-pillar-modal-title'
 
 function PillarModal({ pillar, onClose }) {
   /* Close first, then scroll — the modal restores focus to the card on unmount,
@@ -22,11 +22,11 @@ function PillarModal({ pillar, onClose }) {
       open={!!pillar}
       onClose={onClose}
       labelledBy={TITLE_ID}
-      className="apollo-modal-pillar"
+      className="crc-modal-pillar"
     >
       {pillar && (
         <>
-          <span className="apollo-caption mb-2 block">{pillar.caption}</span>
+          <span className="crc-caption mb-2 block">{pillar.caption}</span>
           <h3
             id={TITLE_ID}
             className="text-[clamp(24px,3.5vw,32px)] font-normal leading-tight tracking-tight mb-4"
@@ -34,11 +34,11 @@ function PillarModal({ pillar, onClose }) {
             {pillar.title.replace('\n', ' ')}
           </h3>
 
-          <p className="apollo-body-sm leading-relaxed mb-4">{pillar.description}</p>
-          <p className="apollo-body-sm leading-relaxed mb-6">{pillar.overview}</p>
+          <p className="crc-body-sm leading-relaxed mb-4">{pillar.description}</p>
+          <p className="crc-body-sm leading-relaxed mb-6">{pillar.overview}</p>
 
-          <p className="apollo-caption mb-3">What that looks like</p>
-          <ul className="apollo-modal-highlights mb-7">
+          <p className="crc-caption mb-3">What that looks like</p>
+          <ul className="crc-modal-highlights mb-7">
             {pillar.points.map((point) => (
               <li key={point}>{point}</li>
             ))}
@@ -47,7 +47,7 @@ function PillarModal({ pillar, onClose }) {
           <button
             type="button"
             onClick={goToSection}
-            className="apollo-link text-sm font-medium"
+            className="crc-link text-sm font-medium"
           >
             {pillar.cta}
           </button>
@@ -62,33 +62,33 @@ export default function MissionSections() {
   const closeDetail = useCallback(() => setSelectedPillar(null), [])
 
   return (
-    <section id="research" className="apollo-section">
-      <div className="apollo-container">
-        <span className="apollo-caption mb-4 block">Mission</span>
+    <section id="research" className="crc-section">
+      <div className="crc-container">
+        <span className="crc-caption mb-4 block">Mission</span>
         <h2 className="text-[clamp(32px,4vw,48px)] font-normal leading-[1.08] tracking-tight mb-4 max-w-xl">
-          How Apollo Labs works
+          How CRC works
         </h2>
-        <p className="apollo-body max-w-xl mb-12">
+        <p className="crc-body max-w-xl mb-12">
           Tap a card to see how each part of the lab actually runs.
         </p>
 
-        <div className="apollo-cards-row">
+        <div className="crc-cards-row">
           {MISSION_PILLARS.map((pillar) => (
             <button
               key={pillar.id}
               type="button"
-              className="apollo-card-vertical apollo-section-dark apollo-pillar-card text-left w-full"
+              className="crc-card-vertical crc-section-dark crc-pillar-card text-left w-full"
               onClick={() => setSelectedPillar(pillar)}
               aria-haspopup="dialog"
             >
-              <span className="apollo-caption mb-3 block">{pillar.caption}</span>
+              <span className="crc-caption mb-3 block">{pillar.caption}</span>
               <h3 className="text-[clamp(22px,2.5vw,28px)] font-normal leading-[1.1] tracking-tight mb-4 whitespace-pre-line flex-1">
                 {pillar.title}
               </h3>
-              <p className="text-sm text-[var(--apollo-text-body)] leading-relaxed mb-6">
+              <p className="text-sm text-[var(--crc-text-body)] leading-relaxed mb-6">
                 {pillar.description}
               </p>
-              <span className="apollo-pillar-card-hint text-sm font-medium mt-auto">
+              <span className="crc-pillar-card-hint text-sm font-medium mt-auto">
                 Tap to expand →
               </span>
             </button>

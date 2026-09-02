@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import ApolloMark from '@/components/ApolloMark'
+import CRCMark from '@/components/CRCMark'
 
 const TICK_MS = 12
 const HOLD_MS = 260
@@ -34,17 +34,16 @@ export default function LoadingScreen({ onComplete }) {
 
   return (
     <motion.div
-      className="apollo-loading fixed inset-0 z-[100] flex items-center justify-center bg-black"
+      className="crc-loading fixed inset-0 z-[100] flex items-center justify-center bg-black"
       exit={{ y: '-100%', transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] } }}
       role="status"
       aria-live="polite"
-      aria-label="Loading Apollo Labs"
+      aria-label="Loading Collaborative Research Club"
     >
       <div className="w-full max-w-[420px] px-6">
-        {/* The mark builds itself: orbit draws, letter rises into it, bead
-            lands at apogee — the identity explained in one and a half seconds. */}
+        {/* The linked forms draw in before their shared node appears. */}
         <div className="mb-10 flex justify-center">
-          <ApolloMark className="apollo-mark-intro h-28 sm:h-32" />
+          <CRCMark className="crc-mark-intro h-28 sm:h-32" />
         </div>
 
         <div className="mb-10 flex justify-center">
@@ -53,16 +52,16 @@ export default function LoadingScreen({ onComplete }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.75, ease: [0.2, 0.8, 0.2, 1] }}
           >
-            <span className="apollo-logo apollo-logo-lg">
-              <span className="apollo-logo-type">
-                <span className="apollo-logo-name">Apollo</span>
-                <span className="apollo-logo-suffix">Labs</span>
+            <span className="crc-logo crc-logo-lg">
+              <span className="crc-logo-type">
+                <span className="crc-logo-name">CRC</span>
+                <span className="crc-logo-suffix">Cal High</span>
               </span>
             </span>
           </motion.span>
         </div>
 
-        <div className="apollo-loading-track mb-3 overflow-hidden">
+        <div className="crc-loading-track mb-3 overflow-hidden">
           <motion.div
             className="h-full bg-white"
             initial={{ width: 0 }}
@@ -71,8 +70,8 @@ export default function LoadingScreen({ onComplete }) {
           />
         </div>
 
-        <p className="apollo-loading-status">
-          <span>{count < 100 ? 'Entering orbit' : 'In orbit'}</span>
+        <p className="crc-loading-status">
+          <span>{count < 100 ? 'Joining ideas' : 'Ready'}</span>
           <span className="tabular-nums text-white/70">{count}</span>
         </p>
       </div>

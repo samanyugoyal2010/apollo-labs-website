@@ -1,4 +1,4 @@
-import ApolloMark from '@/components/ApolloMark'
+import CRCMark from '@/components/CRCMark'
 import { coverHue } from '@/lib/papers'
 
 /**
@@ -11,8 +11,8 @@ export default function ProjectCover({ project, className = '', priority = false
 
   return (
     <div
-      className={`apollo-cover ${className}`}
-      style={{ '--apollo-cover-hue': hue }}
+      className={`crc-cover ${className}`}
+      style={{ '--crc-cover-hue': hue }}
       aria-hidden={!project.cover}
     >
       {project.cover ? (
@@ -20,15 +20,15 @@ export default function ProjectCover({ project, className = '', priority = false
         <img
           src={project.cover}
           alt={`Cover figure for ${project.title}`}
-          className="apollo-cover-image"
+          className="crc-cover-image"
           loading={priority ? 'eager' : 'lazy'}
           decoding="async"
         />
       ) : (
         <>
-          <span className="apollo-cover-wash" />
-          <span className="apollo-cover-grid" />
-          <ApolloMark className="apollo-cover-mark" />
+          <span className="crc-cover-wash" />
+          <span className="crc-cover-grid" />
+          <CRCMark className="crc-cover-mark" />
         </>
       )}
     </div>

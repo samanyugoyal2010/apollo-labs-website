@@ -26,20 +26,18 @@ const OUT = join(dirname(fileURLToPath(import.meta.url)), '..', 'public')
 
 const INK = '#0a0a0a'
 const LIGHT = '#ffffff'
-const BEAD_ON_LIGHT = '#2563eb'
-const BEAD_ON_DARK = '#7ea8ff'
+const NODE_ON_LIGHT = '#2563eb'
+const NODE_ON_DARK = '#7ea8ff'
 
-// Proportions follow the site's nav lockup: the mark's *ink* height matches the
-// wordmark's cap height. The mark is drawn on its tight viewBox here, where the
-// ink fills ~71% of the box, so the box is sized up to compensate — on the full
-// 40x40 viewBox the mark reads small and sits low against large type.
+// Proportions follow the site's nav lockup: the mark's ink height matches the
+// wordmark's cap height.
 const TYPE = 120
 const CAP_HEIGHT = 0.77 // Instrument Serif cap height, as a fraction of the em
-const INK_IN_BOX = 0.711 // ink height within the tight viewBox
+const INK_IN_BOX = 0.86
 const MARK = Math.round((TYPE * CAP_HEIGHT) / INK_IN_BOX)
 const SUFFIX = 40
 
-/** Mark + "Apollo" + "LABS", laid out like `components/ApolloLogo.jsx`. */
+/** Mark + "CRC" + "CAL HIGH", laid out like `components/CRCLogo.jsx`. */
 function lockup({ color, bead, serif, sans }) {
   return h(
     'div',
@@ -73,7 +71,7 @@ function lockup({ color, bead, serif, sans }) {
       h(
         'span',
         { style: { fontFamily: serif, fontSize: TYPE, letterSpacing: -1.5 } },
-        'Apollo'
+        'CRC'
       ),
       h(
         'span',
@@ -86,7 +84,7 @@ function lockup({ color, bead, serif, sans }) {
             opacity: 0.45,
           },
         },
-        'LABS'
+        'CAL HIGH'
       )
     )
   )
@@ -122,7 +120,7 @@ function tile({ size }) {
       src: markDataUri({
         color: LIGHT,
         bead: '#5b8dff',
-        ringWidth: 3,
+        strokeWidth: 3,
         width: size,
         height: size,
         tile: { background: INK, radius: 9, scale: 0.82 },
@@ -147,8 +145,8 @@ async function main() {
   await mkdir(OUT, { recursive: true })
 
   const [serifData, sansData] = await Promise.all([
-    googleFont('Instrument+Serif', 'Apollo'),
-    googleFont('Inter:wght@500', 'LABS'),
+    googleFont('Instrument+Serif', 'CRC'),
+    googleFont('Inter:wght@500', 'CAL HIGH'),
   ])
 
   if (!serifData || !sansData) {
@@ -178,25 +176,25 @@ async function main() {
 
   await render(
     'logo.png',
-    lockup({ color: INK, bead: BEAD_ON_LIGHT, serif, sans }),
+    lockup({ color: INK, bead: NODE_ON_LIGHT, serif, sans }),
     lockupSize,
     fonts
   )
   await render(
     'logo-light.png',
-    lockup({ color: LIGHT, bead: BEAD_ON_DARK, serif, sans }),
+    lockup({ color: LIGHT, bead: NODE_ON_DARK, serif, sans }),
     lockupSize,
     fonts
   )
   await render(
     'mark.png',
-    markOnly({ color: INK, bead: BEAD_ON_LIGHT, size: square.width }),
+    markOnly({ color: INK, bead: NODE_ON_LIGHT, size: square.width }),
     square,
     fonts
   )
   await render(
     'mark-light.png',
-    markOnly({ color: LIGHT, bead: BEAD_ON_DARK, size: square.width }),
+    markOnly({ color: LIGHT, bead: NODE_ON_DARK, size: square.width }),
     square,
     fonts
   )

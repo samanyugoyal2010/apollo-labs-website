@@ -1,9 +1,9 @@
-<img src="public/logo.svg" alt="Apollo Labs" width="216">
+<img src="public/logo.svg" alt="Collaborative Research Club" width="216">
 
-# Apollo Labs Website
+# Collaborative Research Club Website
 
-Marketing site for **Apollo Labs** — a student-led organization where high school
-students collaborate on research projects.
+Website for **Collaborative Research Club (CRC)**, a student-led research club at
+California High School.
 
 Made by Samanyu, Ashmit, and Nihar
 
@@ -18,24 +18,20 @@ footer, and the 404 page. The invite lives in one place — `DISCORD_URL` in
 
 ## Identity
 
-The mark is "the orbit completes the A": a chevron with a chamfered apex is the
-letter, and the tilted ring sweeping through it is at once the crossbar, an
-orbit, and a research trajectory. The ring passes **in front of** the left leg
-and **behind** the right one, so the two forms read as one woven object rather
-than a letter with a circle around it. The blue bead caps the low end of the
-orbit, so the trajectory reads as ascending away from it.
+The mark pairs two open, linked C forms for collaboration and a blue shared node.
+The wordmark uses “CRC” with “Cal High” as the qualifier.
 
 **One source of geometry: [`lib/mark.js`](lib/mark.js).** Everything that draws
 the mark imports from there, so a change to the shape lands everywhere at once.
-The React component takes its color from `currentColor` (and
-`--apollo-mark-bead` for the bead), so it inverts for free — dark on the nav,
-light on the intro. Callers set a height; width follows the viewBox.
+The React component takes its color from `currentColor` and
+`--crc-mark-node` for the blue node. Callers set a height; width follows the
+viewBox.
 
 | Where | What |
 | --- | --- |
 | [`lib/mark.js`](lib/mark.js) | The geometry, plus `markSvg()` / `markDataUri()` for contexts that can't render React. |
-| [`ApolloMark.jsx`](components/ApolloMark.jsx) | The mark as a component. `variant="glyph"` drops the ring and bead for contexts that supply their own orbit. |
-| [`ApolloLogo.jsx`](components/ApolloLogo.jsx) | Mark + wordmark lockup — "Apollo" in the display serif, "Labs" as a tracked sans qualifier. `size="sm"` for nav, footer, and mobile menu; `"lg"` for the intro. |
+| [`CRCMark.jsx`](components/CRCMark.jsx) | The mark as a component. `variant="glyph"` displays only the outer C. |
+| [`CRCLogo.jsx`](components/CRCLogo.jsx) | Mark + “CRC / Cal High” wordmark. `size="sm"` is used in navigation and the footer; `"lg"` is used in the intro. |
 | [`app/icon.svg`](app/icon.svg) | Favicon: the mark on a dark tile, optically centered so it survives 16px. |
 | [`app/apple-icon.jsx`](app/apple-icon.jsx) | 180×180 home-screen icon, generated from `markSvg()`. |
 | [`app/opengraph-image.jsx`](app/opengraph-image.jsx) | 1200×630 social card. |
@@ -66,9 +62,8 @@ ships with Next, so there is no extra dependency — and it is the only rasteriz
 here that can embed Instrument Serif, which a generic SVG converter would
 substitute with whatever serif the machine happens to have.
 
-The lockup's proportions are not arbitrary: the mark's **ink** height is matched
-to the wordmark's cap height, which is why the mark box is scaled up past the
-type size (its ink fills only ~71% of the tight viewBox).
+The mark's ink height is matched to the wordmark's cap height so both parts read
+as one lockup.
 
 Icons and the social card use Next's `app/` file conventions, so the `<link>`
 and `og:image` tags are generated with content hashes. Do not add `icons` to
@@ -162,7 +157,7 @@ npm run dev
 ```
 
 Open http://localhost:3000. To replay the intro animation, clear the
-`apollo-labs-seen` key in `sessionStorage` and reload.
+`crc-seen` key in `sessionStorage` and reload.
 
 ## Build
 
@@ -176,8 +171,8 @@ npm start
 
 ## Deploying
 
-Set `NEXT_PUBLIC_SITE_URL` to the production origin (e.g.
-`https://apollolabs.org`). It drives `metadataBase`, the canonical URL, Open
+Set `NEXT_PUBLIC_SITE_URL` to the production origin. It drives `metadataBase`,
+the canonical URL, Open
 Graph tags, `robots.txt`, and `sitemap.xml`. On Vercel it falls back to the
 project production URL automatically; without either it defaults to
 `http://localhost:3000`.
@@ -189,7 +184,7 @@ add the same variables in the Vercel project settings.
 ## Stack
 
 - Next.js 15 (App Router) + React 19
-- Tailwind CSS v4 over a custom `.apollo-*` CSS-variable design system
+- Tailwind CSS v4 over a custom `.crc-*` CSS-variable design system
 - Framer Motion
 - Fonts: EB Garamond, Inter, Instrument Serif, JetBrains Mono, Great Vibes
 
@@ -197,7 +192,7 @@ add the same variables in the Vercel project settings.
 
 - **The page is server-rendered.** Content always renders; the intro is an
   overlay on top of it, gated by a pre-paint inline script in
-  [`app/layout.jsx`](app/layout.jsx) that sets `.apollo-preload` on `<html>`.
+  [`app/layout.jsx`](app/layout.jsx) that sets `.crc-preload` on `<html>`.
   The script self-clears after 6s so a hydration failure can never leave a
   blank screen.
 - **The intro only plays on the home page.** A shared link to a paper should
@@ -205,10 +200,10 @@ add the same variables in the Vercel project settings.
 - **The intro respects `prefers-reduced-motion`** and is skipped entirely when
   set, along with all ambient animation (marquee, orbits, float, shimmer).
   Because it never mounts in that case, the mark's assemble animation
-  (`.apollo-mark-intro` in `globals.css`) needs no reduced-motion variant.
+  (`.crc-mark-intro` in `globals.css`) needs no reduced-motion variant.
 - **Dialogs** use the shared [`components/Modal.jsx`](components/Modal.jsx):
   focus trap, focus restore, Escape to close, and scroll lock that compensates
   for scrollbar width so the page doesn't shift.
 - **Tailwind v4 caveat:** utilities live in `@layer utilities`, so an unlayered
-  `.apollo-*` rule beats a utility of the same property. If a `md:hidden` (or
+  `.crc-*` rule beats a utility of the same property. If a `md:hidden` (or
   similar) appears to do nothing, check for a competing rule in `globals.css`.

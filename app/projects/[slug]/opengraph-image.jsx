@@ -3,7 +3,7 @@ import { markDataUri } from '@/lib/mark'
 import { googleFont } from '@/lib/google-font'
 import { authorLine, getProject, projectSlugs, statusLabel } from '@/lib/papers'
 
-export const alt = 'Apollo Labs research'
+export const alt = 'Collaborative Research Club research'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -20,14 +20,14 @@ export default async function ProjectOgImage({ params }) {
   const { slug } = await params
   const project = getProject(slug)
 
-  const title = clamp(project?.title ?? 'Apollo Labs', 40)
+  const title = clamp(project?.title ?? 'Collaborative Research Club', 40)
   const topic = clamp(project?.topic ?? 'Student-led research', 70)
-  const byline = project ? authorLine(project) : 'Apollo Labs'
+  const byline = project ? authorLine(project) : 'Collaborative Research Club'
   const status = project ? statusLabel(project) : 'Research'
 
   const [serif, sans] = await Promise.all([
-    googleFont('Instrument+Serif', `Apollo${title}${topic}`),
-    googleFont('Inter:wght@500', `LABS${byline}${status}·`),
+    googleFont('Instrument+Serif', `CRC${title}${topic}`),
+    googleFont('Inter:wght@500', `CALHIGH${byline}${status}·`),
   ])
 
   const fonts = []
@@ -63,7 +63,7 @@ export default async function ProjectOgImage({ params }) {
           />
           <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12 }}>
             <span style={{ fontFamily: serifStack, fontSize: 42, letterSpacing: -0.5 }}>
-              Apollo
+              CRC
             </span>
             <span
               style={{
@@ -74,7 +74,7 @@ export default async function ProjectOgImage({ params }) {
                 color: 'rgba(255, 255, 255, 0.45)',
               }}
             >
-              LABS
+              CAL HIGH
             </span>
           </div>
         </div>
@@ -128,7 +128,7 @@ export default async function ProjectOgImage({ params }) {
           }}
         >
           <span>{byline}</span>
-          <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Apollo Labs</span>
+          <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Collaborative Research Club</span>
         </div>
       </div>
     ),

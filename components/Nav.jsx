@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import ApolloLogo from '@/components/ApolloLogo'
+import CRCLogo from '@/components/CRCLogo'
 import DiscordIcon from '@/components/DiscordIcon'
 import { DISCORD_URL, NAV_LINKS } from '@/lib/data'
 
@@ -42,20 +42,20 @@ export default function Nav() {
     <>
       <nav
         aria-label="Main"
-        className={`apollo-nav fixed top-3 md:top-5 z-50 flex items-center justify-between max-w-[1280px] ${scrolled ? 'apollo-nav-scrolled' : ''}`}
+        className={`crc-nav fixed top-3 md:top-5 z-50 flex items-center justify-between max-w-[1280px] ${scrolled ? 'crc-nav-scrolled' : ''}`}
       >
         <Link
           href="/"
-          className="apollo-logo-link shrink-0"
-          aria-label="Apollo Labs — home"
+          className="crc-logo-link shrink-0"
+          aria-label="Collaborative Research Club — home"
           onClick={closeMenu}
         >
-          <ApolloLogo />
+          <CRCLogo />
         </Link>
 
         <div className="hidden md:flex items-center gap-7">
           {NAV_LINKS.map((link) => (
-            <Link key={link.label} href={hrefFor(link.href)} className="apollo-nav-link">
+            <Link key={link.label} href={hrefFor(link.href)} className="crc-nav-link">
               {link.label}
             </Link>
           ))}
@@ -66,7 +66,7 @@ export default function Nav() {
             href={DISCORD_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="apollo-nav-discord"
+            className="crc-nav-discord"
             onClick={closeMenu}
           >
             <DiscordIcon className="h-4 w-4" />
@@ -75,36 +75,36 @@ export default function Nav() {
           </a>
           <button
             type="button"
-            className="apollo-nav-menu-btn md:hidden"
+            className="crc-nav-menu-btn md:hidden"
             onClick={() => setMenuOpen((o) => !o)}
             aria-expanded={menuOpen}
-            aria-controls="apollo-mobile-menu"
+            aria-controls="crc-mobile-menu"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           >
-            <span className={menuOpen ? 'apollo-nav-menu-open' : ''} />
-            <span className={menuOpen ? 'apollo-nav-menu-open' : ''} />
-            <span className={menuOpen ? 'apollo-nav-menu-open' : ''} />
+            <span className={menuOpen ? 'crc-nav-menu-open' : ''} />
+            <span className={menuOpen ? 'crc-nav-menu-open' : ''} />
+            <span className={menuOpen ? 'crc-nav-menu-open' : ''} />
           </button>
         </div>
       </nav>
 
       {menuOpen && (
-        <div id="apollo-mobile-menu" className="apollo-mobile-menu md:hidden">
-          <div className="apollo-mobile-menu-backdrop" onClick={closeMenu} aria-hidden />
-          <div className="apollo-mobile-menu-panel">
+        <div id="crc-mobile-menu" className="crc-mobile-menu md:hidden">
+          <div className="crc-mobile-menu-backdrop" onClick={closeMenu} aria-hidden />
+          <div className="crc-mobile-menu-panel">
             <Link
               href="/"
-              className="apollo-logo-link apollo-mobile-menu-brand"
-              aria-label="Apollo Labs — home"
+              className="crc-logo-link crc-mobile-menu-brand"
+              aria-label="Collaborative Research Club — home"
               onClick={closeMenu}
             >
-              <ApolloLogo />
+              <CRCLogo />
             </Link>
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={hrefFor(link.href)}
-                className="apollo-mobile-menu-link"
+                className="crc-mobile-menu-link"
                 onClick={closeMenu}
               >
                 {link.label}
@@ -114,7 +114,7 @@ export default function Nav() {
               href={DISCORD_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="apollo-mobile-menu-discord"
+              className="crc-mobile-menu-discord"
               onClick={closeMenu}
             >
               <DiscordIcon className="h-[18px] w-[18px]" />

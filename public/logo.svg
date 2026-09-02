@@ -1,13 +1,12 @@
-<!-- Apollo Labs horizontal lockup. Standalone asset for READMEs, decks, and
+<!-- Collaborative Research Club horizontal lockup. Standalone asset for READMEs, decks, and
      anywhere outside the app that cannot reach the React component.
-     Keep in sync with components/ApolloMark.jsx. -->
+     Keep in sync with components/CRCMark.jsx. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216 44" fill="none">
   <g transform="translate(0 2)">
-    <ellipse cx="20" cy="21" rx="14" ry="5" transform="rotate(-14 20 21)" stroke="#0a0a0a" stroke-width="2.5"/>
-    <path d="M6.7 32 L17.7 7.5 L22.3 7.5 L33.3 32 L28.7 32 L20 12.62 L11.3 32 Z" fill="#0a0a0a"/>
-    <path d="M12.16 18.49 A14 5 -14 0 1 20.46 15.77" stroke="#0a0a0a" stroke-width="2.5" stroke-linecap="round"/>
-    <circle cx="6.42" cy="24.39" r="2.3" fill="#2563eb"/>
+    <path d="M29 9.5 C26.6 7.8 23.7 7 20.5 7 C13 7 7 12.8 7 20 C7 27.2 13 33 20.5 33 C23.7 33 26.6 32.2 29 30.5" stroke="#0a0a0a" stroke-width="4.2" stroke-linecap="round"/>
+    <path d="M31.5 14 C29.9 12.8 28 12.2 25.8 12.2 C21.2 12.2 17.5 15.6 17.5 20 C17.5 24.4 21.2 27.8 25.8 27.8 C28 27.8 29.9 27.2 31.5 26" stroke="#0a0a0a" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="31.5" cy="20" r="2.4" fill="#2563eb"/>
   </g>
-  <text x="46" y="30" font-family="Instrument Serif, Georgia, serif" font-size="27" letter-spacing="-0.4" fill="#0a0a0a">Apollo</text>
-  <text x="138" y="30" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12" font-weight="500" letter-spacing="2.6" fill="rgba(10,10,10,0.42)">LABS</text>
+  <text x="46" y="30" font-family="Instrument Serif, Georgia, serif" font-size="27" letter-spacing="-0.4" fill="#0a0a0a">CRC</text>
+  <text x="103" y="30" font-family="Inter, Helvetica, Arial, sans-serif" font-size="9" font-weight="500" letter-spacing="1.8" fill="rgba(10,10,10,0.42)">CAL HIGH</text>
 </svg>

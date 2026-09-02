@@ -7,7 +7,7 @@ import ProjectCover from '@/components/ProjectCover'
 import { PROJECT_CATEGORIES, PROJECTS } from '@/lib/data'
 import { authorLine, isPublished, projectHref, statusLabel } from '@/lib/papers'
 
-const PREVIEW_TITLE_ID = 'apollo-project-preview-title'
+const PREVIEW_TITLE_ID = 'crc-project-preview-title'
 
 /**
  * The gallery card: cover, field, title, authors, status. Opens the preview
@@ -16,33 +16,33 @@ const PREVIEW_TITLE_ID = 'apollo-project-preview-title'
  */
 function ProjectCard({ project, onOpen, priority }) {
   return (
-    <li className="apollo-gallery-item">
+    <li className="crc-gallery-item">
       <button
         type="button"
-        className="apollo-gallery-card"
+        className="crc-gallery-card"
         onClick={() => onOpen(project)}
         aria-haspopup="dialog"
       >
         <ProjectCover project={project} priority={priority} />
 
-        <span className="apollo-gallery-body">
-          <span className="apollo-gallery-meta">
-            <span className="apollo-caption">{project.category}</span>
+        <span className="crc-gallery-body">
+          <span className="crc-gallery-meta">
+            <span className="crc-caption">{project.category}</span>
             <span
-              className={`apollo-status-pill ${
-                isPublished(project) ? 'apollo-status-pill-published' : ''
+              className={`crc-status-pill ${
+                isPublished(project) ? 'crc-status-pill-published' : ''
               }`}
             >
               {statusLabel(project)}
             </span>
           </span>
 
-          <span className="apollo-gallery-title">{project.title}</span>
-          <span className="apollo-gallery-topic">{project.topic}</span>
-          <span className="apollo-gallery-authors">{authorLine(project)}</span>
-          <span className="apollo-gallery-abstract">{project.description}</span>
+          <span className="crc-gallery-title">{project.title}</span>
+          <span className="crc-gallery-topic">{project.topic}</span>
+          <span className="crc-gallery-authors">{authorLine(project)}</span>
+          <span className="crc-gallery-abstract">{project.description}</span>
 
-          <span className="apollo-gallery-hint">Read the abstract →</span>
+          <span className="crc-gallery-hint">Read the abstract →</span>
         </span>
       </button>
     </li>
@@ -56,11 +56,11 @@ function ProjectPreviewModal({ project, onClose }) {
       open={!!project}
       onClose={onClose}
       labelledBy={PREVIEW_TITLE_ID}
-      className="apollo-modal-project"
+      className="crc-modal-project"
     >
       {project && (
         <>
-          <span className="apollo-caption mb-2 block">
+          <span className="crc-caption mb-2 block">
             {project.category} · {statusLabel(project)}
           </span>
           <h3
@@ -69,23 +69,23 @@ function ProjectPreviewModal({ project, onClose }) {
           >
             {project.title}
           </h3>
-          <p className="text-base font-medium text-[var(--apollo-text-body)] mb-1">
+          <p className="text-base font-medium text-[var(--crc-text-body)] mb-1">
             {project.topic}
           </p>
-          <p className="apollo-caption mb-6">{authorLine(project)}</p>
+          <p className="crc-caption mb-6">{authorLine(project)}</p>
 
-          <p className="apollo-caption mb-2">Abstract</p>
-          <p className="apollo-body-sm leading-relaxed mb-6">{project.overview}</p>
+          <p className="crc-caption mb-2">Abstract</p>
+          <p className="crc-body-sm leading-relaxed mb-6">{project.overview}</p>
 
-          <p className="apollo-caption mb-3">Standout aspects</p>
-          <ul className="apollo-modal-highlights">
+          <p className="crc-caption mb-3">Standout aspects</p>
+          <ul className="crc-modal-highlights">
             {project.highlights.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
 
-          <div className="apollo-preview-actions">
-            <Link href={projectHref(project)} className="apollo-hero-cta">
+          <div className="crc-preview-actions">
+            <Link href={projectHref(project)} className="crc-hero-cta">
               {isPublished(project) ? 'Read the full paper' : 'Read the full write-up'}
               <span aria-hidden> →</span>
             </Link>
@@ -94,7 +94,7 @@ function ProjectPreviewModal({ project, onClose }) {
                 href={project.paper.pdf}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="apollo-link text-sm font-medium"
+                className="crc-link text-sm font-medium"
               >
                 Download PDF ↓
               </a>
@@ -122,24 +122,24 @@ export default function ProjectsSection() {
   )
 
   return (
-    <section id="projects" className="apollo-section apollo-projects-section">
-      <div className="apollo-container">
+    <section id="projects" className="crc-section crc-projects-section">
+      <div className="crc-container">
         <div className="mb-8 md:mb-10">
-          <span className="apollo-caption mb-4 block">Projects</span>
+          <span className="crc-caption mb-4 block">Projects</span>
           <h2 className="text-[clamp(28px,4vw,48px)] font-normal leading-[1.08] tracking-tight mb-4">
             The research gallery
           </h2>
-          <p className="apollo-body max-w-xl">
-            Every Apollo Labs project lives here — open one for the abstract, then read
+          <p className="crc-body max-w-xl">
+            Every Collaborative Research Club project lives here — open one for the abstract, then read
             the full write-up on its own page.{' '}
-            <a href="#submit" className="apollo-link">
+            <a href="#submit" className="crc-link">
               Finished something of your own?
             </a>
           </p>
         </div>
 
         <div
-          className="apollo-project-filters mb-8"
+          className="crc-project-filters mb-8"
           role="group"
           aria-label="Filter by field"
         >
@@ -148,8 +148,8 @@ export default function ProjectsSection() {
               key={cat}
               type="button"
               aria-pressed={category === cat}
-              className={`apollo-project-filter ${
-                category === cat ? 'apollo-project-filter-active' : ''
+              className={`crc-project-filter ${
+                category === cat ? 'crc-project-filter-active' : ''
               }`}
               onClick={() => setCategory(cat)}
             >
@@ -159,7 +159,7 @@ export default function ProjectsSection() {
         </div>
 
         {shown.length > 0 ? (
-          <ul className="apollo-gallery-grid">
+          <ul className="crc-gallery-grid">
             {shown.map((project, i) => (
               <ProjectCard
                 key={project.id}
@@ -170,15 +170,15 @@ export default function ProjectsSection() {
             ))}
           </ul>
         ) : (
-          <p className="apollo-gallery-empty">
+          <p className="crc-gallery-empty">
             Nothing published in {category} yet — it could be yours.{' '}
-            <a href="#submit" className="apollo-link">
+            <a href="#submit" className="crc-link">
               Submit a paper →
             </a>
           </p>
         )}
 
-        <p className="apollo-more-soon">More Coming Soon!</p>
+        <p className="crc-more-soon">More Coming Soon!</p>
       </div>
 
       <ProjectPreviewModal project={selected} onClose={close} />

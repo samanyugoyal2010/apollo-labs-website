@@ -5,8 +5,8 @@ import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import LoadingScreen from '@/components/LoadingScreen'
 
-const STORAGE_KEY = 'apollo-labs-seen'
-const PRELOAD_CLASS = 'apollo-preload'
+const STORAGE_KEY = 'crc-seen'
+const PRELOAD_CLASS = 'crc-preload'
 
 /**
  * The page content always renders — including on the server — so crawlers and
