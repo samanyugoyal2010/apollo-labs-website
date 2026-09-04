@@ -1,4 +1,4 @@
-import CRCMark from '@/components/CRCMark'
+import ApolloMark from '@/components/ApolloMark'
 
 export default function HeroVisual() {
   return (
@@ -22,7 +22,7 @@ export default function HeroVisual() {
       {/* The concentric rings are this mark's orbit blown up to page scale —
           the visual is the logo exploded, with the mark itself at the center. */}
       <div className="crc-hero-core relative z-10 flex h-[104px] w-[104px] items-center justify-center rounded-full">
-        <CRCMark className="crc-hero-core-mark" />
+        <ApolloMark className="crc-hero-core-mark" />
       </div>
 
       <div className="absolute top-[10%] right-[16%] h-3.5 w-3.5 rounded-full bg-[var(--crc-text)] shadow-[0_0_12px_rgba(0,0,0,0.2)]" />

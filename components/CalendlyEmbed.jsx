@@ -7,7 +7,7 @@ export default function CalendlyEmbed() {
     <div className="crc-calendly-wrap">
       <iframe
         src={embedUrl}
-        title="Schedule a meeting with Collaborative Research Club"
+        title="Schedule a meeting with Apollo Labs"
         className="crc-calendly-iframe"
         loading="lazy"
       />

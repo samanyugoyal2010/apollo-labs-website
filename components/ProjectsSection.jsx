@@ -130,7 +130,7 @@ export default function ProjectsSection() {
             The research gallery
           </h2>
           <p className="crc-body max-w-xl">
-            Every Collaborative Research Club project lives here — open one for the abstract, then read
+            Every Apollo Labs project lives here — open one for the abstract, then read
             the full write-up on its own page.{' '}
             <a href="#submit" className="crc-link">
               Finished something of your own?

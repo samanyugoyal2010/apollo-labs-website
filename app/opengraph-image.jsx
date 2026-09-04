@@ -3,18 +3,18 @@ import { markDataUri } from '@/lib/mark'
 import { googleFont } from '@/lib/google-font'
 
 export const alt =
-  'Collaborative Research Club, Cal High students building research together'
+  'Apollo Labs — high school students building research, together'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
 const HEADLINE = 'High school students building research, together.'
-const WORDMARK = 'CRC'
+const WORDMARK = 'Apollo'
 const FOOTNOTE = 'Join our Discord'
 
 export default async function OpengraphImage() {
   const [serif, sans] = await Promise.all([
     googleFont('Instrument+Serif', `${WORDMARK}${HEADLINE}`),
-    googleFont('Inter:wght@500', `CALHIGH${FOOTNOTE}Student-ledCollaborativeResearch·`),
+    googleFont('Inter:wght@500', `LABS${FOOTNOTE}Student-ledCollaborativeResearch·`),
   ])
 
   const fonts = []
@@ -64,7 +64,7 @@ export default async function OpengraphImage() {
                 color: 'rgba(255, 255, 255, 0.45)',
               }}
             >
-              CAL HIGH
+              LABS
             </span>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default async function OpengraphImage() {
             color: 'rgba(255, 255, 255, 0.5)',
           }}
         >
-          <span>Cal High · Student-led · Research</span>
+          <span>Student-led · Collaborative · Research</span>
           <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{FOOTNOTE}</span>
         </div>
       </div>

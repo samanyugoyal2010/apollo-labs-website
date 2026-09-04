@@ -10,7 +10,7 @@ export default function AppleIcon() {
   const svg = markSvg({
     color: '#ffffff',
     bead: '#5b8dff',
-    strokeWidth: 3,
+    ringWidth: 3,
     size: 180,
     tile: { background: '#0a0a0a', radius: 0, scale: 0.8 },
   })

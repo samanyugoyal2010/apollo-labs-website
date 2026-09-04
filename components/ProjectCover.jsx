@@ -1,4 +1,4 @@
-import CRCMark from '@/components/CRCMark'
+import ApolloMark from '@/components/ApolloMark'
 import { coverHue } from '@/lib/papers'
 
 /**
@@ -28,7 +28,7 @@ export default function ProjectCover({ project, className = '', priority = false
         <>
           <span className="crc-cover-wash" />
           <span className="crc-cover-grid" />
-          <CRCMark className="crc-cover-mark" />
+          <ApolloMark className="crc-cover-mark" />
         </>
       )}
     </div>

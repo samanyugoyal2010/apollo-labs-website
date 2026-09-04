@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import CRCLogo from '@/components/CRCLogo'
+import ApolloLogo from '@/components/ApolloLogo'
 import DiscordIcon from '@/components/DiscordIcon'
 import { CONTACT_EMAIL, DISCORD_URL } from '@/lib/data'
 
@@ -14,9 +14,9 @@ export default function Footer() {
             <Link
               href="/"
               className="crc-logo-link"
-              aria-label="Collaborative Research Club — home"
+              aria-label="Apollo Labs — home"
             >
-              <CRCLogo />
+              <ApolloLogo />
             </Link>
             <p className="crc-footer-brand">© {year}</p>
           </div>
@@ -36,7 +36,7 @@ export default function Footer() {
             </a>
           </div>
 
-          <p className="crc-footer-credit">Designed with ❤️ by the CRC Team</p>
+          <p className="crc-footer-credit">Designed with ❤️ by the Apollo Labs Team</p>
         </div>
       </div>
     </footer>

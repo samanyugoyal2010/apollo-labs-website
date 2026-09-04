@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import CRCMark from '@/components/CRCMark'
+import ApolloMark from '@/components/ApolloMark'
 
 const TICK_MS = 12
 const HOLD_MS = 260
@@ -38,12 +38,13 @@ export default function LoadingScreen({ onComplete }) {
       exit={{ y: '-100%', transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] } }}
       role="status"
       aria-live="polite"
-      aria-label="Loading Collaborative Research Club"
+      aria-label="Loading Apollo Labs"
     >
       <div className="w-full max-w-[420px] px-6">
-        {/* The linked forms draw in before their shared node appears. */}
+        {/* The mark builds itself: orbit draws, letter rises into it, bead
+            lands at apogee — the identity explained in one and a half seconds. */}
         <div className="mb-10 flex justify-center">
-          <CRCMark className="crc-mark-intro h-28 sm:h-32" />
+          <ApolloMark className="apollo-mark-intro h-28 sm:h-32" />
         </div>
 
         <div className="mb-10 flex justify-center">
@@ -54,8 +55,8 @@ export default function LoadingScreen({ onComplete }) {
           >
             <span className="crc-logo crc-logo-lg">
               <span className="crc-logo-type">
-                <span className="crc-logo-name">CRC</span>
-                <span className="crc-logo-suffix">Cal High</span>
+                <span className="crc-logo-name">Apollo</span>
+                <span className="crc-logo-suffix">Labs</span>
               </span>
             </span>
           </motion.span>
@@ -71,7 +72,7 @@ export default function LoadingScreen({ onComplete }) {
         </div>
 
         <p className="crc-loading-status">
-          <span>{count < 100 ? 'Joining ideas' : 'Ready'}</span>
+          <span>{count < 100 ? 'Entering orbit' : 'In orbit'}</span>
           <span className="tabular-nums text-white/70">{count}</span>
         </p>
       </div>
