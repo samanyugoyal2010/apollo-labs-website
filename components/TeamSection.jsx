@@ -1,89 +1,62 @@
-'use client'
+import { OFFICIAL_CLUB_RECORD_URL, TEAM_MEMBERS } from '@/lib/data'
 
-import { useCallback, useState } from 'react'
-import Modal from '@/components/Modal'
-import { TEAM_MEMBERS } from '@/lib/data'
-
-const TITLE_ID = 'crc-team-modal-title'
-
-function TeamMemberModal({ member, onClose }) {
+function PeopleList({ people }) {
   return (
-    <Modal open={!!member} onClose={onClose} labelledBy={TITLE_ID} className="crc-modal-team">
-      {member && (
-        <>
-          <div className="crc-team-modal-header">
-            <div className="crc-team-avatar crc-team-avatar-modal">
-              {member.initials}
-            </div>
-            <div>
-              <span className="crc-caption mb-1 block">{member.role}</span>
-              <h3
-                id={TITLE_ID}
-                className="text-[clamp(24px,3.5vw,32px)] font-normal leading-tight tracking-tight"
-              >
-                {member.name}
-              </h3>
-            </div>
-          </div>
-
-          {member.tags?.length > 0 && (
-            <ul className="crc-member-tags">
-              {member.tags.map((tag) => (
-                <li key={tag} className="crc-member-tag">
-                  {tag}
-                </li>
-              ))}
-            </ul>
-          )}
-
-          <p className="crc-body-sm leading-relaxed mt-6">{member.bio}</p>
-        </>
-      )}
-    </Modal>
+    <ul className="crc-people-list">
+      {people.map((person, index) => (
+        <li key={person.id}>
+          <span className="crc-person-index">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <span className="crc-person-name">{person.name}</span>
+          <span className="crc-person-role">{person.role}</span>
+          <span className="crc-person-context">{person.context}</span>
+        </li>
+      ))}
+    </ul>
   )
 }
 
 export default function TeamSection() {
-  const [selectedMember, setSelectedMember] = useState(null)
-  const closeDetail = useCallback(() => setSelectedMember(null), [])
+  const leadership = TEAM_MEMBERS.filter((person) => person.kind === 'leadership')
+  const founders = TEAM_MEMBERS.filter((person) => person.kind === 'founder')
 
   return (
-    <section id="team" className="crc-section crc-team-section">
-      <div className="crc-container">
-        <span className="crc-caption mb-4 block">Team</span>
-        <h2 className="text-[clamp(32px,4vw,48px)] font-normal leading-[1.08] tracking-tight mb-4">
-          Our team
-        </h2>
-        <p className="crc-body max-w-xl mb-12">
-          CRC was founded by Cal High students committed to making collaborative research
-          accessible and rigorous for their peers. Tap a card to read more about each member.
-        </p>
+    <section id="people" className="crc-people" data-scene="people">
+      <div className="crc-page-frame">
+        <div className="crc-section-heading crc-section-heading-light">
+          <p className="crc-eyebrow">People</p>
+          <h2>The names attached to the work.</h2>
+          <p>
+            School leadership and founding roles are listed separately so ownership
+            remains clear.
+          </p>
+        </div>
 
-        <div className="crc-cards-row">
-          {TEAM_MEMBERS.map((member) => (
-            <button
-              key={member.id}
-              type="button"
-              className="crc-team-card text-left w-full"
-              onClick={() => setSelectedMember(member)}
-              aria-haspopup="dialog"
-            >
-              <div className="crc-team-avatar">{member.initials}</div>
-              <h3 className="text-xl font-normal tracking-tight text-[var(--crc-text)] mb-1 text-center">
-                {member.name}
-              </h3>
-              <p className="crc-body-sm text-[var(--crc-text-faint)] text-center mb-4">
-                {member.role}
-              </p>
-              <span className="crc-team-card-hint text-sm text-[var(--crc-text-faint)] block text-center">
-                Tap to read bio →
-              </span>
-            </button>
-          ))}
+        <div className="crc-people-groups">
+          <section aria-labelledby="school-leadership">
+            <div className="crc-people-group-heading">
+              <h3 id="school-leadership">Current school leadership</h3>
+              <a
+                href={OFFICIAL_CLUB_RECORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Official club record <span aria-hidden>↗</span>
+              </a>
+            </div>
+            <PeopleList people={leadership} />
+          </section>
+
+          <section aria-labelledby="founding-team">
+            <div className="crc-people-group-heading">
+              <h3 id="founding-team">Founding team</h3>
+              <span>CRC origin</span>
+            </div>
+            <PeopleList people={founders} />
+          </section>
         </div>
       </div>
-
-      <TeamMemberModal member={selectedMember} onClose={closeDetail} />
     </section>
   )
 }

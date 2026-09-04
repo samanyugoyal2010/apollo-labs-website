@@ -3,11 +3,11 @@ import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { ImageResponse } from 'next/og'
 
-export const size = { width: 180, height: 180 }
+export const size = { width: 48, height: 48 }
 export const contentType = 'image/png'
 export const runtime = 'nodejs'
 
-export default async function AppleIcon() {
+export default async function Icon() {
   const dragon = await readFile(join(process.cwd(), 'public/brand/crc-dragon.png'))
 
   return new ImageResponse(
@@ -25,8 +25,8 @@ export default async function AppleIcon() {
         <img
           src={`data:image/png;base64,${dragon.toString('base64')}`}
           alt=""
-          width={164}
-          height={150}
+          width={44}
+          height={40}
           style={{ objectFit: 'contain' }}
         />
       </div>

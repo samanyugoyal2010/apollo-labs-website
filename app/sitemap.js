@@ -1,4 +1,4 @@
-import { projectSlugs } from '@/lib/papers'
+import { projectSlugs } from '@/lib/projects'
 import { SITE_URL } from '@/lib/site'
 
 export default function sitemap() {

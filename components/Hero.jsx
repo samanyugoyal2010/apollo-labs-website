@@ -1,47 +1,68 @@
 import Link from 'next/link'
-import HeroVisual from '@/components/HeroVisual'
-import ResearchTags from '@/components/ResearchTags'
 import DiscordIcon from '@/components/DiscordIcon'
-import { DISCORD_URL } from '@/lib/data'
+import { DISCORD_URL, PROJECTS } from '@/lib/data'
 
 export default function Hero() {
   return (
-    <section id="mission" className="crc-home pt-24 pb-10 sm:pt-28 md:pt-36 md:pb-12">
-      <div className="crc-container relative z-10">
-        <div className="grid gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-12">
-          <div className="max-w-2xl">
-            <p className="crc-hero-badge">
-              Cal High · Student-led · Research
-            </p>
-            <h1 className="crc-hero-h1 mb-6">
-              High school students building <em>research</em>, together.
-            </h1>
-            <p className="crc-body mb-8 max-w-lg text-[17px] leading-relaxed">
-              Collaborative Research Club is a student-led club at California High
-              School where students work together on research projects, from hypothesis
-              to write-up. Everything happens in our Discord.
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <a
-                href={DISCORD_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="crc-discord-cta relative overflow-hidden crc-shimmer"
-              >
-                <DiscordIcon className="h-[18px] w-[18px]" />
-                Join our Discord
-              </a>
-              <Link href="#team" className="crc-hero-cta-secondary">
-                Meet the team
-              </Link>
-            </div>
-            <p className="crc-hero-meta">
-              Based at Cal High · Free to join
-            </p>
+    <section id="about" className="crc-hero" data-scene="hero">
+      <div className="crc-page-frame crc-hero-frame">
+        <div className="crc-hero-copy">
+          <p className="crc-eyebrow">
+            Collaborative Research Club
+            <span>California High School</span>
+          </p>
+
+          <h1 className="crc-hero-title">
+            Bring a question.
+            <em>Build the record.</em>
+          </h1>
+
+          <p className="crc-hero-intro">
+            CRC is a student-led club at California High School. Students read prior
+            work, define a method, examine evidence, and document what they learn.
+          </p>
+
+          <div className="crc-hero-actions">
+            <a
+              href={DISCORD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="crc-button crc-button-primary"
+            >
+              <DiscordIcon />
+              Join the Discord
+            </a>
+            <Link href="#projects" className="crc-text-link">
+              View project notes
+              <span aria-hidden>↓</span>
+            </Link>
           </div>
-          <HeroVisual />
+
+          <p className="crc-discord-note">
+            Join the Discord for announcements and events.
+          </p>
         </div>
-        <ResearchTags />
+
+        <div className="crc-hero-flight-note" aria-hidden="true">
+          <span>Scroll</span>
+          <span className="crc-flight-rule" />
+          <span>Follow the dragon</span>
+        </div>
+
+        <dl className="crc-hero-ledger">
+          <div>
+            <dt>Current record</dt>
+            <dd>{String(PROJECTS.length).padStart(2, '0')} project notes</dd>
+          </div>
+          <div>
+            <dt>Format</dt>
+            <dd>Question, method, evidence, limits</dd>
+          </div>
+          <div>
+            <dt>Home</dt>
+            <dd>Cal High, San Ramon</dd>
+          </div>
+        </dl>
       </div>
     </section>
   )

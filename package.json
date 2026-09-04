@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "logos": "node --no-warnings=MODULE_TYPELESS_PACKAGE_JSON scripts/render-logo-pngs.mjs"
+    "lint": "eslint ."
   },
   "dependencies": {
     "framer-motion": "^12.39.0",

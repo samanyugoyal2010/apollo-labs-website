@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import CRCMark from '@/components/CRCMark'
-import DiscordIcon from '@/components/DiscordIcon'
-import { DISCORD_URL } from '@/lib/data'
+import Footer from '@/components/Footer'
+import Nav from '@/components/Nav'
 
 export const metadata = {
   title: 'Page not found',
@@ -9,34 +9,22 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <div className="crc-site crc-home flex min-h-screen items-center justify-center px-6 py-24">
-      <div className="max-w-md text-center">
-        <Link href="/" className="crc-logo-link mb-8 inline-block" aria-label="Collaborative Research Club — home">
-          <CRCMark className="crc-notfound-mark" />
-        </Link>
-        <p className="crc-caption mb-4">404</p>
-        <h1 className="crc-hero-h1 mx-auto mb-5 !text-[clamp(32px,6vw,52px)]">
-          Off course.
-        </h1>
-        <p className="crc-body mb-9">
-          That page doesn&apos;t exist. Head back to the launch pad, or find us in the
-          Discord.
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <Link href="/" className="crc-hero-cta">
-            Back to home
-          </Link>
-          <a
-            href={DISCORD_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="crc-discord-cta"
-          >
-            <DiscordIcon className="h-[18px] w-[18px]" />
-            Join our Discord
-          </a>
+    <div className="crc-site">
+      <Nav />
+      <main id="main" className="crc-not-found">
+        <div className="crc-page-frame crc-not-found-layout">
+          <div>
+            <p className="crc-eyebrow">404</p>
+            <h1>This page is not in the record.</h1>
+            <p>The address may have changed, or the page may no longer exist.</p>
+            <Link href="/" className="crc-button crc-button-primary">
+              Return home
+            </Link>
+          </div>
+          <CRCMark priority sizes="(max-width: 767px) 68vw, 440px" />
         </div>
-      </div>
+      </main>
+      <Footer />
     </div>
   )
 }

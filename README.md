@@ -1,209 +1,66 @@
-<img src="public/logo.svg" alt="Collaborative Research Club" width="216">
+# Collaborative Research Club
 
-# Collaborative Research Club Website
-
-Website for **Collaborative Research Club (CRC)**, a student-led research club at
+Website for Collaborative Research Club, a student-led research club at
 California High School.
 
-Made by Samanyu, Ashmit, and Nihar
+## Site structure
 
-## Community
+The home page presents the club's research process, current project records,
+leadership, research limits, and Discord link. Each project also has a static
+record at `/projects/<slug>`.
 
-The Discord server is the primary way to join and the main call to action across
-the site: **https://discord.gg/pvgqDxX2NE**
+Club and project content is stored in [`lib/data.js`](lib/data.js). Shared
+project URL and status helpers are stored in [`lib/projects.js`](lib/projects.js).
 
-It's linked from the nav, the hero, the mobile menu, the "Join us" panel, the
-footer, and the 404 page. The invite lives in one place — `DISCORD_URL` in
-[`lib/data.js`](lib/data.js).
+## Identity and motion
 
-## Identity
+The official dragon asset is
+[`public/brand/crc-dragon.png`](public/brand/crc-dragon.png). Navigation, page
+icons, social cards, and the scroll animation all use that source image.
 
-The mark pairs two open, linked C forms for collaboration and a blue shared node.
-The wordmark uses “CRC” with “Cal High” as the qualifier.
+On the home page, the dragon crosses the viewport in response to page scroll.
+The compact breakpoint uses a shorter path and lower opacity around body copy.
+Visitors who request reduced motion see a quiet, fixed placement instead.
 
-**One source of geometry: [`lib/mark.js`](lib/mark.js).** Everything that draws
-the mark imports from there, so a change to the shape lands everywhere at once.
-The React component takes its color from `currentColor` and
-`--crc-mark-node` for the blue node. Callers set a height; width follows the
-viewBox.
+## Discord
 
-| Where | What |
-| --- | --- |
-| [`lib/mark.js`](lib/mark.js) | The geometry, plus `markSvg()` / `markDataUri()` for contexts that can't render React. |
-| [`CRCMark.jsx`](components/CRCMark.jsx) | The mark as a component. `variant="glyph"` displays only the outer C. |
-| [`CRCLogo.jsx`](components/CRCLogo.jsx) | Mark + “CRC / Cal High” wordmark. `size="sm"` is used in navigation and the footer; `"lg"` is used in the intro. |
-| [`app/icon.svg`](app/icon.svg) | Favicon: the mark on a dark tile, optically centered so it survives 16px. |
-| [`app/apple-icon.jsx`](app/apple-icon.jsx) | 180×180 home-screen icon, generated from `markSvg()`. |
-| [`app/opengraph-image.jsx`](app/opengraph-image.jsx) | 1200×630 social card. |
-| [`public/logo.svg`](public/logo.svg) | Standalone lockup for READMEs and decks. |
-| `public/*.png` | The raster set — see below. |
-
-### Raster assets
-
-Anywhere that can't take an SVG — Discord, Google Workspace, slide decks, print —
-uses the PNGs in `public/`. They are generated, not hand-exported:
-
-```bash
-npm run logos
-```
-
-| File | Size | Use |
-| --- | --- | --- |
-| `logo.png` | 680×190 | Lockup, dark ink, transparent |
-| `logo-light.png` | 680×190 | Lockup, white ink, for dark backgrounds |
-| `mark.png` | 512×512 | Mark alone, dark ink, transparent |
-| `mark-light.png` | 512×512 | Mark alone, white ink, transparent |
-| `icon.png` | 512×512 | Mark on the dark tile — server icons, org avatars |
-
-[`scripts/render-logo-pngs.mjs`](scripts/render-logo-pngs.mjs) renders them from
-the same geometry, so changing the shape in [`lib/mark.js`](lib/mark.js) and
-re-running is all it takes. It goes through `next/og` (satori + resvg), which
-ships with Next, so there is no extra dependency — and it is the only rasterizer
-here that can embed Instrument Serif, which a generic SVG converter would
-substitute with whatever serif the machine happens to have.
-
-The mark's ink height is matched to the wordmark's cap height so both parts read
-as one lockup.
-
-Icons and the social card use Next's `app/` file conventions, so the `<link>`
-and `og:image` tags are generated with content hashes. Do not add `icons` to
-`metadata` in [`app/layout.jsx`](app/layout.jsx) — it overrides the conventions
-and silently drops the apple-touch-icon.
-
-`app/icon.svg` and `public/logo.svg` are the only files that duplicate the path
-data — they are static SVGs read outside React. If the geometry in
-[`lib/mark.js`](lib/mark.js) changes, those two need the same edit by hand;
-everything else regenerates.
-
-The social card and the logo PNGs fetch Instrument Serif and Inter from Google
-via [`lib/google-font.js`](lib/google-font.js) and fall back to system faces if
-that fetch fails, so an offline build still ships a card. `npm run logos` warns
-when it falls back, since a wordmark in the wrong serif should not be committed.
-
-## Editing content
-
-All copy lives in [`lib/data.js`](lib/data.js): team members, projects, mission
-pillars, research tags, join options, contact email, Calendly URL, the
-submission checklist, and the Discord invite. No component holds hard-coded
-copy.
-
-## The research gallery
-
-The Projects section is a gallery of cover cards. Clicking one opens a preview
-with the abstract; "Read the full paper" goes to `/projects/<slug>`, a
-statically generated page with the full write-up, its own social card, and
-JSON-LD for search engines.
-
-A project is a gallery entry from the day it starts. `paper` is what gets
-filled in once a write-up clears review:
-
-```js
-{
-  slug: 'optimus',
-  authors: ['Samanyu Goyal'],
-  status: 'in-progress',
-  paper: null,          // { pdf, published, doi } once approved
-  cover: null,          // '/covers/optimus.png', or null for a generated one
-  // ... title, topic, category, overview (the abstract), highlights, detail
-}
-```
-
-Setting `paper.pdf` flips the card to Published, adds the download button and
-an inline PDF viewer, and upgrades the structured data to `ScholarlyArticle`.
-Leaving `cover` as `null` draws a generated gradient cover keyed to the slug,
-so the gallery never shows a missing image.
-
-### Publishing an approved paper
-
-1. Put the PDF in `public/papers/` (and a cover image in `public/covers/`).
-2. Add or update the entry in `PROJECTS` with `paper.pdf` and
-   `paper.published` set.
-
-That is the whole job — the project page, its social card, and its
-`sitemap.xml` entry all follow from the data.
-
-## Paper submissions
-
-`SubmitPaperSection` posts to `/api/submit-paper`, the site's only server
-route. It sends the reviewer the submission along with **Approve** and
-**Request changes** buttons — `mailto:` links carrying a pre-written reply — and
-sends the student a receipt. There is no database and no admin page: approving
-a paper happens in the reviewer's own mail client.
-
-Set `RESEND_API_KEY` to turn it on; see [`.env.example`](.env.example). Without
-it the route returns 503 and the form points students at the contact email
-instead, so a missing key degrades rather than dead-ends.
-
-One caveat worth knowing: until a sending domain is verified in Resend, the
-default sender only delivers to the Resend account owner. The reviewer copy
-arrives and the student's receipt does not — the route logs that and still
-reports success, because the submission did go through. Verify a domain and set
-`RESEND_FROM` to send receipts.
-
-## Team
-
-- Samanyu Goyal — Co-Founder
-- Ram Rithvik Pagadala — Co-Founder
-- Ashmit Pai — Co-Founder
+Discord is linked only for announcements and events. The invite URL is stored
+once as `DISCORD_URL` in [`lib/data.js`](lib/data.js).
 
 ## Run locally
 
+Install dependencies:
+
 ```bash
-npm install
+npm ci
 ```
+
+Start the local site:
 
 ```bash
 npm run dev
 ```
 
-Open http://localhost:3000. To replay the intro animation, clear the
-`crc-seen` key in `sessionStorage` and reload.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Build
+## Checks
 
 ```bash
+npm run lint
 npm run build
 ```
 
-```bash
-npm start
-```
+## Production metadata
 
-## Deploying
-
-Set `NEXT_PUBLIC_SITE_URL` to the production origin. It drives `metadataBase`,
-the canonical URL, Open
-Graph tags, `robots.txt`, and `sitemap.xml`. On Vercel it falls back to the
-project production URL automatically; without either it defaults to
+Set `NEXT_PUBLIC_SITE_URL` to the production origin. It supplies the canonical
+URL, Open Graph URL, `robots.txt`, and `sitemap.xml`. When it is unset, the app
+uses the Vercel production URL when present, then falls back to
 `http://localhost:3000`.
-
-Set `RESEND_API_KEY` (and ideally `RESEND_FROM`) to enable paper submissions.
-Copy [`.env.example`](.env.example) to `.env.local` for local development, and
-add the same variables in the Vercel project settings.
 
 ## Stack
 
-- Next.js 15 (App Router) + React 19
-- Tailwind CSS v4 over a custom `.crc-*` CSS-variable design system
+- Next.js 15 with the App Router
+- React 19
+- Tailwind CSS 4 and site-specific CSS
 - Framer Motion
-- Fonts: EB Garamond, Inter, Instrument Serif, JetBrains Mono, Great Vibes
-
-## Notes on the front end
-
-- **The page is server-rendered.** Content always renders; the intro is an
-  overlay on top of it, gated by a pre-paint inline script in
-  [`app/layout.jsx`](app/layout.jsx) that sets `.crc-preload` on `<html>`.
-  The script self-clears after 6s so a hydration failure can never leave a
-  blank screen.
-- **The intro only plays on the home page.** A shared link to a paper should
-  land on the paper, not on an intro.
-- **The intro respects `prefers-reduced-motion`** and is skipped entirely when
-  set, along with all ambient animation (marquee, orbits, float, shimmer).
-  Because it never mounts in that case, the mark's assemble animation
-  (`.crc-mark-intro` in `globals.css`) needs no reduced-motion variant.
-- **Dialogs** use the shared [`components/Modal.jsx`](components/Modal.jsx):
-  focus trap, focus restore, Escape to close, and scroll lock that compensates
-  for scrollbar width so the page doesn't shift.
-- **Tailwind v4 caveat:** utilities live in `@layer utilities`, so an unlayered
-  `.crc-*` rule beats a utility of the same property. If a `md:hidden` (or
-  similar) appears to do nothing, check for a competing rule in `globals.css`.
+- Instrument Serif, IBM Plex Sans, and JetBrains Mono
