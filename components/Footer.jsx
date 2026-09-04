@@ -1,34 +1,43 @@
 import Link from 'next/link'
 import CRCLogo from '@/components/CRCLogo'
-import { DISCORD_URL, NAV_LINKS } from '@/lib/data'
+import DiscordIcon from '@/components/DiscordIcon'
+import { CONTACT_EMAIL, DISCORD_URL } from '@/lib/data'
 
 export default function Footer() {
+  const year = new Date().getFullYear()
+
   return (
     <footer className="crc-footer">
-      <div className="crc-page-frame crc-footer-layout">
-        <div>
-          <Link
-            href="/"
-            className="crc-logo-link"
-            aria-label="Collaborative Research Club home"
-          >
-            <CRCLogo priority />
-          </Link>
-          <p>Student-led research club at California High School.</p>
-        </div>
-
-        <nav aria-label="Footer navigation" className="crc-footer-nav">
-          {NAV_LINKS.map((link) => (
-            <Link key={link.label} href={`/${link.href}`}>
-              {link.label}
+      <div className="crc-container">
+        <div className="crc-footer-bar">
+          <div className="crc-footer-identity">
+            <Link
+              href="/"
+              className="crc-logo-link"
+              aria-label="Collaborative Research Club — home"
+            >
+              <CRCLogo />
             </Link>
-          ))}
-          <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer">
-            Discord <span aria-hidden>↗</span>
-          </a>
-        </nav>
+            <p className="crc-footer-brand">© {year}</p>
+          </div>
 
-        <p className="crc-footer-year">© {new Date().getFullYear()} CRC</p>
+          <div className="crc-footer-links">
+            <a
+              href={DISCORD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="crc-footer-discord"
+            >
+              <DiscordIcon className="h-4 w-4" />
+              Discord
+            </a>
+            <a href={`mailto:${CONTACT_EMAIL}`} className="crc-footer-link">
+              Email
+            </a>
+          </div>
+
+          <p className="crc-footer-credit">Designed with ❤️ by the CRC Team</p>
+        </div>
       </div>
     </footer>
   )

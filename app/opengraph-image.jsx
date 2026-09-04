@@ -1,29 +1,28 @@
-/* eslint-disable @next/next/no-img-element */
-import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
 import { ImageResponse } from 'next/og'
+import { markDataUri } from '@/lib/mark'
 import { googleFont } from '@/lib/google-font'
 
 export const alt =
-  'Collaborative Research Club at California High School'
+  'Collaborative Research Club, Cal High students building research together'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
-export const runtime = 'nodejs'
+
+const HEADLINE = 'High school students building research, together.'
+const WORDMARK = 'CRC'
+const FOOTNOTE = 'Join our Discord'
 
 export default async function OpengraphImage() {
-  const eyebrow = 'COLLABORATIVE RESEARCH CLUB · CAL HIGH'
-  const firstLine = 'Bring a question.'
-  const secondLine = 'Build the record.'
-  const footer = 'Student-led research at California High School'
-  const [serif, sans, dragon] = await Promise.all([
-    googleFont('Instrument+Serif', `${firstLine} ${secondLine}`),
-    googleFont('IBM+Plex+Sans:wght@500', `${eyebrow} ${footer}`),
-    readFile(join(process.cwd(), 'public/brand/crc-dragon.png')),
+  const [serif, sans] = await Promise.all([
+    googleFont('Instrument+Serif', `${WORDMARK}${HEADLINE}`),
+    googleFont('Inter:wght@500', `CALHIGH${FOOTNOTE}Student-ledCollaborativeResearch·`),
   ])
 
   const fonts = []
-  if (serif) fonts.push({ name: 'Instrument Serif', data: serif, weight: 400 })
-  if (sans) fonts.push({ name: 'IBM Plex Sans', data: sans, weight: 500 })
+  if (serif) fonts.push({ name: 'Instrument Serif', data: serif, style: 'normal', weight: 400 })
+  if (sans) fonts.push({ name: 'Inter', data: sans, style: 'normal', weight: 500 })
+
+  const serifStack = serif ? 'Instrument Serif' : 'serif'
+  const sansStack = sans ? 'Inter' : 'sans-serif'
 
   return new ImageResponse(
     (
@@ -32,78 +31,73 @@ export default async function OpengraphImage() {
           width: '100%',
           height: '100%',
           display: 'flex',
-          position: 'relative',
-          overflow: 'hidden',
-          background: '#f2efe8',
-          color: '#090b10',
-          padding: '64px 72px',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '72px 80px',
+          background: '#0a0a0a',
+          backgroundImage:
+            'radial-gradient(circle at 78% 22%, rgba(37, 99, 235, 0.22) 0%, transparent 55%)',
+          color: '#ffffff',
         }}
       >
-        <div
-          style={{
-            width: '61%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          }}
-        >
-          <span
-            style={{
-              fontFamily: sans ? 'IBM Plex Sans' : 'sans-serif',
-              fontSize: 18,
-              letterSpacing: 3.2,
-              color: '#1e5eff',
-            }}
-          >
-            {eyebrow}
-          </span>
-
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span
-              style={{
-                fontFamily: serif ? 'Instrument Serif' : 'serif',
-                fontSize: 86,
-                lineHeight: 0.92,
-                letterSpacing: -2,
-              }}
-            >
-              {firstLine}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={markDataUri({ color: '#ffffff', bead: '#7ea8ff', size: 88 })}
+            width={88}
+            height={88}
+            alt=""
+          />
+          {/* satori ignores `baseline` alignment, so the qualifier is sat on the
+              wordmark's baseline by hand: align the boxes' bottoms, then pad up
+              by the difference between the two descenders. */}
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 14 }}>
+            <span style={{ fontFamily: serifStack, fontSize: 68, letterSpacing: -1 }}>
+              {WORDMARK}
             </span>
             <span
               style={{
-                fontFamily: serif ? 'Instrument Serif' : 'serif',
-                fontSize: 86,
-                lineHeight: 0.92,
-                letterSpacing: -2,
-                color: '#1e5eff',
+                fontFamily: sansStack,
+                fontSize: 20,
+                letterSpacing: 6,
+                paddingBottom: 12,
+                color: 'rgba(255, 255, 255, 0.45)',
               }}
             >
-              {secondLine}
+              CAL HIGH
             </span>
           </div>
-
-          <span
-            style={{
-              fontFamily: sans ? 'IBM Plex Sans' : 'sans-serif',
-              fontSize: 22,
-            }}
-          >
-            {footer}
-          </span>
         </div>
 
-        <img
-          src={`data:image/png;base64,${dragon.toString('base64')}`}
-          alt=""
-          width={560}
-          height={512}
+        <div
           style={{
-            position: 'absolute',
-            right: -52,
-            top: 58,
-            objectFit: 'contain',
+            display: 'flex',
+            fontFamily: serifStack,
+            fontSize: 76,
+            lineHeight: 1.1,
+            letterSpacing: -1.5,
+            maxWidth: 900,
           }}
-        />
+        >
+          {HEADLINE}
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingTop: 28,
+            borderTop: '1px solid rgba(255, 255, 255, 0.14)',
+            fontFamily: sansStack,
+            fontSize: 22,
+            letterSpacing: 2,
+            color: 'rgba(255, 255, 255, 0.5)',
+          }}
+        >
+          <span>Cal High · Student-led · Research</span>
+          <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{FOOTNOTE}</span>
+        </div>
       </div>
     ),
     { ...size, fonts }

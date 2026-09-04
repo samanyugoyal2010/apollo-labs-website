@@ -1,36 +1,41 @@
-/* eslint-disable @next/next/no-img-element */
-import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
 import { ImageResponse } from 'next/og'
+import { markDataUri } from '@/lib/mark'
 import { googleFont } from '@/lib/google-font'
-import { getProject, projectSlugs, statusLabel } from '@/lib/projects'
+import { authorLine, getProject, projectSlugs, statusLabel } from '@/lib/papers'
 
-export const alt = 'Collaborative Research Club project note'
+export const alt = 'Collaborative Research Club research'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
-export const runtime = 'nodejs'
 
 export function generateStaticParams() {
   return projectSlugs().map((slug) => ({ slug }))
 }
 
+/** Satori has no text-overflow, so long titles get trimmed by hand. */
+function clamp(text, max) {
+  return text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text
+}
+
 export default async function ProjectOgImage({ params }) {
   const { slug } = await params
   const project = getProject(slug)
-  const title = project?.title ?? 'Project note'
-  const topic = project?.topic ?? 'Student research'
-  const recordLabel = project ? statusLabel(project) : 'Project note'
-  const eyebrow = `CRC · ${recordLabel.toUpperCase()}`
-  const footer = 'Collaborative Research Club · California High School'
-  const [serif, sans, dragon] = await Promise.all([
-    googleFont('Instrument+Serif', title),
-    googleFont('IBM+Plex+Sans:wght@500', `${eyebrow} ${topic} ${footer}`),
-    readFile(join(process.cwd(), 'public/brand/crc-dragon.png')),
+
+  const title = clamp(project?.title ?? 'Collaborative Research Club', 40)
+  const topic = clamp(project?.topic ?? 'Student-led research', 70)
+  const byline = project ? authorLine(project) : 'Collaborative Research Club'
+  const status = project ? statusLabel(project) : 'Research'
+
+  const [serif, sans] = await Promise.all([
+    googleFont('Instrument+Serif', `CRC${title}${topic}`),
+    googleFont('Inter:wght@500', `CALHIGH${byline}${status}·`),
   ])
 
   const fonts = []
-  if (serif) fonts.push({ name: 'Instrument Serif', data: serif, weight: 400 })
-  if (sans) fonts.push({ name: 'IBM Plex Sans', data: sans, weight: 500 })
+  if (serif) fonts.push({ name: 'Instrument Serif', data: serif, style: 'normal', weight: 400 })
+  if (sans) fonts.push({ name: 'Inter', data: sans, style: 'normal', weight: 500 })
+
+  const serifStack = serif ? 'Instrument Serif' : 'serif'
+  const sansStack = sans ? 'Inter' : 'sans-serif'
 
   return new ImageResponse(
     (
@@ -39,90 +44,92 @@ export default async function ProjectOgImage({ params }) {
           width: '100%',
           height: '100%',
           display: 'flex',
-          position: 'relative',
-          overflow: 'hidden',
-          background: '#090b10',
-          color: '#f2efe8',
-          padding: '64px 72px',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '72px 80px',
+          background: '#0a0a0a',
+          backgroundImage:
+            'radial-gradient(circle at 82% 18%, rgba(37, 99, 235, 0.24) 0%, transparent 55%)',
+          color: '#ffffff',
         }}
       >
-        <div
-          style={{
-            width: '70%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-          }}
-        >
-          <span
-            style={{
-              fontFamily: sans ? 'IBM Plex Sans' : 'sans-serif',
-              fontSize: 18,
-              letterSpacing: 3.2,
-              color: '#5a87ff',
-            }}
-          >
-            {eyebrow}
-          </span>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-            <span
-              style={{
-                fontFamily: serif ? 'Instrument Serif' : 'serif',
-                fontSize: 92,
-                lineHeight: 0.95,
-                letterSpacing: -2,
-              }}
-            >
-              {title}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={markDataUri({ color: '#ffffff', bead: '#7ea8ff', size: 56 })}
+            width={56}
+            height={56}
+            alt=""
+          />
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12 }}>
+            <span style={{ fontFamily: serifStack, fontSize: 42, letterSpacing: -0.5 }}>
+              CRC
             </span>
             <span
               style={{
-                fontFamily: sans ? 'IBM Plex Sans' : 'sans-serif',
-                fontSize: 28,
-                lineHeight: 1.2,
-                color: 'rgba(242,239,232,0.7)',
+                fontFamily: sansStack,
+                fontSize: 14,
+                letterSpacing: 4,
+                paddingBottom: 8,
+                color: 'rgba(255, 255, 255, 0.45)',
               }}
             >
-              {topic}
+              CAL HIGH
             </span>
           </div>
+        </div>
 
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <span
             style={{
-              fontFamily: sans ? 'IBM Plex Sans' : 'sans-serif',
-              fontSize: 22,
+              fontFamily: sansStack,
+              fontSize: 20,
+              letterSpacing: 3,
+              textTransform: 'uppercase',
+              color: 'rgba(126, 168, 255, 0.9)',
             }}
           >
-            {footer}
+            {status}
+          </span>
+          <span
+            style={{
+              fontFamily: serifStack,
+              fontSize: 72,
+              lineHeight: 1.08,
+              letterSpacing: -1.5,
+              maxWidth: 960,
+            }}
+          >
+            {title}
+          </span>
+          <span
+            style={{
+              fontFamily: sansStack,
+              fontSize: 30,
+              lineHeight: 1.3,
+              maxWidth: 900,
+              color: 'rgba(255, 255, 255, 0.72)',
+            }}
+          >
+            {topic}
           </span>
         </div>
 
         <div
           style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            width: '38%',
-            height: '100%',
-            background: '#dfe6ff',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingTop: 26,
+            borderTop: '1px solid rgba(255, 255, 255, 0.14)',
+            fontFamily: sansStack,
+            fontSize: 22,
+            color: 'rgba(255, 255, 255, 0.55)',
           }}
-        />
-
-        <img
-          src={`data:image/png;base64,${dragon.toString('base64')}`}
-          alt=""
-          width={430}
-          height={393}
-          style={{
-            position: 'absolute',
-            right: -18,
-            top: 118,
-            objectFit: 'contain',
-            opacity: 0.95,
-            filter: 'drop-shadow(0 0 38px rgba(30,94,255,0.34))',
-          }}
-        />
+        >
+          <span>{byline}</span>
+          <span style={{ color: 'rgba(255, 255, 255, 0.8)' }}>Collaborative Research Club</span>
+        </div>
       </div>
     ),
     { ...size, fonts }
