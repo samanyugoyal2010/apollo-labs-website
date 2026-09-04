@@ -1359,9 +1359,13 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Team cards use the shared 3-up `.crc-cards-row` grid — same rhythm as the
-   mission, project, and join rows. If the team ever grows past three, add a
-   `.crc-cards-row-team` override here rather than letting a row orphan. */
+/* Team cards keep the same card and 3-up rhythm as other rows. When the last
+   row would be a single card (7, 10, …), center it in the middle column. */
+@media (min-width: 768px) {
+  .crc-cards-row-team > :last-child:nth-child(3n + 1) {
+    grid-column: 2;
+  }
+}
 
 .crc-member-tags {
   display: flex;

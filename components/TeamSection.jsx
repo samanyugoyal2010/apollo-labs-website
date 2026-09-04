@@ -59,7 +59,7 @@ export default function TeamSection() {
           accessible and rigorous for their peers. Tap a card to read more about each member.
         </p>
 
-        <div className="crc-cards-row">
+        <div className="crc-cards-row crc-cards-row-team">
           {TEAM_MEMBERS.map((member) => (
             <button
               key={member.id}
