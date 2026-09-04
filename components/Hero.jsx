@@ -11,13 +11,13 @@ export default function Hero() {
         <div className="grid gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-12">
           <div className="max-w-2xl">
             <p className="crc-hero-badge">
-              Cal High · Student-led · Research
+              Apollo Labs · Student-led · Research
             </p>
             <h1 className="crc-hero-h1 mb-6">
               High school students building <em>research</em>, together.
             </h1>
             <p className="crc-body mb-8 max-w-lg text-[17px] leading-relaxed">
-              Collaborative Research Club is a student-led club at California High
+              Apollo Labs is a student-led lab at California High
               School where students work together on research projects, from hypothesis
               to write-up. Everything happens in our Discord.
             </p>

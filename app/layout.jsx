@@ -42,21 +42,21 @@ const greatVibes = Great_Vibes({
   display: 'swap',
 })
 
-const TITLE = 'Collaborative Research Club | Cal High student research'
+const TITLE = 'Apollo Labs | Cal High student research'
 const DESCRIPTION =
-  'Collaborative Research Club is a student-led club at California High School where students work together on research projects, from hypothesis to write-up.'
+  'Apollo Labs is a student-led lab at California High School where students work together on research projects, from hypothesis to write-up.'
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: TITLE,
-    template: '%s | Collaborative Research Club',
+    template: '%s | Apollo Labs',
   },
   description: DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [
-    'Collaborative Research Club',
-    'CRC',
+    'Apollo Labs',
+    'Apollo',
     'California High School',
     'Cal High',
     'student research',

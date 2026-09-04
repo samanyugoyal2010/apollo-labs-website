@@ -55,11 +55,11 @@ export default function TeamSection() {
           Our team
         </h2>
         <p className="crc-body max-w-xl mb-12">
-          CRC was founded by Cal High students committed to making collaborative research
+          Apollo Labs was founded by Cal High students committed to making collaborative research
           accessible and rigorous for their peers. Tap a card to read more about each member.
         </p>
 
-        <div className="crc-cards-row">
+        <div className="crc-cards-row crc-cards-row-team">
           {TEAM_MEMBERS.map((member) => (
             <button
               key={member.id}

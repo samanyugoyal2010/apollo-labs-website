@@ -12,7 +12,7 @@ import {
 
 function buildMailto({ name, email, interest, message }) {
   const subject = encodeURIComponent(
-    `[Collaborative Research Club] ${interest || 'Join request'} — ${name || 'New message'}`
+    `[Apollo Labs] ${interest || 'Join request'} — ${name || 'New message'}`
   )
   const body = encodeURIComponent(
     `Name: ${name || '—'}\nEmail: ${email || '—'}\nInterested in: ${interest || '—'}\n\n${message || ''}`
@@ -40,7 +40,7 @@ function JoinOptionLink({ option }) {
         name: '',
         email: '',
         interest: option.title,
-        message: `Hi Collaborative Research Club,\n\nI'm interested in: ${option.title}\n\n`,
+        message: `Hi Apollo Labs,\n\nI'm interested in: ${option.title}\n\n`,
       })}
       className="crc-link text-sm font-medium mt-auto"
     >
@@ -69,7 +69,7 @@ export default function JoinUsSection() {
       <div className="crc-container">
         <span className="crc-caption mb-4 block">Join us</span>
         <h2 className="text-[clamp(32px,4vw,48px)] font-normal leading-[1.08] tracking-tight mb-4 max-w-xl">
-          Find your place at CRC
+          Find your place at Apollo Labs
         </h2>
         <p className="crc-body max-w-lg mb-10">
           Our Discord is the front door. It&apos;s where projects get staffed, drafts get
@@ -99,7 +99,7 @@ export default function JoinUsSection() {
                 className="crc-discord-cta crc-discord-cta-lg"
               >
                 <DiscordIcon className="h-5 w-5" />
-                Join the CRC Discord
+                Join the Apollo Labs Discord
               </a>
               <p className="crc-discord-meta">
                 Free · Based at Cal High
@@ -137,7 +137,7 @@ export default function JoinUsSection() {
               </h3>
               <p className="crc-body-sm max-w-lg">
                 Prefer to talk one-on-one first? Pick a time that works for you — we&apos;ll
-                walk through how you can join CRC or answer any questions.
+                walk through how you can join Apollo Labs or answer any questions.
               </p>
             </div>
             <CalendlyEmbed />

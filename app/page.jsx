@@ -1,4 +1,5 @@
 import Nav from '@/components/Nav'
+import DragonFlight from '@/components/DragonFlight'
 import Hero from '@/components/Hero'
 import MissionSections from '@/components/MissionSections'
 import TeamSection from '@/components/TeamSection'
@@ -62,6 +63,7 @@ export default function Home() {
       </div>
 
       <Nav />
+      <DragonFlight />
       <main id="main" className="crc-home">
         <Hero />
         <MissionSections />

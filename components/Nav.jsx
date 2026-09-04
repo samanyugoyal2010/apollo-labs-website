@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import CRCLogo from '@/components/CRCLogo'
+import ApolloLogo from '@/components/ApolloLogo'
 import DiscordIcon from '@/components/DiscordIcon'
 import { DISCORD_URL, NAV_LINKS } from '@/lib/data'
 
@@ -47,10 +47,10 @@ export default function Nav() {
         <Link
           href="/"
           className="crc-logo-link shrink-0"
-          aria-label="Collaborative Research Club — home"
+          aria-label="Apollo Labs — home"
           onClick={closeMenu}
         >
-          <CRCLogo />
+          <ApolloLogo />
         </Link>
 
         <div className="hidden md:flex items-center gap-7">
@@ -95,10 +95,10 @@ export default function Nav() {
             <Link
               href="/"
               className="crc-logo-link crc-mobile-menu-brand"
-              aria-label="Collaborative Research Club — home"
+              aria-label="Apollo Labs — home"
               onClick={closeMenu}
             >
-              <CRCLogo />
+              <ApolloLogo />
             </Link>
             {NAV_LINKS.map((link) => (
               <Link

@@ -66,7 +66,7 @@ export default function MissionSections() {
       <div className="crc-container">
         <span className="crc-caption mb-4 block">Mission</span>
         <h2 className="text-[clamp(32px,4vw,48px)] font-normal leading-[1.08] tracking-tight mb-4 max-w-xl">
-          How CRC works
+          How Apollo Labs works
         </h2>
         <p className="crc-body max-w-xl mb-12">
           Tap a card to see how each part of the lab actually runs.

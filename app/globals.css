@@ -35,6 +35,7 @@
   --crc-cta-bg: #0a0a0a;
   --crc-cta-text: #ffffff;
   --crc-mark-node: var(--crc-accent);
+  --apollo-mark-bead: var(--crc-accent);
   --crc-option-bg: #ffffff;
 }
 
@@ -234,7 +235,8 @@
    The mark inherits `currentColor`, so a container only has to set `color`.
    Callers set the mark's height; width follows the viewBox.
 --------------------------------------------------------------------------- */
-.crc-mark {
+.crc-mark,
+.apollo-mark {
   display: block;
   width: auto;
   overflow: visible;
@@ -295,15 +297,37 @@
   letter-spacing: 0.3em;
 }
 
-/* The shared node shifts slightly when the logo is hovered. */
-.crc-logo-link .crc-mark-node {
+/* The bead drifts a step further along its orbit on hover. */
+.crc-logo-link .apollo-mark-bead {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform-box: fill-box;
   transform-origin: center;
 }
 
-.crc-logo-link:hover .crc-mark-node {
-  transform: translate(1px, 0) scale(1.12);
+.crc-logo-link:hover .apollo-mark-bead {
+  transform: translate(-1.4px, -1.9px) scale(1.12);
+}
+
+.crc-dragon-flight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: clamp(20rem, 46vw, 38.75rem);
+  pointer-events: none;
+  transform-origin: 47.46% 51.62%;
+  filter: drop-shadow(0 1.25rem 2.4rem rgba(30, 94, 255, 0.16));
+  will-change: transform, opacity;
+  user-select: none;
+}
+
+.crc-dragon-flight--compact {
+  display: none;
+}
+
+.crc-dragon-flight img {
+  width: 100%;
+  height: auto;
 }
 
 .crc-section {
@@ -919,30 +943,49 @@ button.crc-link {
 }
 
 /* ---------------------------------------------------------------------------
-   Intro sequence. Reduced-motion visitors skip the intro entirely
+   Intro sequence — the mark assembles itself: orbit draws, letter rises,
+   bead lands at apogee. Reduced-motion visitors skip the intro entirely
    (AppShell never mounts it), so there is no separate no-motion variant.
 --------------------------------------------------------------------------- */
-.crc-mark-intro :is(.crc-mark-outer, .crc-mark-inner) {
+.apollo-mark-intro :is(.apollo-mark-ring, .apollo-mark-weave) {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: crc-mark-draw 1.15s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards;
+  animation: apollo-mark-draw 1.15s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards;
 }
 
-.crc-mark-intro .crc-mark-node {
+.apollo-mark-intro .apollo-mark-chevron {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  opacity: 0;
+  animation: apollo-mark-rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.45s forwards;
+}
+
+.apollo-mark-intro .apollo-mark-bead {
   transform-box: fill-box;
   transform-origin: center;
   opacity: 0;
-  animation: crc-mark-land 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.05s
+  animation: apollo-mark-land 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.05s
     forwards;
 }
 
-@keyframes crc-mark-draw {
+@keyframes apollo-mark-draw {
   to {
     stroke-dashoffset: 0;
   }
 }
 
-@keyframes crc-mark-land {
+@keyframes apollo-mark-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14%) scaleY(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes apollo-mark-land {
   from {
     opacity: 0;
     transform: scale(0.2);
@@ -1281,6 +1324,7 @@ html.crc-preload::before {
   will-change: transform;
   color: #ffffff;
   --crc-mark-node: #7ea8ff;
+  --apollo-mark-bead: #7ea8ff;
 }
 
 .crc-loading .crc-logo {
@@ -1359,9 +1403,13 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Team cards use the shared 3-up `.crc-cards-row` grid — same rhythm as the
-   mission, project, and join rows. If the team ever grows past three, add a
-   `.crc-cards-row-team` override here rather than letting a row orphan. */
+/* Team cards keep the same card and 3-up rhythm as other rows. When the last
+   row would be a single card (7, 10, …), center it in the middle column. */
+@media (min-width: 768px) {
+  .crc-cards-row-team > :last-child:nth-child(3n + 1) {
+    grid-column: 2;
+  }
+}
 
 .crc-member-tags {
   display: flex;
@@ -1846,6 +1894,7 @@ html {
   width: auto;
   color: rgba(255, 255, 255, 0.9);
   --crc-mark-node: hsl(var(--crc-cover-hue, 220) 90% 72%);
+  --apollo-mark-bead: hsl(var(--crc-cover-hue, 220) 90% 72%);
 }
 
 /* --- Preview modal actions --- */
@@ -2280,6 +2329,17 @@ html {
     transform: none;
   }
 
+  .crc-dragon-flight {
+    position: absolute !important;
+    top: 8rem !important;
+    right: -6vw !important;
+    left: auto !important;
+    width: min(42vw, 32rem) !important;
+    opacity: 0.16 !important;
+    transform: none !important;
+    filter: none;
+  }
+
   *,
   *::before,
   *::after {
@@ -2346,6 +2406,18 @@ html {
 
 /* Narrow-viewport layout, as opposed to touch ergonomics above. */
 @media (max-width: 767px) {
+  .crc-dragon-flight {
+    width: min(76vw, 19rem);
+  }
+
+  .crc-dragon-flight--wide {
+    display: none;
+  }
+
+  .crc-dragon-flight--compact {
+    display: block;
+  }
+
   /* 9.5px is below comfortable reading size on a phone. */
   .crc-logo-suffix {
     font-size: 10.5px;

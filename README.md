@@ -1,8 +1,8 @@
-<img src="public/logo.svg" alt="Collaborative Research Club" width="216">
+<img src="public/logo.svg" alt="Apollo Labs" width="216">
 
-# Collaborative Research Club Website
+# Apollo Labs Website
 
-Website for **Collaborative Research Club (CRC)**, a student-led research club at
+Website for **Apollo Labs**, a student-led research lab at
 California High School.
 
 Made by Samanyu, Ashmit, and Nihar
@@ -18,20 +18,22 @@ footer, and the 404 page. The invite lives in one place — `DISCORD_URL` in
 
 ## Identity
 
-The mark pairs two open, linked C forms for collaboration and a blue shared node.
-The wordmark uses “CRC” with “Cal High” as the qualifier.
+The mark is an A whose orbit completes the letter — a chevron woven with a
+tilted ring and a blue bead. The wordmark uses “Apollo” with “Labs” as the
+qualifier.
 
 **One source of geometry: [`lib/mark.js`](lib/mark.js).** Everything that draws
 the mark imports from there, so a change to the shape lands everywhere at once.
 The React component takes its color from `currentColor` and
-`--crc-mark-node` for the blue node. Callers set a height; width follows the
-viewBox.
+`--apollo-mark-bead` (falling back to `--crc-mark-node`) for the blue bead.
+Callers set a height; width follows the viewBox.
 
 | Where | What |
 | --- | --- |
 | [`lib/mark.js`](lib/mark.js) | The geometry, plus `markSvg()` / `markDataUri()` for contexts that can't render React. |
-| [`CRCMark.jsx`](components/CRCMark.jsx) | The mark as a component. `variant="glyph"` displays only the outer C. |
-| [`CRCLogo.jsx`](components/CRCLogo.jsx) | Mark + “CRC / Cal High” wordmark. `size="sm"` is used in navigation and the footer; `"lg"` is used in the intro. |
+| [`ApolloMark.jsx`](components/ApolloMark.jsx) | The mark as a component. `variant="glyph"` displays only the chevron. |
+| [`ApolloLogo.jsx`](components/ApolloLogo.jsx) | Mark + “Apollo / Labs” wordmark. `size="sm"` is used in navigation and the footer; `"lg"` is used in the intro. |
+| [`DragonFlight.jsx`](components/DragonFlight.jsx) | The dragon that tracks scroll across the page. |
 | [`app/icon.svg`](app/icon.svg) | Favicon: the mark on a dark tile, optically centered so it survives 16px. |
 | [`app/apple-icon.jsx`](app/apple-icon.jsx) | 180×180 home-screen icon, generated from `markSvg()`. |
 | [`app/opengraph-image.jsx`](app/opengraph-image.jsx) | 1200×630 social card. |
@@ -145,6 +147,10 @@ reports success, because the submission did go through. Verify a domain and set
 - Samanyu Goyal — Co-Founder
 - Ram Rithvik Pagadala — Co-Founder
 - Ashmit Pai — Co-Founder
+- Khushal Pappula — Member
+- Nihar Manchikalapudi — Member
+- Rithvik Boyapati — Member
+- Sampreet Kottakota — Member
 
 ## Run locally
 
@@ -200,7 +206,7 @@ add the same variables in the Vercel project settings.
 - **The intro respects `prefers-reduced-motion`** and is skipped entirely when
   set, along with all ambient animation (marquee, orbits, float, shimmer).
   Because it never mounts in that case, the mark's assemble animation
-  (`.crc-mark-intro` in `globals.css`) needs no reduced-motion variant.
+  (`.apollo-mark-intro` in `globals.css`) needs no reduced-motion variant.
 - **Dialogs** use the shared [`components/Modal.jsx`](components/Modal.jsx):
   focus trap, focus restore, Escape to close, and scroll lock that compensates
   for scrollbar width so the page doesn't shift.

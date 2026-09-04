@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import CRCMark from '@/components/CRCMark'
+import ApolloMark from '@/components/ApolloMark'
 import DiscordIcon from '@/components/DiscordIcon'
 import { DISCORD_URL } from '@/lib/data'
 
@@ -11,8 +11,8 @@ export default function NotFound() {
   return (
     <div className="crc-site crc-home flex min-h-screen items-center justify-center px-6 py-24">
       <div className="max-w-md text-center">
-        <Link href="/" className="crc-logo-link mb-8 inline-block" aria-label="Collaborative Research Club — home">
-          <CRCMark className="crc-notfound-mark" />
+        <Link href="/" className="crc-logo-link mb-8 inline-block" aria-label="Apollo Labs — home">
+          <ApolloMark className="crc-notfound-mark" />
         </Link>
         <p className="crc-caption mb-4">404</p>
         <h1 className="crc-hero-h1 mx-auto mb-5 !text-[clamp(32px,6vw,52px)]">
