@@ -8,18 +8,18 @@ export type Member = {
 /** Placeholder focus lines — replace with each member's own words. */
 export const TEAM: Member[] = [
   {
-    name: "Ashmit Pai",
-    role: "Co-Founder",
-    group: "Founders",
-    focus:
-      "Sets the direction for what Apollo publishes and how projects are reviewed before they go out.",
-  },
-  {
     name: "Samanyu Goyal",
     role: "Co-Founder",
     group: "Founders",
     focus:
       "Works with members on scoping projects — turning a loose idea into something with a defined end.",
+  },
+  {
+    name: "Ashmit Pai",
+    role: "Co-Founder",
+    group: "Founders",
+    focus:
+      "Sets the direction for what Apollo publishes and how projects are reviewed before they go out.",
   },
   {
     name: "Ricky Pagadala",

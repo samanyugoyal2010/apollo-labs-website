@@ -18,11 +18,11 @@ export default function TeamPage() {
         eyebrow="Team"
         title={
           <>
-            The people doing the work,{" "}
-            <span className="text-paper-dim">and the roles they own.</span>
+            The people{" "}
+            <span className="text-paper-dim">behind the work.</span>
           </>
         }
-        lede="Apollo is small on purpose. Every person here owns a clear part of the organization and remains close to the projects being published."
+        lede="A small team with clear ownership and a close connection to every project."
       />
 
       <TeamGrid />
@@ -43,9 +43,6 @@ export default function TeamPage() {
               <div className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:justify-end lg:pb-1">
                 <ButtonLink href="/join" size="lg" className="group">
                   Join Apollo <Arrow />
-                </ButtonLink>
-                <ButtonLink href="/community" size="lg" variant="secondary">
-                  How membership works
                 </ButtonLink>
               </div>
             </div>

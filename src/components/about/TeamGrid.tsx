@@ -1,7 +1,7 @@
 import { TEAM, initials, type Member } from "@/lib/team";
 import { Reveal } from "@/components/ui/Reveal";
 
-function MemberCard({ member, index }: { member: Member; index: number }) {
+function MemberCard({ member }: { member: Member }) {
   return (
     <Reveal as="li" className="h-full">
       <article className="group relative flex h-full min-h-72 flex-col overflow-hidden border border-hairline bg-card p-6 transition-[background-color,border-color,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-signal/45 hover:bg-card-hover md:p-8">
@@ -12,16 +12,12 @@ function MemberCard({ member, index }: { member: Member; index: number }) {
           >
             {initials(member.name)}
           </span>
-          <span className="mono-label text-faint transition-colors duration-300 group-hover:text-signal-text">
-            {String(index).padStart(2, "0")}
-          </span>
         </div>
 
-        <p className="mono-label mt-10 text-signal-text">{member.role}</p>
-        <h4 className="t-sub mt-3 text-paper">{member.name}</h4>
-        <p className="t-body-sm mt-5 max-w-[38ch] text-paper-dim">
-          {member.focus}
-        </p>
+        <div className="mt-auto pt-10">
+          <p className="mono-label text-signal-text">{member.role}</p>
+          <h4 className="t-sub mt-3 text-paper">{member.name}</h4>
+        </div>
 
         <span
           aria-hidden="true"
@@ -38,12 +34,10 @@ function TeamGroup({
   label,
   description,
   members,
-  offset,
 }: {
   label: string;
   description: string;
   members: Member[];
-  offset: number;
 }) {
   return (
     <section aria-labelledby={`team-${label.toLowerCase()}`}>
@@ -64,12 +58,8 @@ function TeamGroup({
       </div>
 
       <ul className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-        {members.map((member, index) => (
-          <MemberCard
-            key={member.name}
-            member={member}
-            index={offset + index + 1}
-          />
+        {members.map((member) => (
+          <MemberCard key={member.name} member={member} />
         ))}
       </ul>
     </section>
@@ -109,13 +99,11 @@ export function TeamGrid() {
             label="Founders"
             description="Direction, review, and member support."
             members={founders}
-            offset={0}
           />
           <TeamGroup
             label="Engineering"
             description="The platform and publication infrastructure."
             members={engineering}
-            offset={founders.length}
           />
         </div>
       </div>
