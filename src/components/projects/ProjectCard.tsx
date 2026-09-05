@@ -36,7 +36,7 @@ export function ProjectCard({ project }: { project: Project }) {
         )}
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-5">
+      <div className="flex flex-1 flex-col gap-4 p-5">
         <p className="mono-label flex items-center gap-2 text-signal-text">
           <span>{project.discipline}</span>
           <span aria-hidden="true" className="text-faint">
@@ -57,10 +57,6 @@ export function ProjectCard({ project }: { project: Project }) {
             </span>
           </button>
         </h3>
-
-        <p className="line-clamp-2 t-body-sm text-paper-dim">
-          {project.summary}
-        </p>
 
         <p className="t-meta mt-auto pt-4 text-muted">
           {authorLine(project)}
