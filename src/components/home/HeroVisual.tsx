@@ -26,9 +26,9 @@ export function HeroVisual() {
         el.style.setProperty("--tilt-y", `${(y * 4).toFixed(2)}px`);
       });
     };
-    window.addEventListener("pointermove", onMove, { passive: true });
+    el.addEventListener("pointermove", onMove, { passive: true });
     return () => {
-      window.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointermove", onMove);
       cancelAnimationFrame(raf);
     };
   }, []);

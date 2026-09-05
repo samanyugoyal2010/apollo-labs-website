@@ -16,7 +16,6 @@ export default function ExplorePage() {
   return (
     <>
       <PageHeader
-        index="03"
         eyebrow="The Archive"
         title={
           <>

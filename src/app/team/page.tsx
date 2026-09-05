@@ -14,7 +14,6 @@ export default function TeamPage() {
   return (
     <>
       <PageHeader
-        index="03"
         eyebrow="Team"
         title={
           <>

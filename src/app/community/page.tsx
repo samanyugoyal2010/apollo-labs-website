@@ -46,7 +46,6 @@ export default function CommunityPage() {
   return (
     <>
       <PageHeader
-        index="02"
         eyebrow="Community"
         title={
           <>

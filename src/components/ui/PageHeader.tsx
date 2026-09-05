@@ -8,7 +8,6 @@ export function PageHeader({
   lede,
   aside,
 }: {
-  index?: string;
   eyebrow: string;
   title: ReactNode;
   lede?: ReactNode;

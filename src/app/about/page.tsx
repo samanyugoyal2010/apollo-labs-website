@@ -13,7 +13,6 @@ export default function AboutPage() {
   return (
     <>
       <PageHeader
-        index="01"
         eyebrow="About"
         title={
           <>
