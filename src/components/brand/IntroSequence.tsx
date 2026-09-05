@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const DURATION = 5900;
+const DURATION = 3000;
 
 /**
  * First-visit intro: points settle, the orbit draws, the Apollo A resolves,

@@ -34,7 +34,7 @@ export default function JoinPage() {
             Already a member?{" "}
             <Link
               href="/signin"
-              className="link-reveal text-paper transition-colors hover:text-signal-bright"
+              className="link-reveal inline-flex min-h-11 items-center text-paper transition-colors hover:text-signal-bright"
             >
               Sign in
             </Link>
@@ -43,9 +43,10 @@ export default function JoinPage() {
             href={DISCORD_INVITE}
             target="_blank"
             rel="noreferrer"
-            className="link-reveal text-paper transition-colors hover:text-signal-bright"
+            className="link-reveal inline-flex min-h-11 items-center text-paper transition-colors hover:text-signal-bright"
           >
             Join the Discord
+            <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>
       }

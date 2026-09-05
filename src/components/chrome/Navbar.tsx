@@ -62,10 +62,15 @@ export function Navbar() {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const onResize = () => {
+      if (window.matchMedia("(min-width: 768px)").matches) setOpen(false);
+    };
     window.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize);
     return () => {
       document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
     };
   }, [open]);
 
@@ -137,7 +142,7 @@ export function Navbar() {
           <ThemeToggle />
         <button
           type="button"
-          className="-mr-2 flex size-10 items-center justify-center"
+          className="flex size-11 items-center justify-center"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}

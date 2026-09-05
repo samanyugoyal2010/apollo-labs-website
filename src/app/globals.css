@@ -794,7 +794,7 @@ html[data-apollo-intro="play"] #apollo-intro {
   gap: 1.25rem;
   background: var(--color-void);
   color: var(--color-paper);
-  animation: intro-exit 550ms var(--ease-precise) 5250ms forwards;
+  animation: intro-exit 350ms var(--ease-precise) 2650ms forwards;
 }
 
 html[data-apollo-intro="play"] body {
@@ -824,7 +824,7 @@ html[data-apollo-intro="play"] body {
   opacity: 0.3;
   animation:
     intro-draw 850ms var(--ease-precise) 250ms forwards,
-    intro-fade-out 550ms var(--ease-precise) 4450ms forwards;
+    intro-fade-out 350ms var(--ease-precise) 1900ms forwards;
 }
 
 /* 0.65s — the A resolves */
@@ -844,29 +844,29 @@ html[data-apollo-intro="play"] body {
   animation: intro-node 360ms var(--ease-out-expo) 1280ms forwards;
 }
 
-/* 0.95s — the rocket takes one measured orbit */
+/* 0.75s — the rocket takes one measured orbit */
 #apollo-intro .intro-rocket-track {
   offset-path: path("M 22,112 a 78,38 0 1,1 156,0 a 78,38 0 1,1 -156,0");
   offset-rotate: auto;
   offset-distance: 0%;
   opacity: 0;
   animation:
-    intro-orbit-run 2400ms linear 950ms forwards,
-    intro-rocket-visible 2400ms linear 950ms forwards;
+    intro-orbit-run 1400ms linear 750ms forwards,
+    intro-rocket-visible 1400ms linear 750ms forwards;
 }
 #apollo-intro .intro-rocket {
   /* Nose leads the path; the mark is authored pointing along +X. */
   transform: scale(1.4);
 }
 
-/* 3.45s — the ringed planet rises behind the mark */
+/* 1.45s — the ringed planet rises behind the mark */
 #apollo-intro .intro-planet {
   opacity: 0;
   transform-origin: 100px 108px;
-  animation: intro-planet-in 780ms var(--ease-out-expo) 3450ms forwards;
+  animation: intro-planet-in 600ms var(--ease-out-expo) 1450ms forwards;
 }
 
-/* 4.05s — wordmark lands */
+/* 1.75s — wordmark lands */
 #apollo-intro .intro-word {
   display: flex;
   gap: 0.5em;
@@ -879,9 +879,9 @@ html[data-apollo-intro="play"] body {
 #apollo-intro .intro-word > span {
   display: block;
   transform: translateY(110%);
-  animation: intro-rise 650ms var(--ease-out-expo) 4050ms forwards;
+  animation: intro-rise 500ms var(--ease-out-expo) 1750ms forwards;
 }
-#apollo-intro .intro-word > span:last-child { animation-delay: 4200ms; }
+#apollo-intro .intro-word > span:last-child { animation-delay: 1900ms; }
 #apollo-intro .intro-word-dim { color: var(--color-muted); }
 
 @keyframes intro-draw { to { stroke-dashoffset: 0; } }

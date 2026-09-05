@@ -42,7 +42,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       aria-pressed={theme === "light"}
       aria-label={`Switch to ${nextTheme} theme`}
       title={`Switch to ${nextTheme} theme`}
-      className={`theme-toggle group inline-flex h-10 items-center gap-2 border border-hairline px-2.5 text-paper-dim transition-[color,border-color,background-color] duration-200 hover:border-hairline-strong hover:bg-paper/[0.04] hover:text-paper ${className ?? ""}`}
+      className={`theme-toggle group inline-flex h-11 items-center gap-2 border border-hairline px-2.5 text-paper-dim transition-[color,border-color,background-color] duration-200 hover:border-hairline-strong hover:bg-paper/[0.04] hover:text-paper ${className ?? ""}`}
     >
       <span aria-hidden="true" className="theme-toggle__icon">
         <RocketCraft className="theme-toggle__craft" />

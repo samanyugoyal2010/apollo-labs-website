@@ -73,7 +73,7 @@ export function ProjectModal() {
   return (
     <dialog
       ref={dialogRef}
-      aria-label={project ? `${project.title} — project preview` : undefined}
+      aria-labelledby={project ? "project-dialog-title" : undefined}
       onClick={(event) => {
         if (event.target === dialogRef.current) close();
       }}
@@ -132,7 +132,7 @@ export function ProjectModal() {
                     <span className="mono-label text-faint">{project.year}</span>
                   </div>
 
-                  <h2 className="max-w-[22ch] text-[clamp(1.75rem,2.6vw,2.5rem)] font-medium leading-[1.12] tracking-[-0.025em] text-paper">
+                  <h2 id="project-dialog-title" className="max-w-[22ch] text-[clamp(1.75rem,2.6vw,2.5rem)] font-medium leading-[1.12] tracking-[-0.025em] text-paper">
                     {project.title}
                   </h2>
 

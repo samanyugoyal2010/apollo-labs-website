@@ -42,8 +42,8 @@ export function HeroVisual() {
       {/* Model output — top right, label above the grid so nothing covers it */}
       <div className="absolute right-0 top-0 z-0 w-[64%] border border-hairline bg-card p-3.5 max-[639px]:w-[76%] max-[639px]:p-2.5">
         <div className="flex items-center justify-between pb-2.5">
-          <span className="mono-label text-faint">Model output</span>
-          <span className="mono-label text-signal-text">0.81</span>
+          <span className="mono-label whitespace-nowrap text-faint max-[639px]:text-[0.5625rem] max-[639px]:tracking-[0.06em]">Model output</span>
+          <span className="mono-label whitespace-nowrap text-signal-text max-[639px]:text-[0.5625rem] max-[639px]:tracking-[0.06em]">0.81</span>
         </div>
         <div className="grid grid-cols-14 gap-[2px]">
           {Array.from({ length: 84 }, (_, i) => {
@@ -65,8 +65,8 @@ export function HeroVisual() {
       {/* Field data — left; label sits on top so the record card can overlap */}
       <div className="absolute left-0 top-[32%] z-10 w-[52%] overflow-hidden border border-hairline bg-card shadow-[0_18px_40px_-24px_rgba(0,0,0,0.55)] max-[639px]:top-[30%] max-[639px]:w-[62%]">
         <div className="flex items-center justify-between gap-2 px-3 py-2.5 max-[639px]:px-2 max-[639px]:py-2">
-          <span className="mono-label text-faint">ENV · Field data</span>
-          <span className="mono-label text-signal-text">Published</span>
+          <span className="mono-label whitespace-nowrap text-faint max-[639px]:text-[0.5625rem] max-[639px]:tracking-[0.06em]">ENV · Field data</span>
+          <span className="mono-label whitespace-nowrap text-signal-text max-[639px]:text-[0.5625rem] max-[639px]:tracking-[0.06em]">Published</span>
         </div>
         <svg viewBox="0 0 200 96" className="w-full text-paper" role="presentation">
           <rect width="200" height="96" className="fill-base" />
@@ -83,7 +83,7 @@ export function HeroVisual() {
 
       {/* Project record — bottom right, clear of the field-data card */}
       <div className="absolute bottom-0 right-[2%] z-20 w-[56%] border border-hairline bg-card p-4 shadow-[0_18px_40px_-24px_rgba(0,0,0,0.55)] max-[639px]:w-[68%] max-[639px]:p-3">
-        <p className="mono-label text-signal-text">AI · Research Paper</p>
+        <p className="mono-label whitespace-nowrap text-signal-text max-[639px]:text-[0.5625rem] max-[639px]:tracking-[0.06em]">AI · Research Paper</p>
         <div className="mt-3 space-y-2">
           <span className="block h-2.5 w-[86%] bg-paper/30" />
           <span className="block h-2.5 w-[62%] bg-paper/30" />
@@ -95,7 +95,7 @@ export function HeroVisual() {
         </div>
         <div className="mt-3.5 flex items-center gap-2 border-t border-hairline pt-3">
           <span className="size-1.5 bg-signal" />
-          <span className="mono-label text-faint">Under review</span>
+          <span className="mono-label whitespace-nowrap text-faint max-[639px]:text-[0.5625rem] max-[639px]:tracking-[0.06em]">Under review</span>
         </div>
       </div>
     </div>

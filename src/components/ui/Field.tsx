@@ -21,7 +21,7 @@ export function Field({
         id={id}
         aria-invalid={error ? true : undefined}
         aria-describedby={descriptionId}
-        className="h-11 border-b border-hairline-strong bg-transparent text-[0.9375rem] text-paper outline-none transition-colors duration-200 placeholder:text-faint hover:border-paper/35 focus:border-signal focus-visible:outline-none"
+        className="h-11 border-b border-hairline-strong bg-transparent text-[1rem] text-paper outline-none transition-colors duration-200 placeholder:text-faint hover:border-paper/35 focus:border-signal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
         {...props}
       />
       {(error || hint) && (
