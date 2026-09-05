@@ -1,26 +1,25 @@
 import type { ReactNode } from "react";
 import { Eyebrow } from "./Eyebrow";
 
-/** Page title held across most of the viewport, with the lede set beside it. */
+/** A compact page introduction with one clear title and optional support copy. */
 export function PageHeader({
-  index,
   eyebrow,
   title,
   lede,
   aside,
 }: {
-  index: string;
+  index?: string;
   eyebrow: string;
   title: ReactNode;
   lede?: ReactNode;
   aside?: ReactNode;
 }) {
   return (
-    <header className="gutter border-b border-hairline pb-16 pt-28 md:pb-24 md:pt-36">
+    <header className="gutter border-b border-hairline pb-12 pt-24 md:pb-16 md:pt-32">
       <div className="shell-wide">
-        <Eyebrow index={index}>{eyebrow}</Eyebrow>
+        <Eyebrow>{eyebrow}</Eyebrow>
 
-        <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-16">
+        <div className="mt-7 grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16">
           <h1 className="t-page max-w-[15ch] text-paper lg:col-span-8">
             {title}
           </h1>

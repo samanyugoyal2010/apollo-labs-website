@@ -16,7 +16,6 @@ const COLUMNS = [
       { href: "/about", label: "About" },
       { href: "/community", label: "Community" },
       { href: "/team", label: "Team" },
-      { href: "/#process", label: "How Apollo Works" },
     ],
   },
   {
@@ -24,7 +23,6 @@ const COLUMNS = [
     links: [
       { href: "/join", label: "Join Apollo" },
       { href: "/signin", label: "Sign In" },
-      { href: "/community", label: "Publish Your Work" },
     ],
   },
 ];
@@ -42,14 +40,12 @@ export function Footer() {
                 <span className="text-muted">Labs</span>
               </span>
             </Link>
-            <p className="mt-6 max-w-[34ch] text-sm leading-relaxed text-muted">
-              A student-led research community. We help students turn curiosity
-              into finished, published work — and give that work somewhere
-              permanent to live.
+            <p className="mt-5 max-w-[30ch] text-sm leading-relaxed text-muted">
+              A student-led home for finished research, engineering, and software.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:col-span-7 md:col-start-6 lg:col-span-7 lg:col-start-6">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:col-span-7 md:col-start-6 lg:col-span-7 lg:col-start-6">
             {COLUMNS.map((col) => (
               <nav key={col.title} aria-label={col.title}>
                 <h2 className="mono-label text-faint">{col.title}</h2>
@@ -70,13 +66,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-hairline pt-5 sm:flex-row sm:items-center sm:justify-between">
-          <p className="mono-label text-faint">
-            Apollo Labs · Est. 2026 · Student-Led Research
-          </p>
-          <p className="mono-label text-faint">
-            <span className="text-signal-text">◆</span> Prototype build 0.1
-          </p>
+        <div className="mt-10 border-t border-hairline pt-5">
+          <p className="mono-label text-faint">Apollo Labs · Est. 2026</p>
         </div>
       </div>
     </footer>
