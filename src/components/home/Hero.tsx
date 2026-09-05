@@ -1,13 +1,5 @@
 import { HeroVisual } from "./HeroVisual";
 import { ButtonLink, Arrow } from "@/components/ui/Button";
-import { PROJECTS } from "@/lib/projects";
-import { DISCIPLINES } from "@/lib/disciplines";
-
-const STATS = [
-  { label: "Published", value: String(PROJECTS.length).padStart(2, "0") },
-  { label: "Disciplines", value: String(DISCIPLINES.length).padStart(2, "0") },
-  { label: "Established", value: "2026" },
-];
 
 /**
  * Asymmetric: the statement takes roughly three fifths of the grid and the
@@ -33,30 +25,15 @@ export function Hero() {
           </h1>
 
           <p className="t-lead mt-8 max-w-[46ch] text-paper-dim">
-            Apollo Labs is where students scope a project, get it reviewed by
-            people who care about the details, and publish it to an archive that
-            stays put.
+            Apollo Labs helps students turn a good question into work worth
+            keeping.
           </p>
 
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="mt-10">
             <ButtonLink href="#work" size="lg" className="group">
               Explore Projects <Arrow />
             </ButtonLink>
-            <ButtonLink href="/join" size="lg" variant="secondary">
-              Publish Your Work
-            </ButtonLink>
           </div>
-
-          <dl className="mt-14 flex flex-wrap gap-x-14 gap-y-5 border-t border-hairline pt-7">
-            {STATS.map((stat) => (
-              <div key={stat.label}>
-                <dd className="text-[clamp(2rem,2.6vw,2.75rem)] font-medium leading-none tracking-[-0.03em] text-paper">
-                  {stat.value}
-                </dd>
-                <dt className="mono-label mt-2.5 text-faint">{stat.label}</dt>
-              </div>
-            ))}
-          </dl>
         </div>
 
         <div className="lg:col-span-5 xl:col-span-6 max-lg:mx-auto max-lg:w-full max-lg:max-w-lg">

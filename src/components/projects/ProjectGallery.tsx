@@ -4,9 +4,9 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Arrow } from "@/components/ui/Button";
 import { PROJECTS } from "@/lib/projects";
 
-/** A uniform grid keeps every selected project at the same visual weight. */
+/** A short grid gives the homepage a clear sample without becoming an archive. */
 export function ProjectGallery() {
-  const selected = PROJECTS.slice(0, 9);
+  const selected = PROJECTS.slice(0, 3);
 
   return (
     <section id="work" className="gutter section-lg scroll-mt-20">
@@ -14,7 +14,7 @@ export function ProjectGallery() {
         <SectionHeading
           label="Projects"
           title="Selected work from Apollo members."
-          lede="Research, engineering, and software built by Apollo members. Open one to read the abstract without leaving the page."
+          lede="A few things members have made, tested, and published."
           action={
             <Link
               href="/explore"
