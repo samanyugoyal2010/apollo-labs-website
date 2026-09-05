@@ -37,10 +37,10 @@ export function HeroVisual() {
     <div
       ref={ref}
       aria-hidden="true"
-      className="relative aspect-[5/4] w-full select-none [transform:translate3d(var(--tilt-x,0),var(--tilt-y,0),0)] [transition:transform_600ms_cubic-bezier(0.22,0.61,0.36,1)]"
+      className="relative aspect-[5/4] w-full min-w-0 select-none [transform:translate3d(var(--tilt-x,0),var(--tilt-y,0),0)] [transition:transform_600ms_cubic-bezier(0.22,0.61,0.36,1)]"
     >
       {/* Model output — top right, label above the grid so nothing covers it */}
-      <div className="absolute right-0 top-0 z-0 w-[64%] border border-hairline bg-card p-3.5">
+      <div className="absolute right-0 top-0 z-0 w-[64%] border border-hairline bg-card p-3.5 max-[639px]:w-[76%] max-[639px]:p-2.5">
         <div className="flex items-center justify-between pb-2.5">
           <span className="mono-label text-faint">Model output</span>
           <span className="mono-label text-signal-text">0.81</span>
@@ -63,8 +63,8 @@ export function HeroVisual() {
       </div>
 
       {/* Field data — left; label sits on top so the record card can overlap */}
-      <div className="absolute left-0 top-[32%] z-10 w-[52%] overflow-hidden border border-hairline bg-card shadow-[0_18px_40px_-24px_rgba(0,0,0,0.55)]">
-        <div className="flex items-center justify-between px-3 py-2.5">
+      <div className="absolute left-0 top-[32%] z-10 w-[52%] overflow-hidden border border-hairline bg-card shadow-[0_18px_40px_-24px_rgba(0,0,0,0.55)] max-[639px]:top-[30%] max-[639px]:w-[62%]">
+        <div className="flex items-center justify-between gap-2 px-3 py-2.5 max-[639px]:px-2 max-[639px]:py-2">
           <span className="mono-label text-faint">ENV · Field data</span>
           <span className="mono-label text-signal-text">Published</span>
         </div>
@@ -82,7 +82,7 @@ export function HeroVisual() {
       </div>
 
       {/* Project record — bottom right, clear of the field-data card */}
-      <div className="absolute bottom-0 right-[2%] z-20 w-[56%] border border-hairline bg-card p-4 shadow-[0_18px_40px_-24px_rgba(0,0,0,0.55)]">
+      <div className="absolute bottom-0 right-[2%] z-20 w-[56%] border border-hairline bg-card p-4 shadow-[0_18px_40px_-24px_rgba(0,0,0,0.55)] max-[639px]:w-[68%] max-[639px]:p-3">
         <p className="mono-label text-signal-text">AI · Research Paper</p>
         <div className="mt-3 space-y-2">
           <span className="block h-2.5 w-[86%] bg-paper/30" />

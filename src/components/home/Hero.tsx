@@ -9,8 +9,8 @@ import { ButtonLink, Arrow } from "@/components/ui/Button";
 export function Hero() {
   return (
     <section className="gutter pb-20 pt-28 md:pb-28 md:pt-36">
-      <div className="shell-wide grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-7 xl:col-span-6">
+      <div className="shell-wide grid min-w-0 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="min-w-0 lg:col-span-7 xl:col-span-6">
           <p className="mono-label flex items-center gap-2.5 text-signal-text">
             <span aria-hidden="true" className="size-1.5 bg-signal" />
             Student-Led Research
@@ -36,7 +36,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="lg:col-span-5 xl:col-span-6 max-lg:mx-auto max-lg:w-full max-lg:max-w-lg">
+        <div className="min-w-0 lg:col-span-5 xl:col-span-6 max-lg:mx-auto max-lg:w-full max-lg:max-w-lg">
           <HeroVisual />
         </div>
       </div>

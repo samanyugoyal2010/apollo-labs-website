@@ -851,8 +851,8 @@ html[data-apollo-intro="play"] body {
   offset-distance: 0%;
   opacity: 0;
   animation:
-    intro-orbit-run 3700ms linear 950ms forwards,
-    intro-rocket-visible 3700ms linear 950ms forwards;
+    intro-orbit-run 2400ms linear 950ms forwards,
+    intro-rocket-visible 2400ms linear 950ms forwards;
 }
 #apollo-intro .intro-rocket {
   /* Nose leads the path; the mark is authored pointing along +X. */

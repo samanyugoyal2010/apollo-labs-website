@@ -4,7 +4,7 @@ type RocketOrbitProps = {
   delay?: number;
 };
 
-const ORBIT_DURATION = 13.5;
+const ORBIT_DURATION = 8.5;
 
 /** Apollo-mark orbit, authored on the same 32×32 coordinate system. */
 export const APOLLO_MARK_ORBIT_PATH =
