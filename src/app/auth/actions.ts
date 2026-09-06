@@ -53,9 +53,28 @@ function value(formData: FormData, name: string) {
   return String(formData.get(name) ?? "").trim();
 }
 
+function normalizeOrigin(value: string) {
+  return value.startsWith("http://") || value.startsWith("https://")
+    ? value.replace(/\/$/, "")
+    : `https://${value}`;
+}
+
+function configuredOrigin() {
+  return normalizeOrigin(
+    process.env.VERCEL_PROJECT_PRODUCTION_URL ??
+      process.env.NEXT_PUBLIC_SITE_URL ??
+      "https://apollo-labs-website.vercel.app",
+  );
+}
+
 async function siteOrigin() {
+  // Production auth links must never fall back to localhost or a preview URL.
+  // Vercel provides VERCEL_PROJECT_PRODUCTION_URL automatically; the explicit
+  // site URL remains the fallback for other hosted environments.
+  if (process.env.VERCEL_ENV === "production") return configuredOrigin();
+
   const requestHeaders = await headers();
-  return requestHeaders.get("origin") ?? process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  return requestHeaders.get("origin") ?? configuredOrigin();
 }
 
 export async function signUp(_state: AuthState, formData: FormData): Promise<AuthState> {
