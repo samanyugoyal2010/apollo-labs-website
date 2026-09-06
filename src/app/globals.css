@@ -203,10 +203,11 @@
     border: 1px solid color-mix(in srgb, var(--color-paper) 12%, transparent);
   }
 
+  /* Keep the reading order legible while the rotations add the human pinboard feel. */
   .board-note--1 { transform: rotate(-0.45deg); }
-  .board-note--2 { transform: rotate(0.7deg) translateY(0.45rem); }
+  .board-note--2 { transform: rotate(0.7deg); }
   .board-note--3 { transform: rotate(-0.25deg); }
-  .board-note--4 { transform: rotate(0.55deg) translateY(-0.25rem); }
+  .board-note--4 { transform: rotate(0.55deg); }
 
   .board-note:hover {
     z-index: 1;

@@ -21,7 +21,7 @@ export function Disciplines() {
             <p className="mono-label text-paper/55">{DISCIPLINES.length} open areas · 0 projects pinned</p>
           </div>
 
-          <ul className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <ul className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {DISCIPLINES.map((discipline, index) => (
               <li
                 key={discipline.name}
