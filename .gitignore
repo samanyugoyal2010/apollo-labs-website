@@ -1,3 +1,5 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
 # dependencies
 /node_modules
 /.pnp
@@ -8,19 +10,19 @@
 !.yarn/releases
 !.yarn/versions
 
+# testing
+/coverage
+
 # next.js
 /.next/
 /out/
 
 # production
 /build
-/dist
 
 # misc
 .DS_Store
 *.pem
-.env*
-!.env.example
 
 # debug
 npm-debug.log*
@@ -28,20 +30,32 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-# vite (legacy)
-.vite
-
-# eslint
-.eslintcache
+# env files (can opt-in for committing if needed)
+.env*
 
 # vercel
 .vercel
 
-# agent tooling
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# ai assistant / agent local files
 CLAUDE.md
+.claude/
+.cursor/
+.aider*
+.windsurfrules
 
+# editors
+.vscode/
+.idea/
+*.swp
 
+# os
+Thumbs.db
+
+# logs & caches
+*.log
+.turbo
+.swc
